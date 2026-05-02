@@ -1,34 +1,193 @@
 {
-  "generatedAt": "2026-05-02T15:47:39.639975+00:00",
+  "generatedAt": "2026-05-02T15:57:04.012816+00:00",
   "date": "2026-05-02",
   "signalCount": 14,
   "errors": [
-    "Wheat/Kansas_US"
+    "Cotton/Texas_US"
   ],
   "signals": [
     {
       "commodity": "Soybeans",
       "region": "Iowa US",
-      "sentiment": "Neutral",
+      "sentiment": "Bullish",
       "confidence": 0.65,
-      "rationale": "NDVI velocity peaked in May and remains modestly positive overall, indicating early growth but a slowing trend as the season progresses. LSWI values suggest moderate moisture with no severe stress, and the peak NDVI in July aligns with expected growth timing, supporting a cautious stance.",
-      "peakNdvi": 0.9175,
-      "peakLswi": 0.4619,
-      "spectralVelocity": "+0.005/16d",
-      "divergenceZScore": 0.8,
+      "rationale": "NDVI velocity peaked early in May at +0.239/16d, indicating robust greening and healthy growth. Moisture stress is low with LSWI at 0.479, and the seasonal trajectory aligns with typical soybean phenology, showing a strong early season and a normal late\u2011season decline.",
+      "peakNdvi": 0.9149,
+      "peakLswi": 0.4791,
+      "spectralVelocity": "+0.239/16d",
+      "divergenceZScore": 1.2,
       "macroRegime": "neutral",
       "strategy": {
-        "action": "NEUTRAL",
-        "entryZone": "current price",
-        "stopLoss": "none",
-        "takeProfit": "none",
-        "riskReward": "N/A"
+        "action": "LONG",
+        "entryZone": "basis +0.5%",
+        "stopLoss": "basis -0.3%",
+        "takeProfit": "basis +1.2%",
+        "riskReward": "4:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity",
           "status": "Pass",
-          "signal": "Early growth velocity high, overall trend modestly positive",
+          "signal": "Strong early growth, velocity peaked at +0.239/16d, sustained high NDVI through July.",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "High moisture with LSWI peaking at 0.479, indicating adequate water availability.",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "0% cloud cover, data quality excellent.",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "Growth trajectory matches typical soybean phenology: early peak, normal late\u2011season decline.",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "Neutral ENSO conditions, no extreme weather events.",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Mato Grosso BR",
+      "sentiment": "Bearish",
+      "confidence": 0.6,
+      "rationale": "NDVI velocity turned negative after the July peak, indicating declining greenness as harvest approaches. LSWI is also falling, pointing to moisture stress that could reduce yields. With a neutral macro regime, the outlook is bearish for soybean futures.",
+      "peakNdvi": 0.9038,
+      "peakLswi": 0.4674,
+      "spectralVelocity": "-0.0575/16d",
+      "divergenceZScore": -2.53,
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "$10.00-$10.50",
+        "stopLoss": "$9.50",
+        "takeProfit": "$9.00",
+        "riskReward": "1.67:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Caution",
+          "signal": "Velocity decreasing post-peak, signaling harvest onset",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Caution",
+          "signal": "Moisture decreasing, potential yield stress",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "No cloud interference",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "Data aligns with expected harvest cycle",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "Neutral climate conditions",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Illinois US",
+      "sentiment": "Bearish",
+      "confidence": 0.65,
+      "rationale": "NDVI velocity peaked in May and July but has turned negative since August, indicating a decline in vegetative vigor; LSWI shows increasing moisture stress as the season progresses; the post\u2011harvest period further supports a bearish outlook.",
+      "peakNdvi": 0.933,
+      "peakLswi": 0.4726,
+      "spectralVelocity": "-0.25623/16d",
+      "divergenceZScore": -1.2,
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "current price +0.5%",
+        "stopLoss": "entry +5%",
+        "takeProfit": "entry -10%",
+        "riskReward": "2:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Caution",
+          "signal": "Negative velocity since August indicates declining vigor",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Caution",
+          "signal": "LSWI decreasing, suggesting moisture stress",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "0% cloud cover, data quality high",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "Post\u2011harvest season aligns with declining vegetation",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "Neutral macro regime, no strong El Ni\u00f1o/La Ni\u00f1a influence",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Buenos Aires AR",
+      "sentiment": "Neutral",
+      "confidence": 0.65,
+      "rationale": "NDVI velocity peaked in May and has since declined, indicating the crop is approaching harvest while maintaining moderate moisture stress. Seasonal NDVI and LSWI values align with expected growth cycle, supporting a neutral outlook.",
+      "peakNdvi": 0.95,
+      "peakLswi": 0.4574,
+      "spectralVelocity": "-0.152/16d",
+      "divergenceZScore": 0.0,
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "NEUTRAL",
+        "entryZone": "Current price +/- 2%",
+        "stopLoss": "5% below entry",
+        "takeProfit": "10% above entry",
+        "riskReward": "2:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Caution",
+          "signal": "Velocity peaked in May, now declining toward harvest",
           "weight": 0.25
         },
         {
@@ -40,207 +199,154 @@
         {
           "name": "Cloud Cover QA",
           "status": "Pass",
-          "signal": "0% cloud cover, data quality excellent",
-          "weight": 0.1
-        },
-        {
-          "name": "Seasonal Alignment",
-          "status": "Pass",
-          "signal": "Peak NDVI aligns with expected July growth",
-          "weight": 0.2
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "Neutral macro conditions",
-          "weight": 0.25
-        }
-      ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
-      "ndviSource": "simulated"
-    },
-    {
-      "commodity": "Soybeans",
-      "region": "Mato Grosso BR",
-      "sentiment": "Neutral",
-      "confidence": 0.65,
-      "rationale": "NDVI velocity peaked in May with +0.2439/16d, indicating strong growth, but recent negative velocity in December suggests a slowing trend. LSWI remains moderate at 0.498, showing adequate moisture. Seasonal alignment is consistent with typical planting and harvest cycles.",
-      "peakNdvi": 0.9236,
-      "peakLswi": 0.498,
-      "spectralVelocity": "+0.2439/16d",
-      "divergenceZScore": 1.2,
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "NEUTRAL",
-        "entryZone": "basis 0.0-0.05",
-        "stopLoss": "basis 0.05",
-        "takeProfit": "basis 0.10",
-        "riskReward": "1:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity",
-          "status": "Pass",
-          "signal": "Strong growth in May with high velocity",
-          "weight": 0.25
-        },
-        {
-          "name": "LSWI Moisture",
-          "status": "Pass",
-          "signal": "LSWI peaked at 0.498, indicating adequate moisture",
-          "weight": 0.2
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
           "signal": "0% cloud cover, data quality high",
           "weight": 0.1
         },
         {
           "name": "Seasonal Alignment",
           "status": "Pass",
-          "signal": "NDVI trajectory aligns with planting/harvest calendar",
+          "signal": "NDVI peak aligns with expected growth cycle",
           "weight": 0.2
         },
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "Neutral climate conditions, no El Ni\u00f1o or La Ni\u00f1a influence",
+          "signal": "Neutral climate, no extreme events",
           "weight": 0.25
         }
       ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
-      "ndviSource": "simulated"
-    },
-    {
-      "commodity": "Soybeans",
-      "region": "Illinois US",
-      "sentiment": "Neutral",
-      "confidence": 0.55,
-      "rationale": "NDVI velocity has shifted from a peak in May to a modest decline in July\u2011September, indicating the crop has reached maturity and growth is slowing. LSWI remains within an optimal moisture range, suggesting no acute water stress. Seasonal timing aligns with the expected soybean growth cycle, supporting a neutral outlook.",
-      "peakNdvi": 0.9122,
-      "peakLswi": 0.505,
-      "spectralVelocity": "-0.139/16d",
-      "divergenceZScore": 1.2,
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "NEUTRAL",
-        "entryZone": "current price",
-        "stopLoss": "1% below",
-        "takeProfit": "1% above",
-        "riskReward": "1:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity",
-          "status": "Caution",
-          "signal": "Velocity decreasing after peak",
-          "weight": 0.25
-        },
-        {
-          "name": "LSWI Moisture",
-          "status": "Pass",
-          "signal": "LSWI within optimal range",
-          "weight": 0.2
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "0% cloud cover, data quality high",
-          "weight": 0.1
-        },
-        {
-          "name": "Seasonal Alignment",
-          "status": "Pass",
-          "signal": "Growth cycle aligns with expected timing",
-          "weight": 0.2
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "Neutral climate regime",
-          "weight": 0.25
-        }
-      ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
-      "ndviSource": "simulated"
-    },
-    {
-      "commodity": "Soybeans",
-      "region": "Buenos Aires AR",
-      "sentiment": "Bearish",
-      "confidence": 0.65,
-      "rationale": "NDVI velocity peaked in May then turned negative, indicating crop maturity and a declining trend; LSWI remains moderate but decreasing, suggesting no current moisture stress but potential yield constraints; seasonal timing aligns with harvest, supporting a bearish outlook.",
-      "peakNdvi": 0.9161,
-      "peakLswi": 0.4796,
-      "spectralVelocity": "+0.24849/16d",
-      "divergenceZScore": 1.61,
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "120-125",
-        "stopLoss": "115",
-        "takeProfit": "130",
-        "riskReward": "2.0:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity",
-          "status": "Caution",
-          "signal": "Peak velocity high but declining trend indicates maturity",
-          "weight": 0.25
-        },
-        {
-          "name": "LSWI Moisture",
-          "status": "Pass",
-          "signal": "LSWI within optimal range, no moisture stress",
-          "weight": 0.2
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "No cloud interference",
-          "weight": 0.1
-        },
-        {
-          "name": "Seasonal Alignment",
-          "status": "Caution",
-          "signal": "Seasonal maturity may reduce yields",
-          "weight": 0.2
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "No significant ENSO influence",
-          "weight": 0.25
-        }
-      ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
       "ndviSource": "simulated"
     },
     {
       "commodity": "Corn",
       "region": "Iowa US",
-      "sentiment": "Bullish",
-      "confidence": 0.65,
-      "rationale": "NDVI velocity peaked in month 6 and has since declined, yet NDVI remains at 0.95 indicating healthy crop; LSWI shows moderate moisture stress; late season approaching harvest supports a bullish outlook.",
+      "sentiment": "Bearish",
+      "confidence": 0.62,
+      "rationale": "NDVI velocity peaked in May but has been declining into a negative trend, indicating slowing greenness growth; LSWI moisture levels are also falling, suggesting increasing drought stress as the harvest approaches; the late\u2011season decline in both indices signals a bearish outlook for corn futures.",
       "peakNdvi": 0.95,
-      "peakLswi": 0.4219,
-      "spectralVelocity": "-0.165/16d",
-      "divergenceZScore": 1.2,
+      "peakLswi": 0.4391,
+      "spectralVelocity": "-0.0733/16d",
+      "divergenceZScore": 1.18,
       "macroRegime": "neutral",
       "strategy": {
-        "action": "LONG",
-        "entryZone": "basis 0.5-0.7",
-        "stopLoss": "0.4",
-        "takeProfit": "1.0",
-        "riskReward": "2.5:1"
+        "action": "SHORT",
+        "entryZone": "current price",
+        "stopLoss": "-5%",
+        "takeProfit": "+10%",
+        "riskReward": "2:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Caution",
+          "signal": "Velocity peaked early but now negative, indicating slowing growth",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Caution",
+          "signal": "Moisture index declining, hinting at drought stress",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "Zero cloud cover, data quality high",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Caution",
+          "signal": "Late\u2011season decline aligns with harvest period, reducing future yield potential",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "Neutral macro conditions, no El Ni\u00f1o/La Ni\u00f1a influence",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Corn",
+      "region": "Mato Grosso BR",
+      "sentiment": "Bearish",
+      "confidence": 0.55,
+      "rationale": "NDVI velocity has shifted from a peak of +0.2416/16d in May to a negative trend of \u20130.0605/16d in December, indicating a slowing crop growth. The divergence between NDVI and LSWI (z\u2011score \u2248\u202f1.76) signals increasing moisture stress as the season progresses. Combined with the late\u2011season decline, the outlook for the upcoming harvest is cautiously bearish.",
+      "peakNdvi": 0.9438,
+      "peakLswi": 0.4274,
+      "spectralVelocity": "+0.2416/16d",
+      "divergenceZScore": 1.76,
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "within 5% of current price",
+        "stopLoss": "5% below entry",
+        "takeProfit": "10% above entry",
+        "riskReward": "2:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Caution",
+          "signal": "Velocity peaked in May but has turned negative by December",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Caution",
+          "signal": "LSWI peaked in July and has been declining, indicating rising moisture stress",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "0% cloud cover across all composites",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "Peak NDVI aligns with the main growing season (May\u2013July)",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "Neutral macro\u2011climate conditions with no strong La\u202fNi\u00f1a or El\u202fNi\u00f1o signals",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Corn",
+      "region": "Heilongjiang CN",
+      "sentiment": "Bearish",
+      "confidence": 0.68,
+      "rationale": "NDVI velocity peaked in May and has turned negative since July, indicating a decline in greenness. LSWI shows moderate moisture but the post\u2011peak drop in both indices signals weakening crop vigor.",
+      "peakNdvi": 0.95,
+      "peakLswi": 0.4508,
+      "spectralVelocity": "+0.23708/16d",
+      "divergenceZScore": 1.3,
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "current futures price",
+        "stopLoss": "5% below entry",
+        "takeProfit": "10% above entry",
+        "riskReward": "2:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity",
           "status": "Pass",
-          "signal": "Strong early growth, now declining but still healthy",
+          "signal": "Early positive velocity, now negative",
           "weight": 0.25
         },
         {
@@ -252,160 +358,266 @@
         {
           "name": "Cloud Cover QA",
           "status": "Pass",
-          "signal": "0% cloud cover",
+          "signal": "0% cloud, high QA",
           "weight": 0.1
         },
         {
           "name": "Seasonal Alignment",
-          "status": "Pass",
-          "signal": "Late season approaching harvest",
+          "status": "Caution",
+          "signal": "Post\u2011peak decline aligns with late growing season",
           "weight": 0.2
         },
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "Neutral macro regime",
+          "signal": "Neutral climate, no El Ni\u00f1o/La Ni\u00f1a bias",
           "weight": 0.25
         }
       ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
       "ndviSource": "simulated"
     },
     {
-      "commodity": "Corn",
-      "region": "Mato Grosso BR",
-      "sentiment": "Bearish",
-      "confidence": 0.62,
-      "rationale": "NDVI velocity has fallen from its peak of +0.25562 to \u20130.06726 over the last 16\u2011day period, indicating a slowing of greening. LSWI has also declined from 0.458 to 0.0498, signalling increasing moisture stress as the post\u2011harvest season progresses.",
-      "peakNdvi": 0.95,
-      "peakLswi": 0.458,
-      "spectralVelocity": "-0.06726/16d",
-      "divergenceZScore": -1.23,
+      "commodity": "Wheat",
+      "region": "Kansas US",
+      "sentiment": "Bullish",
+      "confidence": 0.68,
+      "rationale": "NDVI velocity peaked in March and remains positive through May, indicating strong growth, while LSWI remains high, showing adequate moisture. The early peak and subsequent decline suggest the crop is maturing toward harvest, supporting a bullish outlook.",
+      "peakNdvi": 0.8786,
+      "peakLswi": 0.4304,
+      "spectralVelocity": "+0.22132/16d",
+      "divergenceZScore": 1.2,
       "macroRegime": "neutral",
       "strategy": {
-        "action": "SHORT",
-        "entryZone": "basis 0.5\u20130.6",
-        "stopLoss": "0.4",
-        "takeProfit": "0.7",
-        "riskReward": "2:1"
+        "action": "LONG",
+        "entryZone": "near current futures price",
+        "stopLoss": "-2%",
+        "takeProfit": "+5%",
+        "riskReward": "2.5:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity",
-          "status": "Fail",
-          "signal": "Velocity dropped from +0.25562 to \u20130.06726, indicating a slowdown in crop vigor",
+          "status": "Pass",
+          "signal": "Positive velocity until May, indicating robust growth",
           "weight": 0.25
         },
         {
           "name": "LSWI Moisture",
-          "status": "Fail",
-          "signal": "LSWI fell from 0.458 to 0.0498, reflecting rising moisture stress",
+          "status": "Pass",
+          "signal": "High LSWI values suggest adequate soil moisture",
           "weight": 0.2
         },
         {
           "name": "Cloud Cover QA",
           "status": "Pass",
-          "signal": "Zero cloud cover, data quality high",
+          "signal": "0% cloud cover, data quality high",
           "weight": 0.1
         },
         {
           "name": "Seasonal Alignment",
           "status": "Pass",
-          "signal": "Post\u2011harvest decline aligns with expected seasonal trajectory",
+          "signal": "Growth trajectory aligns with Kansas wheat phenology",
           "weight": 0.2
         },
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "Neutral macro regime, no overriding climatic bias",
+          "signal": "No strong El Ni\u00f1o/La Ni\u00f1a influence detected",
           "weight": 0.25
         }
       ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
-      "ndviSource": "simulated"
-    },
-    {
-      "commodity": "Corn",
-      "region": "Heilongjiang CN",
-      "sentiment": "Bearish",
-      "confidence": 0.62,
-      "rationale": "NDVI velocity peaked in May and has been declining since July, indicating a post\u2011harvest decline. LSWI shows decreasing moisture stress as the season progresses, reinforcing a bearish outlook.",
-      "peakNdvi": 0.9185,
-      "peakLswi": 0.4689,
-      "spectralVelocity": "+0.27988/16d",
-      "divergenceZScore": 1.18,
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "$5.80\u2013$5.90",
-        "stopLoss": "$6.00",
-        "takeProfit": "$5.50",
-        "riskReward": "2.4:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity",
-          "status": "Caution",
-          "signal": "Velocity peaked then declining",
-          "weight": 0.25
-        },
-        {
-          "name": "LSWI Moisture",
-          "status": "Caution",
-          "signal": "Moisture stress increasing",
-          "weight": 0.2
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "0% cloud cover",
-          "weight": 0.1
-        },
-        {
-          "name": "Seasonal Alignment",
-          "status": "Caution",
-          "signal": "Post\u2011harvest decline",
-          "weight": 0.2
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "Neutral climate conditions",
-          "weight": 0.25
-        }
-      ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
       "ndviSource": "simulated"
     },
     {
       "commodity": "Wheat",
       "region": "Rostov RU",
-      "sentiment": "Bearish",
-      "confidence": 0.62,
-      "rationale": "NDVI velocity peaked early but turned negative during grain filling, indicating a decline in greenness that may translate to lower yields. LSWI shows moderate moisture but a downward trend, adding moisture\u2011stress concern. Seasonal timing aligns with late\u2011season senescence, reinforcing a bearish outlook.",
-      "peakNdvi": 0.8649,
-      "peakLswi": 0.4477,
-      "spectralVelocity": "+0.0042/16d",
-      "divergenceZScore": -1.1,
+      "sentiment": "Bullish",
+      "confidence": 0.65,
+      "rationale": "NDVI velocity peaked in March with a strong positive trend, LSWI indicates adequate moisture during the growing season, and the seasonal alignment shows a typical wheat phenology pattern for the region.",
+      "peakNdvi": 0.8473,
+      "peakLswi": 0.4183,
+      "spectralVelocity": "+0.2265/16d",
+      "divergenceZScore": 1.2,
       "macroRegime": "neutral",
       "strategy": {
-        "action": "SHORT",
-        "entryZone": "5.00-5.10",
-        "stopLoss": "5.20",
-        "takeProfit": "4.80",
-        "riskReward": "1.5:1"
+        "action": "LONG",
+        "entryZone": "near current price",
+        "stopLoss": "5% below entry",
+        "takeProfit": "10% above entry",
+        "riskReward": "2:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity",
-          "status": "Caution",
-          "signal": "Velocity peaked in month 2 then declined to negative, signaling potential yield stress",
+          "status": "Pass",
+          "signal": "Strong early-season growth with velocity >0.2",
           "weight": 0.25
         },
         {
           "name": "LSWI Moisture",
           "status": "Pass",
-          "signal": "LSWI peaked at 0.4477 and remains moderate, but decreasing trend suggests mild moisture stress",
+          "signal": "LSWI >0.4 during peak, indicating good moisture",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "0% cloud cover, data quality excellent",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "Phenology matches typical wheat cycle for Rostov",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "Neutral macro climate, no El Ni\u00f1o/La Ni\u00f1a impact",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Wheat",
+      "region": "Saskatchewan CA",
+      "sentiment": "Neutral",
+      "confidence": 0.55,
+      "rationale": "NDVI velocity peaked early in March and has since declined to a low positive value, indicating that the crop has entered the late growth phase. LSWI remains moderate, suggesting no severe moisture stress, and the seasonal pattern aligns with a typical wheat cycle in this region.",
+      "peakNdvi": 0.8537,
+      "peakLswi": 0.4163,
+      "spectralVelocity": "+0.0036/16d",
+      "divergenceZScore": 0.4,
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "NEUTRAL",
+        "entryZone": "current futures price range",
+        "stopLoss": "5% below entry",
+        "takeProfit": "5% above entry",
+        "riskReward": "1:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "Early growth, current velocity low but positive",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "Moderate moisture, no severe stress",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "No cloud cover issues",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "Seasonal growth aligns with NDVI peak in May",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "Neutral climate regime",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Wheat",
+      "region": "Grand Est FR",
+      "sentiment": "Bearish",
+      "confidence": 0.6,
+      "rationale": "NDVI velocity peaked in March and then turned negative, indicating early senescence; LSWI moisture values declined through the growing season, suggesting increasing water stress; the seasonal alignment is off from typical wheat phenology.",
+      "peakNdvi": 0.8243,
+      "peakLswi": 0.4153,
+      "spectralVelocity": "+0.068/16d",
+      "divergenceZScore": 1.8,
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "basis 0.5-0.7",
+        "stopLoss": "basis 0.4",
+        "takeProfit": "basis 1.0",
+        "riskReward": "2.5:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Caution",
+          "signal": "Early peak followed by negative trend",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Caution",
+          "signal": "Gradual decline indicating moisture stress",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "0% cloud cover, high data quality",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Caution",
+          "signal": "Peak NDVI occurs earlier than typical wheat phenology",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "No evidence of El Ni\u00f1o or La Ni\u00f1a influence",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Sugar",
+      "region": "Sao Paulo BR",
+      "sentiment": "Bearish",
+      "confidence": 0.62,
+      "rationale": "NDVI velocity peaked in July but has since fallen sharply, indicating declining greenness; LSWI shows increasing moisture stress in late season and negative velocity in Oct\u2011Dec signals a weakening crop.",
+      "peakNdvi": 0.8958,
+      "peakLswi": 0.6124,
+      "spectralVelocity": "+0.042/16d",
+      "divergenceZScore": 1.18,
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "$1.80\u2013$1.90",
+        "stopLoss": "$1.95",
+        "takeProfit": "$1.60",
+        "riskReward": "2.0:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Caution",
+          "signal": "Velocity peaked in July but declined to negative values by December",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Caution",
+          "signal": "LSWI indicates moisture stress in late season",
           "weight": 0.2
         },
         {
@@ -417,325 +629,60 @@
         {
           "name": "Seasonal Alignment",
           "status": "Pass",
-          "signal": "NDVI pattern matches typical wheat growth cycle, with peak in May and decline in July",
+          "signal": "Peak NDVI aligns with expected harvest timing",
           "weight": 0.2
         },
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "Neutral macro climate conditions, no strong El Ni\u00f1o or La Ni\u00f1a influence",
+          "signal": "Neutral climate regime, no extreme El Ni\u00f1o/La Ni\u00f1a influence",
           "weight": 0.25
         }
       ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
-      "ndviSource": "simulated"
-    },
-    {
-      "commodity": "Wheat",
-      "region": "Saskatchewan CA",
-      "sentiment": "Neutral",
-      "confidence": 0.6,
-      "rationale": "NDVI velocity peaked early in the season and has since turned negative, indicating post\u2011anthesis decline; LSWI shows a similar downward trend, suggesting increasing moisture stress as harvest approaches. The overall phenology aligns with expected wheat growth, but the lack of sustained growth signals a neutral outlook.",
-      "peakNdvi": 0.8337,
-      "peakLswi": 0.4214,
-      "spectralVelocity": "-0.183/16d",
-      "divergenceZScore": 0.15,
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "NEUTRAL",
-        "entryZone": "current price",
-        "stopLoss": "none",
-        "takeProfit": "none",
-        "riskReward": "1:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity",
-          "status": "Caution",
-          "signal": "Velocity peaked early then declined, indicating post\u2011anthesis decline",
-          "weight": 0.25
-        },
-        {
-          "name": "LSWI Moisture",
-          "status": "Caution",
-          "signal": "LSWI peaked then declined, suggesting moisture stress",
-          "weight": 0.2
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "No cloud contamination",
-          "weight": 0.1
-        },
-        {
-          "name": "Seasonal Alignment",
-          "status": "Pass",
-          "signal": "NDVI and LSWI trends match expected wheat phenology",
-          "weight": 0.2
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "No significant El Ni\u00f1o/La Ni\u00f1a influence",
-          "weight": 0.25
-        }
-      ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
-      "ndviSource": "simulated"
-    },
-    {
-      "commodity": "Wheat",
-      "region": "Grand Est FR",
-      "sentiment": "Bullish",
-      "confidence": 0.65,
-      "rationale": "The NDVI peaked at 0.8491 in May with a strong positive velocity of +0.21292/16d, indicating vigorous growth and a healthy crop. The LSWI remained moderate (0.4428) and has not yet dropped into severe moisture stress, while the negative velocity after the peak signals imminent harvest, supporting a bullish outlook. Seasonal alignment with the expected harvest window further confirms the positive trend.",
-      "peakNdvi": 0.8491,
-      "peakLswi": 0.4428,
-      "spectralVelocity": "+0.21292/16d",
-      "divergenceZScore": 0.85,
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "LONG",
-        "entryZone": "near current price",
-        "stopLoss": "5% below entry",
-        "takeProfit": "10% above entry",
-        "riskReward": "2:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity",
-          "status": "Pass",
-          "signal": "Strong upward trend in early season",
-          "weight": 0.25
-        },
-        {
-          "name": "LSWI Moisture",
-          "status": "Pass",
-          "signal": "Adequate moisture, no severe stress",
-          "weight": 0.2
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "0% cloud cover, high data quality",
-          "weight": 0.1
-        },
-        {
-          "name": "Seasonal Alignment",
-          "status": "Pass",
-          "signal": "NDVI peak aligns with expected harvest window",
-          "weight": 0.2
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "Neutral climate conditions",
-          "weight": 0.25
-        }
-      ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
-      "ndviSource": "simulated"
-    },
-    {
-      "commodity": "Sugar",
-      "region": "Sao Paulo BR",
-      "sentiment": "Bullish",
-      "confidence": 0.75,
-      "rationale": "High NDVI velocity in July and peak NDVI in September indicate strong crop growth, while the recent negative velocity trend signals approaching harvest and potential supply tightening. Moisture stress remains moderate with LSWI values above 0.5 during peak months.",
-      "peakNdvi": 0.8931,
-      "peakLswi": 0.5779,
-      "spectralVelocity": "+0.23351/16d",
-      "divergenceZScore": -0.12,
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "LONG",
-        "entryZone": "basis 0.90-0.95",
-        "stopLoss": "0.85",
-        "takeProfit": "1.05",
-        "riskReward": "2.4:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity",
-          "status": "Pass",
-          "signal": "Velocity peaked at +0.23351/16d, indicating strong growth momentum.",
-          "weight": 0.25
-        },
-        {
-          "name": "LSWI Moisture",
-          "status": "Pass",
-          "signal": "LSWI values above 0.5 during peak months suggest adequate moisture.",
-          "weight": 0.2
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "0% cloud cover ensures data reliability.",
-          "weight": 0.1
-        },
-        {
-          "name": "Seasonal Alignment",
-          "status": "Pass",
-          "signal": "Peak NDVI and LSWI align with expected harvest window in September.",
-          "weight": 0.2
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "Neutral macro regime reduces external risk factors.",
-          "weight": 0.25
-        }
-      ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
       "ndviSource": "simulated"
     },
     {
       "commodity": "Sugar",
       "region": "Uttar Pradesh IN",
-      "sentiment": "Bearish",
-      "confidence": 0.62,
-      "rationale": "NDVI velocity peaked in month 7 but has been declining since, with negative velocity in the last quarter. LSWI shows moisture stress that is also decreasing, indicating post\u2011harvest senescence. Seasonal alignment confirms the crop is in the post\u2011harvest period, supporting a bearish outlook.",
-      "peakNdvi": 0.8678,
-      "peakLswi": 0.6051,
-      "spectralVelocity": "+0.017/16d",
-      "divergenceZScore": 0.78,
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "near current price",
-        "stopLoss": "5% below entry",
-        "takeProfit": "10% above entry",
-        "riskReward": "2:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity",
-          "status": "Caution",
-          "signal": "Velocity peaked then declined",
-          "weight": 0.25
-        },
-        {
-          "name": "LSWI Moisture",
-          "status": "Pass",
-          "signal": "Moisture adequate but decreasing",
-          "weight": 0.2
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "0% cloud cover",
-          "weight": 0.1
-        },
-        {
-          "name": "Seasonal Alignment",
-          "status": "Pass",
-          "signal": "Post\u2011harvest period",
-          "weight": 0.2
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "Neutral climate",
-          "weight": 0.25
-        }
-      ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
-      "ndviSource": "simulated"
-    },
-    {
-      "commodity": "Cotton",
-      "region": "Texas US",
-      "sentiment": "Bearish",
+      "sentiment": "Bullish",
       "confidence": 0.65,
-      "rationale": "NDVI velocity peaked in June and has been declining, indicating a potential yield plateau. LSWI moisture peaked in September but is trending downward, suggesting increasing moisture stress. Seasonal alignment with typical cotton flowering supports a bearish outlook.",
-      "peakNdvi": 0.7955,
-      "peakLswi": 0.3267,
-      "spectralVelocity": "-0.115/16d",
-      "divergenceZScore": -0.7,
-      "macroRegime": "neutral",
+      "rationale": "NDVI velocity rose to +0.052/16d in early July, indicating vigorous greening, while LSWI peaked at 0.5965 showing ample soil moisture. The subsequent decline in velocity in the last quarter suggests a forthcoming harvest, but the high NDVI and moisture levels support a bullish outlook.",
+      "peakNdvi": 0.8486,
+      "peakLswi": 0.5965,
+      "spectralVelocity": "+0.052/16d",
+      "divergenceZScore": -1.68,
+      "macroRegime": "Neutral",
       "strategy": {
-        "action": "SHORT",
-        "entryZone": "0.50-0.55",
-        "stopLoss": "0.60",
-        "takeProfit": "0.45",
-        "riskReward": "1.5:1"
+        "action": "LONG",
+        "entryZone": "$1.20 - $1.25",
+        "stopLoss": "$1.15",
+        "takeProfit": "$1.35",
+        "riskReward": "2.0:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity",
-          "status": "Caution",
-          "signal": "Velocity peaked in June then declined, indicating a potential yield plateau.",
+          "status": "Pass",
+          "signal": "Velocity increased to +0.052/16d",
           "weight": 0.25
         },
         {
           "name": "LSWI Moisture",
           "status": "Pass",
-          "signal": "Moisture index peaked in September but is decreasing, suggesting rising moisture stress.",
+          "signal": "LSWI peaked at 0.5965 indicating adequate moisture",
           "weight": 0.2
         },
         {
           "name": "Cloud Cover QA",
           "status": "Pass",
-          "signal": "Zero cloud cover, data quality high.",
+          "signal": "0% cloud cover ensures data integrity",
           "weight": 0.1
         },
         {
           "name": "Seasonal Alignment",
           "status": "Pass",
-          "signal": "NDVI peak aligns with expected cotton flowering period.",
-          "weight": 0.2
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "Neutral climate conditions, no major El Nino/La Nina influence.",
-          "weight": 0.25
-        }
-      ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
-      "ndviSource": "simulated"
-    },
-    {
-      "commodity": "Cotton",
-      "region": "Xinjiang CN",
-      "sentiment": "Bearish",
-      "confidence": 0.62,
-      "rationale": "NDVI velocity peaked in June and has been declining since, while LSWI indicates increasing moisture stress after August. Seasonal timing shows the crop is moving toward harvest, reducing future growth potential.",
-      "peakNdvi": 0.7748,
-      "peakLswi": 0.3309,
-      "spectralVelocity": "+0.19312/16d",
-      "divergenceZScore": 1.12,
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "0.55-0.60",
-        "stopLoss": "0.05",
-        "takeProfit": "0.15",
-        "riskReward": "3:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity",
-          "status": "Caution",
-          "signal": "Velocity peaked early, now declining",
-          "weight": 0.25
-        },
-        {
-          "name": "LSWI Moisture",
-          "status": "Caution",
-          "signal": "Moisture stress increasing post-peak",
-          "weight": 0.2
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "0% cloud cover",
-          "weight": 0.1
-        },
-        {
-          "name": "Seasonal Alignment",
-          "status": "Pass",
-          "signal": "Growth aligns with planting season, harvest approaching",
+          "signal": "Peak NDVI aligns with expected harvest window",
           "weight": 0.2
         },
         {
@@ -745,7 +692,60 @@
           "weight": 0.25
         }
       ],
-      "generatedAt": "2026-05-02T15:47:39.639975+00:00",
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Cotton",
+      "region": "Xinjiang CN",
+      "sentiment": "Bearish",
+      "confidence": 0.68,
+      "rationale": "NDVI velocity has turned negative and LSWI is low, indicating the crop is entering late-season decline and moisture stress is rising. The seasonal pattern shows a peak in August followed by a sharp fall, suggesting upcoming harvest and potential supply increase.",
+      "peakNdvi": 0.7858,
+      "peakLswi": 0.3542,
+      "spectralVelocity": "-0.11433/16d",
+      "divergenceZScore": -0.89,
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "Current price \u00b1 0.5%",
+        "stopLoss": "2% above entry",
+        "takeProfit": "4% below entry",
+        "riskReward": "2:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Caution",
+          "signal": "Negative velocity indicates slowing growth",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Caution",
+          "signal": "Low LSWI signals moisture stress",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "0% cloud cover ensures data quality",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "Timing aligns with late-season harvest",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "No strong ENSO influence detected",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T15:57:04.012816+00:00",
       "ndviSource": "simulated"
     }
   ]
