@@ -2,9 +2,9 @@ name: QuantAgri Pipeline
 
 on:
   schedule:
-    - cron: '0 6 * * *'
-    - cron: '0 7 * * 1'
-    - cron: '30 7 1 * *'
+    - cron: '0 6 * * *'      # nightly 06:00 UTC — NDVI + prices + signals
+    - cron: '0 23 * * 5'     # Friday 23:00 UTC — weekly newsletter
+    - cron: '30 7 1 * *'     # 1st of month 07:30 UTC — podcast
   workflow_dispatch:
     inputs:
       run_newsletter:
@@ -55,7 +55,7 @@ jobs:
 
       - name: Generate weekly newsletter
         if: |
-          github.event.schedule == '0 7 * * 1' ||
+          github.event.schedule == '0 23 * * 5' ||
           github.event.inputs.run_newsletter == 'true'
         run: python scripts/newsletter.py
         env:
