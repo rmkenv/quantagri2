@@ -218,25 +218,28 @@ pre{background:var(--bg0);border:1px solid var(--b0);padding:10px 12px;font-size
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="ctrl">
-      <div class="clbl">Ollama Cloud API Key</div>
-      <input type="password" id="apiKey" placeholder="ollama_xxxxxxxx" />
+      <div class="clbl">Gemini API Key <span style="color:var(--g2);font-size:9px">FREE · no card</span></div>
+      <input type="password" id="apiKey" placeholder="AIza..." />
+      <div style="font-size:9px;color:var(--t3);margin-top:4px;line-height:1.5">
+        Get free key → <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--cyan)">aistudio.google.com/apikey</a>
+      </div>
     </div>
     <div class="ctrl">
       <div class="clbl">Model</div>
       <select id="modelSel">
-        <option value="qwen2.5:7b">qwen2.5:7b</option>
-        <option value="qwen2.5:14b">qwen2.5:14b</option>
-        <option value="qwen3:8b">qwen3:8b</option>
-        <option value="qwen3-coder:480b-cloud">qwen3-coder:480b-cloud</option>
-        <option value="gpt-oss:20b-cloud">gpt-oss:20b-cloud</option>
-        <option value="gpt-oss:120b-cloud">gpt-oss:120b-cloud</option>
-        <option value="deepseek-v3.1:671b-cloud">deepseek-v3.1:671b-cloud</option>
+        <option value="gemini-2.0-flash" selected>gemini-2.0-flash (free, fast)</option>
+        <option value="gemini-2.5-flash-preview-05-20">gemini-2.5-flash (free, best)</option>
+        <option value="gemini-1.5-flash">gemini-1.5-flash (free, stable)</option>
       </select>
     </div>
     <div class="conn-bar">
       <div class="cdot" id="cdot"></div>
       <span id="cstat" style="color:var(--t2)">Not tested</span>
       <button class="cbtn" style="max-width:46px" onclick="pingCloud()">PING</button>
+    </div>
+    <div style="font-size:9px;color:var(--t3);line-height:1.5;padding:4px 2px">
+      Signal Engine: Gemini (browser, free).<br>
+      Nightly pipeline: Ollama Cloud (GitHub Actions).
     </div>
     <div class="ctrl">
       <div class="clbl">Commodity</div>
@@ -290,11 +293,11 @@ pre{background:var(--bg0);border:1px solid var(--b0);padding:10px 12px;font-size
     <div class="view" id="view-terminal">
       <div class="empty" id="emptyState">
         <div class="eg">⬛</div>
-        <p>Paste your <strong style="color:var(--g0)">Ollama Cloud API key</strong>, select commodity + region, then click <strong>Run Signal Engine</strong></p>
-        <p style="font-size:10px;color:var(--t3);margin-top:6px">On-demand analysis · qwen2.5 via ollama.com</p>
+        <p>Paste your <strong style="color:var(--g0)">free Gemini API key</strong> (AIza...), select commodity + region, then click <strong>Run Signal Engine</strong></p>
+        <p style="font-size:10px;color:var(--t3);margin-top:6px">Get a free key at <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--cyan)">aistudio.google.com/apikey</a> — no credit card</p>
       </div>
       <div id="resultWrap" style="display:none;position:relative">
-        <div class="lmask" id="lmask"><div class="spin"></div><div class="lmsg" id="lmsg">QUERYING OLLAMA CLOUD...</div></div>
+        <div class="lmask" id="lmask"><div class="spin"></div><div class="lmsg" id="lmsg">QUERYING CLAUDE...</div></div>
         <div class="stream-area" id="streamArea"></div>
         <div class="sh" id="termTitle">SIGNAL ENGINE OUTPUT</div>
         <div class="cards" id="sigCards"></div>
@@ -354,8 +357,8 @@ pre{background:var(--bg0);border:1px solid var(--b0);padding:10px 12px;font-size
       <div class="mb">
         <button class="mt open" onclick="toggleM(this)">1 · Ollama Cloud API <span>▲</span></button>
         <div class="mbody open">
-          <p>All LLM calls go to <code>https://ollama.com/api/chat</code> with <code>Authorization: Bearer $OLLAMA_API_KEY</code>. No local GPU. No local daemon. Subscription pricing — free tier available at ollama.com.</p>
-          <pre>curl https://ollama.com/api/chat \
+          <p>All LLM calls go to <code>https://ollama.com/v1/chat/completions</code> with <code>Authorization: Bearer $OLLAMA_API_KEY</code>. No local GPU. No local daemon. Subscription pricing — free tier available at ollama.com.</p>
+          <pre>curl https://ollama.com/v1/chat/completions \
   -H "Authorization: Bearer $OLLAMA_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -635,35 +638,36 @@ function renderMarkdown(md) {
     .replace(/<\/table>\s*<table>/g, '');
 }
 
-// ── Ping Ollama Cloud ──────────────────────────────────────
+// ── Ping Gemini API ────────────────────────────────────────
 async function pingCloud() {
-  const key   = document.getElementById('apiKey').value.trim();
+  const key  = document.getElementById('apiKey').value.trim();
   const model = document.getElementById('modelSel').value;
-  const dot   = document.getElementById('cdot');
-  const stat  = document.getElementById('cstat');
-  if (!key) { alert('Paste your Ollama Cloud API key first'); return; }
+  const dot  = document.getElementById('cdot');
+  const stat = document.getElementById('cstat');
+  if (!key) { alert('Paste your Gemini API key (AIza...).\nGet one free at aistudio.google.com/apikey'); return; }
   stat.textContent = 'Testing...'; dot.className = 'cdot';
-  log('Pinging ollama.com...', 'inf');
+  log('Pinging Gemini API...', 'inf');
   try {
-    const r = await fetch('https://ollama.com/api/chat', {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+    const r = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${key}` },
-      body: JSON.stringify({ model, messages:[{role:'user',content:'Reply: ONLINE'}], stream:false })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contents: [{ parts: [{ text: 'Reply with one word: ONLINE' }] }] })
     });
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    if (!r.ok) {
+      const err = await r.json().catch(() => ({}));
+      throw new Error(err.error?.message || `HTTP ${r.status}`);
+    }
     const d = await r.json();
+    const reply = d.candidates?.[0]?.content?.parts?.[0]?.text || '';
     dot.className = 'cdot ok';
     stat.style.color = 'var(--g0)';
     stat.textContent = `OK · ${model}`;
-    log(`Connected · ${model} · reply: "${(d.message?.content||'').slice(0,30)}"`, 'ok');
+    log(`Gemini connected · reply: "${reply.trim()}"`, 'ok');
   } catch(e) {
     dot.className = 'cdot fail'; stat.style.color = 'var(--red)';
-    let msg = e.message;
-    if (msg.toLowerCase().includes('failed to fetch') || msg.toLowerCase().includes('network')) {
-      msg = 'CORS blocked — ollama.com blocks browser requests. Pipeline still works via Actions.';
-    }
-    stat.textContent = msg.slice(0, 60);
-    log('Ping failed: ' + e.message + ' (CORS likely — Actions pipeline unaffected)', 'err');
+    stat.textContent = e.message.slice(0, 60);
+    log('Ping failed: ' + e.message, 'err');
   }
 }
 
@@ -704,74 +708,77 @@ function abort() {
   log('Aborted', 'wrn');
 }
 
-// ── Signal engine ──────────────────────────────────────────
+// ── Signal engine (Gemini API — free, browser CORS safe) ───
 async function runEngine() {
   const key       = document.getElementById('apiKey').value.trim();
   const model     = document.getElementById('modelSel').value;
   const commodity = document.getElementById('commodity').value;
   const region    = document.getElementById('region').value;
   const depth     = document.getElementById('depth').value;
-  if (!key) { alert('Paste your Ollama Cloud API key'); return; }
+  if (!key) { alert('Paste your Gemini API key.\nGet one free at aistudio.google.com/apikey'); return; }
 
   const ndviData = mkNDVI(commodity, region);
   document.getElementById('emptyState').style.display = 'none';
   document.getElementById('resultWrap').style.display = 'block';
   document.getElementById('lmask').classList.add('on');
-  document.getElementById('lmsg').textContent = 'QUERYING OLLAMA CLOUD...';
+  document.getElementById('lmsg').textContent = 'QUERYING GEMINI...';
   document.getElementById('runBtn').disabled = true;
   document.getElementById('stopBtn').classList.add('show');
-  document.getElementById('streamArea').className = 'stream-area on';
-  document.getElementById('streamArea').textContent = '';
+  const sa = document.getElementById('streamArea');
+  sa.className = 'stream-area on';
+  sa.textContent = '';
   document.getElementById('ratBox').className = 'rat streaming';
-  document.getElementById('termTitle').textContent = `SIGNAL · ${commodity.toUpperCase()} · ${region.toUpperCase()}`;
+  document.getElementById('termTitle').textContent =
+    `SIGNAL · ${commodity.toUpperCase()} · ${region.toUpperCase()}`;
   log(`Engine: ${model} · ${commodity} · ${region}`);
   abortCtrl = new AbortController();
 
   try {
-    const resp = await fetch('https://ollama.com/api/chat', {
-      method:'POST', signal:abortCtrl.signal,
-      headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`},
-      body:JSON.stringify({model,messages:[{role:'user',content:buildPrompt(commodity,region,depth,ndviData)}],stream:true,format:'json',options:{temperature:0.2}})
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+    const resp = await fetch(url, {
+      method: 'POST',
+      signal: abortCtrl.signal,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: buildPrompt(commodity, region, depth, ndviData) }] }],
+        generationConfig: {
+          responseMimeType: 'application/json',
+          temperature: 0.2,
+          maxOutputTokens: 1024,
+        }
+      })
     });
-    if (!resp.ok) { const t=await resp.text(); throw new Error(`HTTP ${resp.status}: ${t.slice(0,100)}`); }
 
-    const reader = resp.body.getReader(); const dec = new TextDecoder();
-    let raw = ''; const sa = document.getElementById('streamArea');
-    while (true) {
-      const {done,value} = await reader.read(); if (done) break;
-      for (const line of dec.decode(value,{stream:true}).split('\n')) {
-        if (!line.trim()) continue;
-        try { raw += JSON.parse(line).message?.content || ''; } catch(_) {}
-      }
-      sa.textContent = raw.slice(-300); sa.scrollTop = sa.scrollHeight;
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      throw new Error(err.error?.message || `HTTP ${resp.status}`);
     }
+
+    const data = await resp.json();
+    const raw  = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    sa.textContent = raw.slice(0, 300);
     log(`${raw.length} chars received`, 'ok');
+
     const jm = raw.match(/\{[\s\S]*\}/);
     if (!jm) throw new Error('No JSON in response');
     const sig = JSON.parse(jm[0]);
-    log(`${sig.sentiment} · ${(sig.confidence*100).toFixed(0)}% conf`, 'ok');
+    log(`${sig.sentiment} · ${(sig.confidence * 100).toFixed(0)}% conf`, 'ok');
     renderSignal(sig, commodity, region, ndviData, model);
     sa.className = 'stream-area';
+
   } catch(e) {
-    if (e.name==='AbortError') return;
-    let msg = e.message;
-    if (msg.toLowerCase().includes('failed to fetch') || msg.toLowerCase().includes('cors') || msg.toLowerCase().includes('network')) {
-      msg = 'Network/CORS error — ollama.com/api/chat blocked browser requests.\n\n' +
-            'The Signal Engine tab only works if Ollama Cloud allows browser cross-origin requests.\n\n' +
-            'The nightly pipeline (GitHub Actions) is unaffected — it runs server-side.\n\n' +
-            'Workaround: use the Snapshot tab which loads pipeline-generated data from your repo.';
-    }
-    log('ERROR: '+e.message,'err');
-    alert(msg);
+    if (e.name === 'AbortError') return;
+    log('ERROR: ' + e.message, 'err');
+    alert('Gemini API error:\n' + e.message);
     document.getElementById('lmask').classList.remove('on');
   }
+
   document.getElementById('runBtn').disabled = false;
   document.getElementById('stopBtn').classList.remove('show');
   document.getElementById('lmask').classList.remove('on');
   document.getElementById('ratBox').classList.remove('streaming');
   abortCtrl = null;
 }
-
 // ── Render signal ──────────────────────────────────────────
 function renderSignal(sig, commodity, region, ndviData, model) {
   const sc = sig.sentiment==='Bullish'?'':sig.sentiment==='Bearish'?'bear':'neut';
