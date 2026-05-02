@@ -465,6 +465,11 @@ function switchView(name, btn) {
   if (name === 'podcast')    loadProse('podcast');
 }
 
+// ── Base URL — resolves data/ correctly on GitHub Pages /reponame/ subfolders ──
+const BASE_URL = window.location.href
+  .replace(/\/index\.html.*$/, '')
+  .replace(/\/$/, '');
+
 // ── Log ────────────────────────────────────────────────────
 function log(msg, cls='') {
   const el = document.getElementById('slog');
@@ -477,21 +482,22 @@ function log(msg, cls='') {
 async function loadSnapshot() {
   log('Loading nightly snapshot...', 'inf');
   try {
-    const resp = await fetch('data/signals/latest.json?_=' + Date.now());
+    const resp = await fetch(BASE_URL + '/data/signals/latest.json?_=' + Date.now());
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     snapshotData = await resp.json();
     renderSnapshot(snapshotData);
     updateTicker(snapshotData);
     log(`Snapshot loaded — ${snapshotData.signalCount} signals · ${snapshotData.date}`, 'ok');
   } catch (e) {
-    log('Snapshot not found (run pipeline first): ' + e.message, 'wrn');
+    log('Snapshot fetch error: ' + e.message, 'err');
     document.getElementById('snapContent').innerHTML = `
       <div class="empty" style="min-height:240px">
         <div class="eg" style="font-size:32px">⚠</div>
-        <p><strong style="color:var(--amber)">No snapshot yet.</strong><br>
-        Run the GitHub Actions pipeline first, or run locally:<br>
-        <code style="color:var(--cyan)">python scripts/pc_pipeline.py</code><br>
-        <code style="color:var(--cyan)">python scripts/generate_signals.py</code></p>
+        <p><strong style="color:var(--red)">Failed to load snapshot.</strong><br>
+        Error: ${e.message}<br><br>
+        <strong style="color:var(--amber)">Fix:</strong> Make sure the <code>data/signals/latest.json</code>
+        file exists in your repo. Trigger the pipeline:<br>
+        Repo → <strong>Actions → QuantAgri Pipeline → Run workflow</strong></p>
       </div>`;
   }
 }
@@ -499,8 +505,19 @@ async function loadSnapshot() {
 function renderSnapshot(data) {
   const signals = data.signals || [];
   if (!signals.length) {
-    document.getElementById('snapContent').innerHTML =
-      '<div class="empty" style="min-height:200px"><p>No signals in snapshot</p></div>';
+    const isSeed = data.seed === true;
+    document.getElementById('snapContent').innerHTML = `
+      <div class="empty" style="min-height:240px">
+        <div class="eg" style="font-size:32px">${isSeed ? '🌱' : '⬛'}</div>
+        <p><strong style="color:var(--amber)">${isSeed ? 'Pipeline has not run yet.' : 'No signals in snapshot.'}</strong><br><br>
+        ${isSeed
+          ? 'Trigger the GitHub Actions pipeline to generate real NDVI + signal data:<br><br>' +
+            'Repo → <strong>Actions → QuantAgri Pipeline → Run workflow</strong><br><br>' +
+            'The pipeline fetches Sentinel-2 imagery, generates signals via Ollama Cloud,<br>' +
+            'and commits <code>data/signals/latest.json</code> back to your repo.'
+          : 'Run the pipeline to generate signals.'
+        }</p>
+      </div>`;
     return;
   }
 
@@ -577,7 +594,7 @@ async function loadProse(type) {
   const el = document.getElementById(containerId);
 
   try {
-    const resp = await fetch(path + '?_=' + Date.now());
+    const resp = await fetch(BASE_URL + '/' + path + '?_=' + Date.now());
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const md = await resp.text();
     el.innerHTML = `<div class="prose">${renderMarkdown(md)}</div>`;
@@ -641,8 +658,12 @@ async function pingCloud() {
     log(`Connected · ${model} · reply: "${(d.message?.content||'').slice(0,30)}"`, 'ok');
   } catch(e) {
     dot.className = 'cdot fail'; stat.style.color = 'var(--red)';
-    stat.textContent = 'Failed: ' + e.message;
-    log('Ping failed: ' + e.message, 'err');
+    let msg = e.message;
+    if (msg.toLowerCase().includes('failed to fetch') || msg.toLowerCase().includes('network')) {
+      msg = 'CORS blocked — ollama.com blocks browser requests. Pipeline still works via Actions.';
+    }
+    stat.textContent = msg.slice(0, 60);
+    log('Ping failed: ' + e.message + ' (CORS likely — Actions pipeline unaffected)', 'err');
   }
 }
 
@@ -733,7 +754,15 @@ async function runEngine() {
     sa.className = 'stream-area';
   } catch(e) {
     if (e.name==='AbortError') return;
-    log('ERROR: '+e.message,'err'); alert('Ollama Cloud error:\n'+e.message);
+    let msg = e.message;
+    if (msg.toLowerCase().includes('failed to fetch') || msg.toLowerCase().includes('cors') || msg.toLowerCase().includes('network')) {
+      msg = 'Network/CORS error — ollama.com/api/chat blocked browser requests.\n\n' +
+            'The Signal Engine tab only works if Ollama Cloud allows browser cross-origin requests.\n\n' +
+            'The nightly pipeline (GitHub Actions) is unaffected — it runs server-side.\n\n' +
+            'Workaround: use the Snapshot tab which loads pipeline-generated data from your repo.';
+    }
+    log('ERROR: '+e.message,'err');
+    alert(msg);
     document.getElementById('lmask').classList.remove('on');
   }
   document.getElementById('runBtn').disabled = false;
