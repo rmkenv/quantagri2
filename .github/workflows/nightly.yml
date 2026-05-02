@@ -2,9 +2,9 @@ name: QuantAgri Pipeline
 
 on:
   schedule:
-    - cron: '0 6 * * *'      # nightly: NDVI + prices + signals
-    - cron: '0 7 * * 1'      # Monday: newsletter
-    - cron: '30 7 1 * *'     # 1st of month: podcast
+    - cron: '0 6 * * *'
+    - cron: '0 7 * * 1'
+    - cron: '30 7 1 * *'
   workflow_dispatch:
     inputs:
       run_newsletter:
@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -37,24 +39,20 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # Step 1: Planetary Computer -> NDVI flat files
       - name: Run PC pipeline (NDVI)
         run: python scripts/pc_pipeline.py
         env:
           PC_SDK_SUBSCRIPTION_KEY: ${{ secrets.PC_SDK_SUBSCRIPTION_KEY }}
 
-      # Step 2: Fetch live prices (ETFs + futures via yfinance)
       - name: Fetch live prices
         run: python scripts/fetch_prices.py
 
-      # Step 3: Ollama Cloud -> trading signals
       - name: Generate signals
         run: python scripts/generate_signals.py
         env:
           OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
-          OLLAMA_MODEL: qwen2.5:7b
+          OLLAMA_MODEL: gpt-oss:20b
 
-      # Step 4: Weekly newsletter (Mondays only, or forced)
       - name: Generate weekly newsletter
         if: |
           github.event.schedule == '0 7 * * 1' ||
@@ -62,9 +60,8 @@ jobs:
         run: python scripts/newsletter.py
         env:
           OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
-          OLLAMA_MODEL: qwen2.5:7b
+          OLLAMA_MODEL: gpt-oss:20b
 
-      # Step 5: Monthly podcast (1st only, or forced)
       - name: Generate monthly podcast script
         if: |
           github.event.schedule == '30 7 1 * *' ||
@@ -72,9 +69,8 @@ jobs:
         run: python scripts/podcast.py
         env:
           OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
-          OLLAMA_MODEL: qwen2.5:7b
+          OLLAMA_MODEL: gpt-oss:20b
 
-      # Step 6: Commit all data/ outputs
       - name: Commit outputs
         run: |
           git config user.name  "quantagri-bot"
@@ -82,5 +78,6 @@ jobs:
           git add data/
           git diff --staged --quiet \
             && echo "Nothing to commit" \
-            || git commit -m "chore: pipeline $(date -u '+%Y-%m-%d %H:%M UTC')" \
-            && git push
+            || (git commit -m "chore: pipeline $(date -u '+%Y-%m-%d %H:%M UTC')" \
+            && git pull --rebase origin main \
+            && git push origin main)
