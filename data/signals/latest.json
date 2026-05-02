@@ -1,0 +1,803 @@
+{
+  "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+  "date": "2026-05-02",
+  "signalCount": 15,
+  "errors": [],
+  "signals": [
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Iowa US",
+      "sentiment": "Bullish",
+      "confidence": 0.82,
+      "rationale": "Test rationale.",
+      "peakNdvi": 0.742,
+      "peakLswi": 0.312,
+      "spectralVelocity": "+0.041/16d",
+      "divergenceZScore": 1.87,
+      "macroRegime": "La Nina",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "1420",
+        "stopLoss": "1390",
+        "takeProfit": "1510",
+        "riskReward": "2.8:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.25
+        },
+        {
+          "name": "LSWI Moisture",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.1
+        },
+        {
+          "name": "Seasonal Alignment",
+          "status": "Pass",
+          "signal": "test",
+          "weight": 0.2
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "test",
+          "weight": 0.25
+        }
+      ],
+      "generatedAt": "2026-05-02T12:03:01.303297+00:00",
+      "ndviSource": "simulated"
+    }
+  ]
+}

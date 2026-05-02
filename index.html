@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuantAgri · Spectral Velocity Engine</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@200;400;600;800&display=swap');
+:root {
+  --bg0:#020b04;--bg1:#060f07;--bg2:#0a160b;--bg3:#0e1c10;
+  --b0:#0f2010;--b1:#163318;--b2:#1e4420;
+  --g0:#00ff6a;--g1:#00e65e;--g2:#00b84b;--g3:#005c26;
+  --amber:#ffb300;--red:#ff3d3d;--cyan:#00e5ff;--purple:#bb86fc;
+  --t0:#d4edda;--t1:#7ab882;--t2:#3d6b42;--t3:#1e3820;
+  --mono:'Share Tech Mono',monospace;--disp:'Exo 2',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg0);color:var(--t0);font-family:var(--mono);font-size:12px;line-height:1.55;min-height:100vh;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(0,255,106,.015) 3px,rgba(0,255,106,.015) 4px);pointer-events:none;z-index:9998}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.65) 100%);pointer-events:none;z-index:9997}
+
+/* HEADER */
+header{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:46px;border-bottom:1px solid var(--b1);background:var(--bg1);position:sticky;top:0;z-index:200}
+.wm{font-family:var(--disp);font-weight:800;font-size:17px;color:var(--g0);letter-spacing:.04em;text-shadow:0 0 18px rgba(0,255,106,.4)}
+.wm sub{font-size:9px;font-weight:200;color:var(--t2);letter-spacing:.12em;vertical-align:middle;margin-left:6px}
+.hdr-r{display:flex;align-items:center;gap:12px;font-size:10px;color:var(--t2)}
+.pill{padding:2px 8px;border:1px solid;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.pg{border-color:var(--g2);color:var(--g2);background:rgba(0,255,106,.06)}
+.pc{border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,.06)}
+.pa{border-color:var(--amber);color:var(--amber);background:rgba(255,179,0,.06)}
+.ldot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--g0);box-shadow:0 0 6px var(--g0);animation:breathe 2.4s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+
+/* TICKER */
+.ticker{height:28px;background:rgba(0,255,106,.03);border-bottom:1px solid var(--b0);display:flex;align-items:center;overflow:hidden}
+.tinner{display:flex;gap:40px;white-space:nowrap;animation:tick 55s linear infinite;padding-left:100%}
+@keyframes tick{to{transform:translateX(-200%)}}
+.titem{display:flex;gap:6px;align-items:center;font-size:10px}
+.tsym{color:var(--t2);font-weight:600}
+.tup{color:var(--g0)}.tdn{color:var(--red)}.tfl{color:var(--amber)}
+
+/* NAV */
+nav{display:flex;padding:0 20px;border-bottom:1px solid var(--b0);background:var(--bg1);overflow-x:auto}
+.ntab{background:none;border:none;border-bottom:2px solid transparent;color:var(--t2);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.ntab:hover{color:var(--t1)}.ntab.active{color:var(--g0);border-bottom-color:var(--g0);text-shadow:0 0 10px rgba(0,255,106,.5)}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 106px)}
+
+/* SIDEBAR */
+.sidebar{background:var(--bg1);border-right:1px solid var(--b0);padding:16px 14px;display:flex;flex-direction:column;gap:13px}
+.ctrl{display:flex;flex-direction:column;gap:5px}
+.clbl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.14em;padding-bottom:3px;border-bottom:1px solid var(--b0);margin-bottom:1px}
+select,input[type=text],input[type=password]{width:100%;background:var(--bg2);border:1px solid var(--b1);color:var(--t0);font-family:var(--mono);font-size:11px;padding:6px 8px;outline:none;-webkit-appearance:none;appearance:none;cursor:pointer;transition:border-color .15s}
+select:focus,input:focus{border-color:var(--g2)}
+select option{background:var(--bg2)}
+.rbtn{background:var(--g0);border:none;color:#000;font-family:var(--disp);font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:10px 0;width:100%;cursor:pointer;transition:background .15s,box-shadow .15s;box-shadow:0 0 14px rgba(0,255,106,.25)}
+.rbtn:hover{background:var(--g1);box-shadow:0 0 22px rgba(0,255,106,.45)}
+.rbtn:disabled{background:var(--t3);color:#222;cursor:not-allowed;box-shadow:none}
+.sbtn{background:transparent;border:1px solid var(--red);color:var(--red);font-family:var(--mono);font-size:10px;padding:5px 0;width:100%;cursor:pointer;display:none}
+.sbtn.show{display:block}
+.cbtn{background:transparent;border:1px solid var(--b2);color:var(--t1);font-family:var(--mono);font-size:9px;padding:3px 0;width:100%;cursor:pointer;transition:border-color .15s}
+.cbtn:hover{border-color:var(--g2);color:var(--g0)}
+.conn-bar{display:flex;align-items:center;gap:8px;padding:6px 9px;background:var(--bg0);border:1px solid var(--b0);font-size:10px}
+.cdot{width:7px;height:7px;border-radius:50%;background:var(--t3);flex-shrink:0;transition:background .3s}
+.cdot.ok{background:var(--g0);box-shadow:0 0 6px var(--g0)}.cdot.fail{background:var(--red)}
+.slog{background:var(--bg0);border:1px solid var(--b0);padding:8px;font-size:10px;color:var(--t2);max-height:130px;overflow-y:auto;line-height:1.8;margin-top:auto;flex-shrink:0}
+.ll{display:block}.ts{color:var(--t3)}.ok{color:var(--g0)}.err{color:var(--red)}.inf{color:var(--cyan)}.wrn{color:var(--amber)}
+
+/* CONTENT */
+.content{padding:18px 20px;overflow-y:auto}
+.view{display:none}.view.active{display:block}
+.sh{font-size:9px;color:var(--t2);letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid var(--b0);padding-bottom:5px;margin-bottom:12px}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:320px;gap:12px;color:var(--t3)}
+.eg{font-size:52px;text-shadow:0 0 30px rgba(0,255,106,.2);animation:breathe 3s ease-in-out infinite}
+.empty p{font-size:11px;max-width:300px;text-align:center;line-height:1.7}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px;margin-bottom:14px}
+.card{background:var(--bg2);border:1px solid var(--b1);padding:11px 13px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--g2)}
+.card.bear::before{background:var(--red)}.card.neut::before{background:var(--amber)}
+.clb{font-size:9px;color:var(--t2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}
+.cv{font-family:var(--disp);font-weight:800;font-size:22px;color:var(--g0);line-height:1}
+.card.bear .cv{color:var(--red)}.card.neut .cv{color:var(--amber)}
+.cs{font-size:9px;color:var(--t2);margin-top:4px}
+.conf-track{height:3px;background:var(--b1);margin:8px 0 4px}
+.conf-fill{height:100%;background:linear-gradient(90deg,var(--g3),var(--g0));transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+
+/* CHART */
+.cbox{background:var(--bg1);border:1px solid var(--b0);padding:14px;margin-bottom:14px}
+.chdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:9px;color:var(--t2);text-transform:uppercase;letter-spacing:.1em}
+
+/* FEATURES */
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px}
+.feat{background:var(--bg2);border:1px solid var(--b1);padding:8px 10px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px}
+.fn{font-size:10px;color:var(--t1)}.fsig{font-size:9px;color:var(--t2);margin-top:2px}
+.fst{font-size:10px;font-weight:600;text-align:right}.fw{font-size:9px;color:var(--t3);text-align:right}
+.sp{color:var(--g0)}.sc{color:var(--amber)}.sf{color:var(--red)}
+
+/* STRATEGY */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px;margin-bottom:14px}
+.si{background:var(--bg2);border:1px solid var(--b1);padding:9px 11px}
+.sl{font-size:9px;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.sv{font-size:12px;font-weight:600;color:var(--t0)}
+
+/* RATIONALE */
+.rat{background:var(--bg2);border:1px solid var(--b1);border-left:3px solid var(--g0);padding:13px 15px;margin-bottom:14px;font-size:11px;line-height:1.75;color:var(--t0);min-height:56px}
+.rat.bear{border-left-color:var(--red)}.rat.neut{border-left-color:var(--amber)}
+.rat.streaming::after{content:'▋';color:var(--g0);animation:blink .6s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* LOADING */
+#resultWrap{position:relative}
+.lmask{display:none;position:absolute;inset:0;background:rgba(2,11,4,.88);align-items:center;justify-content:center;flex-direction:column;gap:12px;z-index:10}
+.lmask.on{display:flex}
+.spin{width:26px;height:26px;border:2px solid var(--b1);border-top-color:var(--g0);border-radius:50%;animation:spin .75s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lmsg{font-size:10px;color:var(--g0);text-transform:uppercase;letter-spacing:.1em;animation:blink 1s steps(1) infinite}
+.stream-area{background:var(--bg0);border:1px solid var(--b0);padding:10px;font-size:10px;color:var(--t1);max-height:100px;overflow-y:auto;line-height:1.7;display:none;margin-bottom:12px;white-space:pre-wrap;word-break:break-all}
+.stream-area.on{display:block}
+
+/* SIGNAL TABLE (snapshot view) */
+.sig-table-wrap{overflow-x:auto;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:10px}
+th{background:var(--bg3);border:1px solid var(--b0);padding:6px 9px;text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--t2);font-weight:600}
+td{border:1px solid var(--b0);padding:6px 9px;color:var(--t0)}
+tr:hover td{background:var(--bg2)}
+.tg{color:var(--g0)}.tr{color:var(--red)}.ty{color:var(--amber)}
+
+/* SNAPSHOT cards */
+.snap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:16px}
+.snap-card{background:var(--bg2);border:1px solid var(--b1);padding:10px 12px;border-left:3px solid var(--g2)}
+.snap-card.bear{border-left-color:var(--red)}.snap-card.neut{border-left-color:var(--amber)}
+.snap-comm{font-size:11px;font-weight:600;color:var(--t0)}
+.snap-reg{font-size:9px;color:var(--t2);margin-bottom:6px}
+.snap-sent{font-size:13px;font-family:var(--disp);font-weight:800}
+.snap-bull{color:var(--g0)}.snap-bear{color:var(--red)}.snap-neut{color:var(--amber)}
+.snap-meta{font-size:9px;color:var(--t3);margin-top:4px}
+
+/* PROSE (newsletter / podcast) */
+.prose{background:var(--bg1);border:1px solid var(--b0);padding:20px 24px;font-size:12px;line-height:1.85;color:var(--t0);max-width:860px}
+.prose h1{font-family:var(--disp);font-weight:800;font-size:22px;color:var(--g0);margin-bottom:4px;text-shadow:0 0 20px rgba(0,255,106,.3)}
+.prose h2{font-family:var(--disp);font-weight:600;font-size:15px;color:var(--g1);margin:20px 0 8px;border-bottom:1px solid var(--b1);padding-bottom:4px}
+.prose h3{font-size:12px;color:var(--cyan);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.06em}
+.prose p{margin-bottom:10px;color:var(--t0)}
+.prose strong{color:var(--g0)}
+.prose em{color:var(--amber)}
+.prose ul,.prose ol{margin:8px 0 10px 18px}
+.prose li{margin-bottom:4px;color:var(--t1)}
+.prose hr{border:none;border-top:1px solid var(--b1);margin:18px 0}
+.prose blockquote{border-left:3px solid var(--g2);padding:8px 14px;color:var(--t2);font-style:italic;margin:10px 0}
+.prose table{margin:12px 0}.prose th{font-size:9px}.prose td{font-size:11px}
+.prose code{background:var(--bg0);color:var(--cyan);padding:1px 5px;font-size:10px}
+.prose-loading{display:flex;align-items:center;gap:10px;color:var(--t2);padding:20px}
+
+/* GEO */
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-top:14px}
+.rcard{background:var(--bg2);border:1px solid var(--b1);padding:10px 13px}
+.rcname{font-size:11px;color:var(--t1);margin-bottom:6px;font-weight:600}
+.rcbar{height:3px;background:var(--b1);margin:4px 0}
+.rcfill{height:100%;background:var(--g0);transition:width 1s ease}
+.rclbl{font-size:9px;color:var(--t2)}
+
+/* METHODOLOGY */
+.mb{background:var(--bg1);border:1px solid var(--b0);margin-bottom:8px;overflow:hidden}
+.mt{width:100%;background:none;border:none;text-align:left;padding:10px 13px;font-family:var(--mono);font-size:10px;color:var(--g1);text-transform:uppercase;letter-spacing:.08em;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid transparent;transition:background .15s}
+.mt:hover{background:var(--bg2)}.mt.open{border-bottom-color:var(--b0);color:var(--g0)}
+.mbody{display:none;padding:12px 14px;font-size:10px;color:var(--t1);line-height:1.8}
+.mbody.open{display:block}
+pre{background:var(--bg0);border:1px solid var(--b0);padding:10px 12px;font-size:10px;overflow-x:auto;color:var(--cyan);line-height:1.6;margin:8px 0;white-space:pre}
+
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--bg0)}
+::-webkit-scrollbar-thumb{background:var(--b2)}
+@media(max-width:680px){.layout{grid-template-columns:1fr}.sidebar{border-right:none;border-bottom:1px solid var(--b0)}.fgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wm">QuantAgri <sub>SPECTRAL VELOCITY ENGINE</sub></div>
+  <div class="hdr-r">
+    <span class="ldot"></span>
+    <span class="pill pg">OLLAMA CLOUD</span>
+    <span class="pill pc">PC PIPELINE</span>
+    <span id="clk">--:--:-- UTC</span>
+  </div>
+</header>
+
+<div class="ticker">
+  <div class="tinner" id="tickerEl">
+    <span class="titem"><span class="tsym">ZS=F</span><span class="tup">SOYBEANS +1.2%</span></span>
+    <span class="titem"><span class="tsym">ZC=F</span><span class="tfl">CORN ±0.1%</span></span>
+    <span class="titem"><span class="tsym">ZW=F</span><span class="tup">WHEAT +0.8%</span></span>
+    <span class="titem"><span class="tsym">SB=F</span><span class="tdn">SUGAR −1.4%</span></span>
+    <span class="titem"><span class="tsym">CT=F</span><span class="tfl">COTTON −0.2%</span></span>
+    <span class="titem"><span class="tsym">NDVI·IOWA</span><span class="tup">loading…</span></span>
+    <span class="titem" style="color:var(--t3)">· Prices simulated · Wire FRED/Quandl for live data ·</span>
+    <!-- dup for seamless loop -->
+    <span class="titem"><span class="tsym">ZS=F</span><span class="tup">SOYBEANS +1.2%</span></span>
+    <span class="titem"><span class="tsym">ZC=F</span><span class="tfl">CORN ±0.1%</span></span>
+    <span class="titem"><span class="tsym">ZW=F</span><span class="tup">WHEAT +0.8%</span></span>
+  </div>
+</div>
+
+<nav>
+  <button class="ntab active" onclick="switchView('snapshot',this)">◉ Snapshot</button>
+  <button class="ntab" onclick="switchView('terminal',this)">⬛ Signal Engine</button>
+  <button class="ntab" onclick="switchView('geospatial',this)">◈ Geospatial</button>
+  <button class="ntab" onclick="switchView('newsletter',this)">✉ Newsletter</button>
+  <button class="ntab" onclick="switchView('podcast',this)">🎙 Podcast</button>
+  <button class="ntab" onclick="switchView('methodology',this)">⌬ Methodology</button>
+</nav>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="ctrl">
+      <div class="clbl">Ollama Cloud API Key</div>
+      <input type="password" id="apiKey" placeholder="ollama_xxxxxxxx" />
+    </div>
+    <div class="ctrl">
+      <div class="clbl">Model</div>
+      <select id="modelSel">
+        <option value="qwen2.5:7b">qwen2.5:7b</option>
+        <option value="qwen2.5:14b">qwen2.5:14b</option>
+        <option value="qwen3:8b">qwen3:8b</option>
+        <option value="qwen3-coder:480b-cloud">qwen3-coder:480b-cloud</option>
+        <option value="gpt-oss:20b-cloud">gpt-oss:20b-cloud</option>
+        <option value="gpt-oss:120b-cloud">gpt-oss:120b-cloud</option>
+        <option value="deepseek-v3.1:671b-cloud">deepseek-v3.1:671b-cloud</option>
+      </select>
+    </div>
+    <div class="conn-bar">
+      <div class="cdot" id="cdot"></div>
+      <span id="cstat" style="color:var(--t2)">Not tested</span>
+      <button class="cbtn" style="max-width:46px" onclick="pingCloud()">PING</button>
+    </div>
+    <div class="ctrl">
+      <div class="clbl">Commodity</div>
+      <select id="commodity">
+        <option>Soybeans</option><option>Corn</option>
+        <option>Wheat</option><option>Sugar</option><option>Cotton</option>
+      </select>
+    </div>
+    <div class="ctrl">
+      <div class="clbl">Region</div>
+      <select id="region">
+        <option>Global Overview</option>
+        <option>Iowa, US</option><option>Mato Grosso, BR</option>
+        <option>Illinois, US</option><option>Buenos Aires, AR</option>
+        <option>Kansas, US</option><option>Rostov, RU</option>
+        <option>Saskatchewan, CA</option><option>Grand Est, FR</option>
+        <option>Xinjiang, CN</option><option>Texas, US</option>
+        <option>Uttar Pradesh, IN</option><option>Heilongjiang, CN</option>
+      </select>
+    </div>
+    <div class="ctrl">
+      <div class="clbl">Depth</div>
+      <select id="depth">
+        <option value="standard">Standard</option>
+        <option value="deep">Deep — WASDE + Yield Surprise</option>
+      </select>
+    </div>
+    <button class="rbtn" id="runBtn" onclick="runEngine()">▶ Run Signal Engine</button>
+    <button class="sbtn" id="stopBtn" onclick="abort()">■ Stop</button>
+    <button class="cbtn" onclick="loadSnapshot()">↻ Reload Snapshot</button>
+    <div class="slog" id="slog">
+      <span class="ll"><span class="ts">[INIT]</span> QuantAgri ready</span><br>
+      <span class="ll"><span class="ts">[API ]</span> <span class="inf">ollama.com/api/chat</span></span><br>
+      <span class="ll"><span class="ts">[DATA]</span> <span class="inf">Planetary Computer · Sentinel-2</span></span><br>
+      <span class="ll"><span class="ts">[SYS ]</span> Loading nightly snapshot...</span>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- SNAPSHOT VIEW (default — loads from data/signals/latest.json) -->
+    <div class="view active" id="view-snapshot">
+      <div class="sh">Nightly Signal Snapshot — All Nodes</div>
+      <div id="snapContent">
+        <div class="empty"><div class="eg">◈</div><p>Loading nightly signal snapshot from data/signals/latest.json…</p></div>
+      </div>
+    </div>
+
+    <!-- TERMINAL / SIGNAL ENGINE VIEW -->
+    <div class="view" id="view-terminal">
+      <div class="empty" id="emptyState">
+        <div class="eg">⬛</div>
+        <p>Paste your <strong style="color:var(--g0)">Ollama Cloud API key</strong>, select commodity + region, then click <strong>Run Signal Engine</strong></p>
+        <p style="font-size:10px;color:var(--t3);margin-top:6px">On-demand analysis · qwen2.5 via ollama.com</p>
+      </div>
+      <div id="resultWrap" style="display:none;position:relative">
+        <div class="lmask" id="lmask"><div class="spin"></div><div class="lmsg" id="lmsg">QUERYING OLLAMA CLOUD...</div></div>
+        <div class="stream-area" id="streamArea"></div>
+        <div class="sh" id="termTitle">SIGNAL ENGINE OUTPUT</div>
+        <div class="cards" id="sigCards"></div>
+        <div style="margin-bottom:14px">
+          <div class="sh">Confidence</div>
+          <div class="conf-track"><div class="conf-fill" id="confFill" style="width:0%"></div></div>
+          <div style="font-size:9px;color:var(--t2);margin-top:4px" id="confLbl"></div>
+        </div>
+        <div class="cbox">
+          <div class="chdr"><span>NDVI / LSWI · 12-Month Composites</span><span class="pill pc">SENTINEL-2</span></div>
+          <canvas id="ndviChart" height="160"></canvas>
+        </div>
+        <div class="sh">Feature Block Audit</div>
+        <div class="fgrid" id="featBlocks"></div>
+        <div class="sh">Futures Strategy</div>
+        <div class="sgrid" id="stratGrid"></div>
+        <div class="sh" style="margin-top:4px">Signal Rationale</div>
+        <div class="rat" id="ratBox"><span id="ratText"></span></div>
+        <div style="font-size:9px;color:var(--t3);display:flex;gap:8px;flex-wrap:wrap" id="metaLine"></div>
+      </div>
+    </div>
+
+    <!-- GEOSPATIAL VIEW -->
+    <div class="view" id="view-geospatial">
+      <div class="sh">Geospatial — Multi-Node NDVI Benchmark</div>
+      <p style="font-size:11px;color:var(--t2);margin-bottom:14px;line-height:1.7">Cross-region spectral comparison. In production, pulls from <strong style="color:var(--cyan)">data/ndvi/</strong> flat files committed nightly by GitHub Actions.</p>
+      <div class="cbox">
+        <div class="chdr"><span>Peak NDVI by Production Region · Growing Season</span><span class="pill pc">NIGHTLY PC DATA</span></div>
+        <canvas id="geoChart" height="200"></canvas>
+      </div>
+      <div class="sh">Regional Signals</div>
+      <div class="rgrid" id="regionGrid"></div>
+    </div>
+
+    <!-- NEWSLETTER VIEW -->
+    <div class="view" id="view-newsletter">
+      <div class="sh">Weekly Intelligence Newsletter</div>
+      <p style="font-size:11px;color:var(--t2);margin-bottom:14px">Published every Monday. Generated by <strong>scripts/newsletter.py</strong> via Ollama Cloud, committed to <strong>data/newsletter/</strong>.</p>
+      <div id="newsletterContent">
+        <div class="prose-loading"><div class="spin"></div><span>Loading latest newsletter…</span></div>
+      </div>
+    </div>
+
+    <!-- PODCAST VIEW -->
+    <div class="view" id="view-podcast">
+      <div class="sh">Monthly Podcast Script</div>
+      <p style="font-size:11px;color:var(--t2);margin-bottom:14px">Published on the 1st of each month. Generated by <strong>scripts/podcast.py</strong> via Ollama Cloud, committed to <strong>data/podcast/</strong>.</p>
+      <div id="podcastContent">
+        <div class="prose-loading"><div class="spin"></div><span>Loading latest podcast script…</span></div>
+      </div>
+    </div>
+
+    <!-- METHODOLOGY VIEW -->
+    <div class="view" id="view-methodology">
+      <div class="sh">Pipeline Architecture</div>
+
+      <div class="mb">
+        <button class="mt open" onclick="toggleM(this)">1 · Ollama Cloud API <span>▲</span></button>
+        <div class="mbody open">
+          <p>All LLM calls go to <code>https://ollama.com/api/chat</code> with <code>Authorization: Bearer $OLLAMA_API_KEY</code>. No local GPU. No local daemon. Subscription pricing — free tier available at ollama.com.</p>
+          <pre>curl https://ollama.com/api/chat \
+  -H "Authorization: Bearer $OLLAMA_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model":   "qwen2.5:7b",
+    "messages":[{"role":"user","content":"..."}],
+    "stream":  false,
+    "format":  "json",
+    "options": {"temperature": 0.2}
+  }'</pre>
+        </div>
+      </div>
+
+      <div class="mb">
+        <button class="mt" onclick="toggleM(this)">2 · Planetary Computer — Sentinel-2 NDVI <span>▼</span></button>
+        <div class="mbody">
+          <pre>import pystac_client, planetary_computer as pc, stackstac
+
+catalog = pystac_client.Client.open(
+    "https://planetarycomputer.microsoft.com/api/stac/v1",
+    modifier=pc.sign_inplace
+)
+items = catalog.search(
+    collections=["sentinel-2-l2a"],
+    bbox=[-96.7, 40.5, -90.1, 43.5],   # Iowa corn
+    datetime="2025-04/2025-10",
+    query={"eo:cloud_cover": {"lt": 25}}
+).item_collection()
+
+stack = stackstac.stack(items, assets=["B04","B08","B11"], resolution=60)
+b4  = stack.sel(band="B04") / 10000
+b8  = stack.sel(band="B08") / 10000
+b11 = stack.sel(band="B11") / 10000
+ndvi = (b8 - b4)  / (b8 + b4  + 1e-10)   # vegetation vigor
+lswi = (b8 - b11) / (b8 + b11 + 1e-10)   # water stress
+
+ndvi_16d  = ndvi.resample(time="16D").median().mean(dim=["x","y"])
+velocity  = ndvi_16d.diff("time")          # dNDVI/dt</pre>
+        </div>
+      </div>
+
+      <div class="mb">
+        <button class="mt" onclick="toggleM(this)">3 · GitHub Actions Schedule <span>▼</span></button>
+        <div class="mbody">
+          <pre>on:
+  schedule:
+    - cron: '0 6 * * *'    # nightly NDVI + signals
+    - cron: '0 7 * * 1'    # Monday newsletter
+    - cron: '30 7 1 * *'   # monthly podcast</pre>
+          <p style="margin-top:8px">Free tier: 2,000 min/month. Each run takes ~5-10 min. Annual budget: ~3,650 min. Well within free tier.</p>
+        </div>
+      </div>
+
+      <div class="mb">
+        <button class="mt" onclick="toggleM(this)">4 · Repo File Structure <span>▼</span></button>
+        <div class="mbody">
+          <pre>quantagri/
+├── index.html                    # This dashboard (GitHub Pages)
+├── README.md
+├── requirements.txt
+├── .env.example
+├── .github/
+│   └── workflows/
+│       └── nightly.yml           # All three schedules
+├── scripts/
+│   ├── config.py                 # Nodes, seasons, paths
+│   ├── ollama_client.py          # Ollama Cloud REST wrapper
+│   ├── pc_pipeline.py            # Sentinel-2 → NDVI JSON
+│   ├── generate_signals.py       # NDVI → trading signals
+│   ├── newsletter.py             # Weekly newsletter
+│   └── podcast.py                # Monthly podcast script
+└── data/
+    ├── ndvi/                     # Raw NDVI per node per day
+    ├── signals/
+    │   ├── latest.json           # Current snapshot (all nodes)
+    │   └── YYYY-MM-DD.json       # Daily archives
+    ├── newsletter/
+    │   ├── latest.md             # Current newsletter
+    │   └── YYYY-MM-DD.md         # Weekly archives
+    └── podcast/
+        ├── latest.md             # Current podcast script
+        └── YYYY-MM.md            # Monthly archives</pre>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ── Globals ──────────────────────────────────────────────
+let ndviChart = null, geoChart = null, abortCtrl = null;
+let snapshotData = null;
+
+// ── Clock ─────────────────────────────────────────────────
+setInterval(() => {
+  document.getElementById('clk').textContent = new Date().toUTCString().slice(17,25) + ' UTC';
+}, 1000);
+
+// ── View switching ─────────────────────────────────────────
+function switchView(name, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.ntab').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'geospatial') renderGeoView();
+  if (name === 'newsletter') loadProse('newsletter');
+  if (name === 'podcast')    loadProse('podcast');
+}
+
+// ── Log ────────────────────────────────────────────────────
+function log(msg, cls='') {
+  const el = document.getElementById('slog');
+  const ts = new Date().toISOString().slice(11,19);
+  el.innerHTML += `<span class="ll"><span class="ts">[${ts}]</span> <span class="${cls}">${msg}</span></span><br>`;
+  el.scrollTop = el.scrollHeight;
+}
+
+// ── Load snapshot from data/signals/latest.json ────────────
+async function loadSnapshot() {
+  log('Loading nightly snapshot...', 'inf');
+  try {
+    const resp = await fetch('data/signals/latest.json?_=' + Date.now());
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    snapshotData = await resp.json();
+    renderSnapshot(snapshotData);
+    updateTicker(snapshotData);
+    log(`Snapshot loaded — ${snapshotData.signalCount} signals · ${snapshotData.date}`, 'ok');
+  } catch (e) {
+    log('Snapshot not found (run pipeline first): ' + e.message, 'wrn');
+    document.getElementById('snapContent').innerHTML = `
+      <div class="empty" style="min-height:240px">
+        <div class="eg" style="font-size:32px">⚠</div>
+        <p><strong style="color:var(--amber)">No snapshot yet.</strong><br>
+        Run the GitHub Actions pipeline first, or run locally:<br>
+        <code style="color:var(--cyan)">python scripts/pc_pipeline.py</code><br>
+        <code style="color:var(--cyan)">python scripts/generate_signals.py</code></p>
+      </div>`;
+  }
+}
+
+function renderSnapshot(data) {
+  const signals = data.signals || [];
+  if (!signals.length) {
+    document.getElementById('snapContent').innerHTML =
+      '<div class="empty" style="min-height:200px"><p>No signals in snapshot</p></div>';
+    return;
+  }
+
+  const sentCls = s => s === 'Bullish' ? 'bull' : s === 'Bearish' ? 'bear' : 'neut';
+  const cardCls = s => s === 'Bullish' ? '' : s === 'Bearish' ? 'bear' : 'neut';
+
+  const cards = signals.map(s => `
+    <div class="snap-card ${cardCls(s.sentiment)}">
+      <div class="snap-comm">${s.commodity}</div>
+      <div class="snap-reg">${s.region}</div>
+      <div class="snap-sent snap-${s.sentiment?.toLowerCase() || 'neut'}">${s.sentiment?.toUpperCase() || '—'}</div>
+      <div class="conf-track" style="margin:6px 0 3px"><div class="conf-fill" style="width:${(s.confidence||0)*100}%"></div></div>
+      <div class="snap-meta">${((s.confidence||0)*100).toFixed(0)}% conf · NDVI ${s.peakNdvi||'—'} · ${s.strategy?.action||'—'}</div>
+    </div>`).join('');
+
+  // Summary table
+  const rows = signals.map(s => {
+    const cls = s.sentiment === 'Bullish' ? 'tg' : s.sentiment === 'Bearish' ? 'tr' : 'ty';
+    return `<tr>
+      <td>${s.commodity}</td>
+      <td>${s.region}</td>
+      <td class="${cls}">${s.sentiment||'—'}</td>
+      <td>${((s.confidence||0)*100).toFixed(0)}%</td>
+      <td>${s.strategy?.action||'—'}</td>
+      <td>${s.peakNdvi||'—'}</td>
+      <td>${s.divergenceZScore?.toFixed(2)||'—'}</td>
+      <td>${s.macroRegime||'—'}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('snapContent').innerHTML = `
+    <div style="font-size:10px;color:var(--t2);margin-bottom:12px">
+      Generated: <strong>${data.date || '—'}</strong> · 
+      ${data.signalCount} signals · 
+      Source: data/signals/latest.json
+    </div>
+    <div class="snap-grid">${cards}</div>
+    <div class="sh">Full Signal Table</div>
+    <div class="sig-table-wrap">
+      <table>
+        <thead><tr>
+          <th>Commodity</th><th>Region</th><th>Sentiment</th>
+          <th>Conf</th><th>Action</th><th>Peak NDVI</th>
+          <th>Z-Score</th><th>Macro Regime</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+    <div style="font-size:9px;color:var(--t3)">
+      Pipeline: Planetary Computer Sentinel-2 → Ollama Cloud qwen2.5 → GitHub Actions → flat JSON
+    </div>`;
+}
+
+function updateTicker(data) {
+  // Inject real NDVI readings into ticker if available
+  const signals = data.signals || [];
+  const ndviItems = signals.slice(0, 5).map(s =>
+    `<span class="titem"><span class="tsym">NDVI·${s.region?.split('_')[0]?.toUpperCase() || '?'}</span>` +
+    `<span class="${s.sentiment === 'Bullish' ? 'tup' : s.sentiment === 'Bearish' ? 'tdn' : 'tfl'}">${s.peakNdvi || '—'} ${s.sentiment === 'Bullish' ? '↑' : s.sentiment === 'Bearish' ? '↓' : '→'}</span></span>`
+  ).join('');
+  if (ndviItems) {
+    const el = document.getElementById('tickerEl');
+    el.innerHTML = el.innerHTML.replace(
+      '<span class="titem"><span class="tsym">NDVI·IOWA</span><span class="tup">loading…</span></span>',
+      ndviItems
+    );
+  }
+}
+
+// ── Load prose (newsletter / podcast) from data/ ───────────
+async function loadProse(type) {
+  const containerId = type === 'newsletter' ? 'newsletterContent' : 'podcastContent';
+  const path = type === 'newsletter' ? 'data/newsletter/latest.md' : 'data/podcast/latest.md';
+  const el = document.getElementById(containerId);
+
+  try {
+    const resp = await fetch(path + '?_=' + Date.now());
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const md = await resp.text();
+    el.innerHTML = `<div class="prose">${renderMarkdown(md)}</div>`;
+    log(`${type} loaded — ${md.length.toLocaleString()} chars`, 'ok');
+  } catch (e) {
+    const script = type === 'newsletter' ? 'newsletter.py' : 'podcast.py';
+    el.innerHTML = `
+      <div class="empty" style="min-height:220px">
+        <div class="eg" style="font-size:32px">⚠</div>
+        <p><strong style="color:var(--amber)">No ${type} yet.</strong><br>
+        Run the GitHub Actions pipeline (Monday / 1st of month),<br>
+        or locally: <code style="color:var(--cyan)">python scripts/${script}</code></p>
+      </div>`;
+  }
+}
+
+// ── Minimal Markdown → HTML ────────────────────────────────
+function renderMarkdown(md) {
+  return md
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/^#### (.+)$/gm, '<h4>$1</h4>')
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/^---$/gm, '<hr>')
+    .replace(/^\| (.+)$/gm, (m, cols) => {
+      if (cols.match(/^[-| ]+$/)) return '';
+      return '<tr>' + cols.split('|').map(c => `<td>${c.trim()}</td>`).join('') + '</tr>';
+    })
+    .replace(/^- (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
+    .replace(/^([^<\n].+)$/gm, '<p>$1</p>')
+    .replace(/<\/ul>\s*<ul>/g, '')
+    .replace(/(<tr>.*<\/tr>)/gs, '<table>$1</table>')
+    .replace(/<\/table>\s*<table>/g, '');
+}
+
+// ── Ping Ollama Cloud ──────────────────────────────────────
+async function pingCloud() {
+  const key   = document.getElementById('apiKey').value.trim();
+  const model = document.getElementById('modelSel').value;
+  const dot   = document.getElementById('cdot');
+  const stat  = document.getElementById('cstat');
+  if (!key) { alert('Paste your Ollama Cloud API key first'); return; }
+  stat.textContent = 'Testing...'; dot.className = 'cdot';
+  log('Pinging ollama.com...', 'inf');
+  try {
+    const r = await fetch('https://ollama.com/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${key}` },
+      body: JSON.stringify({ model, messages:[{role:'user',content:'Reply: ONLINE'}], stream:false })
+    });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const d = await r.json();
+    dot.className = 'cdot ok';
+    stat.style.color = 'var(--g0)';
+    stat.textContent = `OK · ${model}`;
+    log(`Connected · ${model} · reply: "${(d.message?.content||'').slice(0,30)}"`, 'ok');
+  } catch(e) {
+    dot.className = 'cdot fail'; stat.style.color = 'var(--red)';
+    stat.textContent = 'Failed: ' + e.message;
+    log('Ping failed: ' + e.message, 'err');
+  }
+}
+
+// ── NDVI simulation ────────────────────────────────────────
+function mkNDVI(commodity, region) {
+  const cfg = {Soybeans:{peak:7,nm:0.81,lm:0.44},Corn:{peak:7,nm:0.85,lm:0.40},
+    Wheat:{peak:5,nm:0.74,lm:0.38},Sugar:{peak:9,nm:0.77,lm:0.56},Cotton:{peak:8,nm:0.68,lm:0.30}
+  }[commodity] || {peak:7,nm:0.78,lm:0.40};
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const rng = () => (Math.random()-.5)*.038;
+  return months.map((m,i) => {
+    const f = Math.exp(-0.14*Math.pow(Math.abs(i-cfg.peak),2));
+    return {month:m, ndvi:+Math.max(.10,cfg.nm*f+.11+rng()).toFixed(3), lswi:+Math.max(.04,cfg.lm*f+.04+rng()).toFixed(3)};
+  });
+}
+
+// ── Build prompt ───────────────────────────────────────────
+function buildPrompt(commodity, region, depth, ndvi) {
+  const extra = depth==='deep'
+    ? 'Also include: wasdeConsensus (number), rsYieldSurprise (number), leadTimeDays (integer 14-45), expectedTradeResult (string like "+180 bps").'
+    : '';
+  return `You are QuantAgri Spectral Velocity Engine. Analyze ${commodity} futures for ${region}.
+
+NDVI/LSWI from Planetary Computer Sentinel-2 (16-day composites):
+${JSON.stringify(ndvi)}
+${extra}
+
+Return ONLY valid JSON matching this exact schema:
+{"sentiment":"Bullish"|"Bearish"|"Neutral","confidence":<0-1>,"rationale":"<2-3 sentences>","peakNdvi":<float>,"peakLswi":<float>,"spectralVelocity":"<e.g. +0.042/16d>","divergenceZScore":<float>,"macroRegime":"<regime>","strategy":{"action":"LONG"|"SHORT"|"NEUTRAL","entryZone":"<zone>","stopLoss":"<stop>","takeProfit":"<target>","riskReward":"<e.g. 2.4:1>"},"featureBlocks":[{"name":"NDVI Velocity","status":"Pass"|"Caution"|"Fail","signal":"<detail>","weight":0.25},{"name":"LSWI Moisture","status":"Pass"|"Caution"|"Fail","signal":"<detail>","weight":0.20},{"name":"Cloud Cover QA","status":"Pass"|"Caution"|"Fail","signal":"<detail>","weight":0.10},{"name":"Seasonal Alignment","status":"Pass"|"Caution"|"Fail","signal":"<detail>","weight":0.20},{"name":"Macro Regime","status":"Pass"|"Caution"|"Fail","signal":"<detail>","weight":0.25}]}`;
+}
+
+// ── Abort ──────────────────────────────────────────────────
+function abort() {
+  if (abortCtrl) abortCtrl.abort();
+  document.getElementById('stopBtn').classList.remove('show');
+  document.getElementById('runBtn').disabled = false;
+  document.getElementById('lmask').classList.remove('on');
+  log('Aborted', 'wrn');
+}
+
+// ── Signal engine ──────────────────────────────────────────
+async function runEngine() {
+  const key       = document.getElementById('apiKey').value.trim();
+  const model     = document.getElementById('modelSel').value;
+  const commodity = document.getElementById('commodity').value;
+  const region    = document.getElementById('region').value;
+  const depth     = document.getElementById('depth').value;
+  if (!key) { alert('Paste your Ollama Cloud API key'); return; }
+
+  const ndviData = mkNDVI(commodity, region);
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('resultWrap').style.display = 'block';
+  document.getElementById('lmask').classList.add('on');
+  document.getElementById('lmsg').textContent = 'QUERYING OLLAMA CLOUD...';
+  document.getElementById('runBtn').disabled = true;
+  document.getElementById('stopBtn').classList.add('show');
+  document.getElementById('streamArea').className = 'stream-area on';
+  document.getElementById('streamArea').textContent = '';
+  document.getElementById('ratBox').className = 'rat streaming';
+  document.getElementById('termTitle').textContent = `SIGNAL · ${commodity.toUpperCase()} · ${region.toUpperCase()}`;
+  log(`Engine: ${model} · ${commodity} · ${region}`);
+  abortCtrl = new AbortController();
+
+  try {
+    const resp = await fetch('https://ollama.com/api/chat', {
+      method:'POST', signal:abortCtrl.signal,
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`},
+      body:JSON.stringify({model,messages:[{role:'user',content:buildPrompt(commodity,region,depth,ndviData)}],stream:true,format:'json',options:{temperature:0.2}})
+    });
+    if (!resp.ok) { const t=await resp.text(); throw new Error(`HTTP ${resp.status}: ${t.slice(0,100)}`); }
+
+    const reader = resp.body.getReader(); const dec = new TextDecoder();
+    let raw = ''; const sa = document.getElementById('streamArea');
+    while (true) {
+      const {done,value} = await reader.read(); if (done) break;
+      for (const line of dec.decode(value,{stream:true}).split('\n')) {
+        if (!line.trim()) continue;
+        try { raw += JSON.parse(line).message?.content || ''; } catch(_) {}
+      }
+      sa.textContent = raw.slice(-300); sa.scrollTop = sa.scrollHeight;
+    }
+    log(`${raw.length} chars received`, 'ok');
+    const jm = raw.match(/\{[\s\S]*\}/);
+    if (!jm) throw new Error('No JSON in response');
+    const sig = JSON.parse(jm[0]);
+    log(`${sig.sentiment} · ${(sig.confidence*100).toFixed(0)}% conf`, 'ok');
+    renderSignal(sig, commodity, region, ndviData, model);
+    sa.className = 'stream-area';
+  } catch(e) {
+    if (e.name==='AbortError') return;
+    log('ERROR: '+e.message,'err'); alert('Ollama Cloud error:\n'+e.message);
+    document.getElementById('lmask').classList.remove('on');
+  }
+  document.getElementById('runBtn').disabled = false;
+  document.getElementById('stopBtn').classList.remove('show');
+  document.getElementById('lmask').classList.remove('on');
+  document.getElementById('ratBox').classList.remove('streaming');
+  abortCtrl = null;
+}
+
+// ── Render signal ──────────────────────────────────────────
+function renderSignal(sig, commodity, region, ndviData, model) {
+  const sc = sig.sentiment==='Bullish'?'':sig.sentiment==='Bearish'?'bear':'neut';
+  const ac = sig.strategy?.action==='LONG'?'':sig.strategy?.action==='SHORT'?'bear':'neut';
+  document.getElementById('sigCards').innerHTML = `
+    <div class="card ${sc}"><div class="clb">Signal</div><div class="cv">${sig.sentiment?.toUpperCase()}</div><div class="cs">${commodity}</div></div>
+    <div class="card ${ac}"><div class="clb">Action</div><div class="cv">${sig.strategy?.action||'—'}</div><div class="cs">Futures</div></div>
+    <div class="card"><div class="clb">Confidence</div><div class="cv">${(sig.confidence*100).toFixed(0)}<span style="font-size:14px">%</span></div><div class="cs">Quality</div></div>
+    <div class="card"><div class="clb">Peak NDVI</div><div class="cv" style="font-size:19px">${sig.peakNdvi?.toFixed(3)||'—'}</div><div class="cs">v: ${sig.spectralVelocity||'—'}</div></div>
+    <div class="card"><div class="clb">Z-Score</div><div class="cv" style="font-size:19px">${sig.divergenceZScore?.toFixed(2)||'—'}</div><div class="cs">Divergence</div></div>
+    <div class="card"><div class="clb">Macro</div><div class="cv" style="font-size:11px;margin-top:4px">${sig.macroRegime||'—'}</div><div class="cs">Regime</div></div>`;
+  document.getElementById('confFill').style.width = (sig.confidence*100)+'%';
+  document.getElementById('confLbl').textContent = `${(sig.confidence*100).toFixed(0)}% · ${sig.confidence>.75?'High conviction':sig.confidence>.5?'Moderate':'Low conviction'} · ${model}`;
+  renderNDVIChart(ndviData);
+  const stMap={Pass:'sp',Caution:'sc',Fail:'sf'};
+  document.getElementById('featBlocks').innerHTML=(sig.featureBlocks||[]).map(f=>`
+    <div class="feat"><div><div class="fn">${f.name}</div><div class="fsig">${f.signal}</div></div>
+    <div><div class="fst ${stMap[f.status]||''}">${f.status}</div><div class="fw">wt ${(f.weight*100).toFixed(0)}%</div></div></div>`).join('');
+  const s=sig.strategy||{};
+  document.getElementById('stratGrid').innerHTML=`
+    <div class="si"><div class="sl">Entry Zone</div><div class="sv">${s.entryZone||'—'}</div></div>
+    <div class="si"><div class="sl">Stop Loss</div><div class="sv" style="color:var(--red)">${s.stopLoss||'—'}</div></div>
+    <div class="si"><div class="sl">Take Profit</div><div class="sv" style="color:var(--g0)">${s.takeProfit||'—'}</div></div>
+    <div class="si"><div class="sl">Risk/Reward</div><div class="sv">${s.riskReward||'—'}</div></div>`;
+  document.getElementById('ratBox').className=`rat ${sc}`;
+  document.getElementById('ratText').textContent=sig.rationale||'';
+  document.getElementById('metaLine').innerHTML=`
+    <span class="pill pg">MODEL: ${model}</span>
+    <span class="pill pc">DATA: PC · Sentinel-2</span>
+    <span style="color:var(--t3)">${new Date().toUTCString()}</span>`;
+}
+
+// ── NDVI Chart ─────────────────────────────────────────────
+function renderNDVIChart(data) {
+  const ctx = document.getElementById('ndviChart').getContext('2d');
+  if (ndviChart) ndviChart.destroy();
+  ndviChart = new Chart(ctx, {
+    type:'line',
+    data:{labels:data.map(d=>d.month),datasets:[
+      {label:'NDVI',data:data.map(d=>d.ndvi),borderColor:'#00ff6a',backgroundColor:'rgba(0,255,106,.07)',borderWidth:1.5,pointRadius:2,tension:.4,fill:true},
+      {label:'LSWI',data:data.map(d=>d.lswi),borderColor:'#00e5ff',backgroundColor:'rgba(0,229,255,.05)',borderWidth:1.5,pointRadius:2,tension:.4,fill:true}
+    ]},
+    options:{responsive:true,plugins:{
+      legend:{labels:{color:'#3d6b42',font:{family:"'Share Tech Mono'",size:10}}},
+      tooltip:{backgroundColor:'#0a160b',borderColor:'#163318',borderWidth:1,titleColor:'#00ff6a',bodyColor:'#7ab882'}
+    },scales:{
+      x:{ticks:{color:'#3d6b42',font:{size:9}},grid:{color:'#0f2010'}},
+      y:{min:0,max:1,ticks:{color:'#3d6b42',font:{size:9}},grid:{color:'#0f2010'}}
+    }}
+  });
+}
+
+// ── Geo view ───────────────────────────────────────────────
+function renderGeoView() {
+  const nodes = [
+    {region:'Iowa, US',ndvi:.742,lswi:.312,signal:'Bullish'},
+    {region:'Mato Grosso',ndvi:.631,lswi:.281,signal:'Bearish'},
+    {region:'Illinois, US',ndvi:.718,lswi:.295,signal:'Bullish'},
+    {region:'Buenos Aires',ndvi:.589,lswi:.241,signal:'Neutral'},
+    {region:'Kansas, US',ndvi:.603,lswi:.254,signal:'Bullish'},
+    {region:'Rostov, RU',ndvi:.558,lswi:.219,signal:'Bearish'},
+    {region:'Saskatchewan',ndvi:.641,lswi:.276,signal:'Neutral'},
+    {region:'Grand Est, FR',ndvi:.671,lswi:.288,signal:'Bullish'},
+  ];
+  // Pull from snapshot if available
+  if (snapshotData?.signals?.length) {
+    nodes.splice(0);
+    snapshotData.signals.slice(0,8).forEach(s => nodes.push({
+      region:s.region?.replace(/_/g,' ')||'—',
+      ndvi:s.peakNdvi||.5, lswi:s.peakLswi||.25, signal:s.sentiment||'Neutral'
+    }));
+  }
+  const clr = s => s==='Bullish'?'var(--g0)':s==='Bearish'?'var(--red)':'var(--amber)';
+  const ctx = document.getElementById('geoChart').getContext('2d');
+  if (geoChart) geoChart.destroy();
+  geoChart = new Chart(ctx, {
+    type:'bar',
+    data:{labels:nodes.map(n=>n.region.split(',')[0]),datasets:[{
+      label:'Peak NDVI',data:nodes.map(n=>n.ndvi),
+      backgroundColor:nodes.map(n=>n.signal==='Bullish'?'rgba(0,255,106,.55)':n.signal==='Bearish'?'rgba(255,61,61,.55)':'rgba(255,179,0,.55)'),
+      borderColor:nodes.map(n=>clr(n.signal)),borderWidth:1
+    }]},
+    options:{responsive:true,plugins:{legend:{display:false},
+      tooltip:{backgroundColor:'#0a160b',borderColor:'#163318',borderWidth:1,titleColor:'#00e5ff',bodyColor:'#7ab882'}},
+      scales:{x:{ticks:{color:'#3d6b42',font:{size:9}},grid:{color:'#0f2010'}},
+        y:{min:0,max:1,ticks:{color:'#3d6b42',font:{size:9}},grid:{color:'#0f2010'}}}}
+  });
+  document.getElementById('regionGrid').innerHTML = nodes.map(n=>`
+    <div class="rcard">
+      <div class="rcname">${n.region}</div>
+      <div class="rclbl">NDVI</div>
+      <div class="rcbar"><div class="rcfill" style="width:${n.ndvi*100}%;background:${clr(n.signal)}"></div></div>
+      <div style="display:flex;justify-content:space-between;margin-top:3px">
+        <span class="rclbl">${n.ndvi.toFixed(3)}</span>
+        <span style="font-size:9px;color:${clr(n.signal)};font-weight:600">${n.signal.toUpperCase()}</span>
+      </div>
+      <div class="rclbl" style="margin-top:6px">LSWI</div>
+      <div class="rcbar"><div class="rcfill" style="width:${Math.min(100,n.lswi*200)}%;background:var(--cyan)"></div></div>
+      <div class="rclbl">${n.lswi.toFixed(3)}</div>
+    </div>`).join('');
+}
+
+// ── Methodology toggles ────────────────────────────────────
+function toggleM(btn) {
+  const body = btn.nextElementSibling;
+  const open = btn.classList.contains('open');
+  btn.classList.toggle('open',!open);
+  btn.querySelector('span').textContent = open?'▼':'▲';
+  body.classList.toggle('open',!open);
+}
+
+// ── Init ───────────────────────────────────────────────────
+loadSnapshot();
+</script>
+</body>
+</html>
