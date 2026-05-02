@@ -687,16 +687,45 @@ function mkNDVI(commodity, region) {
 // ── Build prompt ───────────────────────────────────────────
 function buildPrompt(commodity, region, depth, ndvi) {
   const extra = depth==='deep'
-    ? 'Also include: wasdeConsensus (number), rsYieldSurprise (number), leadTimeDays (integer 14-45), expectedTradeResult (string like "+180 bps").'
+    ? '"wasdeConsensus":<number>,"rsYieldSurprise":<number>,"leadTimeDays":<integer 14-45>,"expectedTradeResult":"<e.g. +180 bps>",'
     : '';
-  return `You are QuantAgri Spectral Velocity Engine. Analyze ${commodity} futures for ${region}.
+  return `Analyze ${commodity} futures for the ${region} production region using the NDVI/LSWI spectral data below.
 
-NDVI/LSWI from Planetary Computer Sentinel-2 (16-day composites):
+NDVI/LSWI 16-day composites (Planetary Computer Sentinel-2):
 ${JSON.stringify(ndvi)}
-${extra}
 
-Return ONLY valid JSON matching this exact schema:
-{"sentiment":"Bullish"|"Bearish"|"Neutral","confidence":<0-1>,"rationale":"<2-3 sentences>","peakNdvi":<float>,"peakLswi":<float>,"spectralVelocity":"<e.g. +0.042/16d>","divergenceZScore":<float>,"macroRegime":"<regime>","strategy":{"action":"LONG"|"SHORT"|"NEUTRAL","entryZone":"<zone>","stopLoss":"<stop>","takeProfit":"<target>","riskReward":"<e.g. 2.4:1>"},"featureBlocks":[{"name":"NDVI Velocity","status":"Pass"|"Caution"|"Fail","signal":"<detail>","weight":0.25},{"name":"LSWI Moisture","status":"Pass"|"Caution"|"Fail","signal":"<detail>","weight":0.20},{"name":"Cloud Cover QA","status":"Pass"|"Caution"|"Fail","signal":"<detail>","weight":0.10},{"name":"Seasonal Alignment","status":"Pass"|"Caution"|"Fail","signal":"<detail>","weight":0.20},{"name":"Macro Regime","status":"Pass"|"Caution"|"Fail","signal":"<detail>","weight":0.25}]}`;
+OUTPUT RULES — CRITICAL:
+- Output ONLY a single raw JSON object
+- No markdown, no code fences, no explanation, no preamble
+- Start your response with { and end with }
+- Every field in the schema below is required
+
+REQUIRED JSON SCHEMA:
+{
+  "sentiment": "Bullish" or "Bearish" or "Neutral",
+  "confidence": <float 0.0 to 1.0>,
+  "rationale": "<2-3 sentences referencing NDVI velocity and seasonal context>",
+  "peakNdvi": <float>,
+  "peakLswi": <float>,
+  "spectralVelocity": "<e.g. +0.042/16d>",
+  "divergenceZScore": <float>,
+  "macroRegime": "<e.g. La Nina tightening>",
+  ${extra}
+  "strategy": {
+    "action": "LONG" or "SHORT" or "NEUTRAL",
+    "entryZone": "<price or basis range>",
+    "stopLoss": "<stop level>",
+    "takeProfit": "<target level>",
+    "riskReward": "<e.g. 2.4:1>"
+  },
+  "featureBlocks": [
+    {"name":"NDVI Velocity","status":"Pass","signal":"<detail>","weight":0.25},
+    {"name":"LSWI Moisture","status":"Pass","signal":"<detail>","weight":0.20},
+    {"name":"Cloud Cover QA","status":"Pass","signal":"<detail>","weight":0.10},
+    {"name":"Seasonal Alignment","status":"Pass","signal":"<detail>","weight":0.20},
+    {"name":"Macro Regime","status":"Caution","signal":"<detail>","weight":0.25}
+  ]
+}`;
 }
 
 // ── Abort ──────────────────────────────────────────────────
@@ -743,8 +772,8 @@ async function runEngine() {
         contents: [{ parts: [{ text: buildPrompt(commodity, region, depth, ndviData) }] }],
         generationConfig: {
           responseMimeType: 'application/json',
-          temperature: 0.2,
-          maxOutputTokens: 1024,
+          temperature: 0.1,
+          maxOutputTokens: 2048,
         }
       })
     });
@@ -755,13 +784,45 @@ async function runEngine() {
     }
 
     const data = await resp.json();
-    const raw  = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    sa.textContent = raw.slice(0, 300);
-    log(`${raw.length} chars received`, 'ok');
 
-    const jm = raw.match(/\{[\s\S]*\}/);
-    if (!jm) throw new Error('No JSON in response');
-    const sig = JSON.parse(jm[0]);
+    // Log full response structure for debugging
+    const finishReason = data.candidates?.[0]?.finishReason || '';
+    const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    sa.textContent = raw.slice(0, 400);
+    log(`${raw.length} chars · finishReason: ${finishReason}`, 'ok');
+
+    if (!raw) {
+      const blocked = data.promptFeedback?.blockReason || finishReason;
+      throw new Error(`Empty response from Gemini. Reason: ${blocked || 'unknown'}`);
+    }
+
+    // Multi-strategy JSON extraction
+    let sig = null;
+
+    // Strategy 1: direct parse (responseMimeType worked)
+    try { sig = JSON.parse(raw); } catch(_) {}
+
+    // Strategy 2: strip markdown fences ```json ... ```
+    if (!sig) {
+      const fenced = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
+      try { sig = JSON.parse(fenced); } catch(_) {}
+    }
+
+    // Strategy 3: extract outermost { ... }
+    if (!sig) {
+      const match = raw.match(/\{[\s\S]*\}/);
+      if (match) try { sig = JSON.parse(match[0]); } catch(_) {}
+    }
+
+    if (!sig) {
+      console.error('Raw Gemini response:', raw);
+      throw new Error(
+        'Could not parse JSON from Gemini response.\n\n' +
+        'Raw response (first 200 chars):\n' + raw.slice(0, 200) + '\n\n' +
+        'Try switching to gemini-2.5-flash-lite in the model dropdown.'
+      );
+    }
+
     log(`${sig.sentiment} · ${(sig.confidence * 100).toFixed(0)}% conf`, 'ok');
     renderSignal(sig, commodity, region, ndviData, model);
     sa.className = 'stream-area';
