@@ -1,6 +1,5 @@
 """
 QuantAgri — Ollama Cloud Client
-Thin wrapper around the Ollama Cloud REST API.
 Endpoint: https://ollama.com/api/chat
 Auth:     Authorization: Bearer $OLLAMA_API_KEY
 """
@@ -15,9 +14,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-ENDPOINT = "https://ollama.com/api/chat"
+ENDPOINT    = "https://ollama.com/api/chat"
 MAX_RETRIES = 3
-RETRY_DELAY = 8   # seconds
+RETRY_DELAY = 8
 
 
 def _get_key() -> str:
@@ -37,16 +36,6 @@ def chat(
     as_json: bool = True,
     system: str | None = None,
 ) -> str:
-    """
-    Send a chat request to Ollama Cloud. Returns the response content string.
-
-    Args:
-        prompt:      User message content.
-        model:       Ollama model tag. Defaults to OLLAMA_MODEL env var or qwen2.5:7b.
-        temperature: Sampling temperature (lower = more deterministic).
-        as_json:     If True, sets format='json' to force structured output.
-        system:      Optional system message.
-    """
     model = model or os.getenv("OLLAMA_MODEL", "qwen2.5:7b")
     key   = _get_key()
 
@@ -71,22 +60,15 @@ def chat(
 
     for attempt in range(1, MAX_RETRIES + 1):
         try:
-            resp = requests.post(
-                ENDPOINT,
-                headers=headers,
-                json=payload,
-                timeout=120,
-            )
+            resp = requests.post(ENDPOINT, headers=headers, json=payload, timeout=120)
             resp.raise_for_status()
-            data = resp.json()
-            return data["message"]["content"]
+            return resp.json()["message"]["content"]
         except requests.HTTPError as e:
             print(f"  [HTTP {resp.status_code}] attempt {attempt}/{MAX_RETRIES}: {e}")
             if resp.status_code in (401, 403):
                 raise RuntimeError("Invalid or expired OLLAMA_API_KEY") from e
         except requests.RequestException as e:
             print(f"  [NET ERR] attempt {attempt}/{MAX_RETRIES}: {e}")
-
         if attempt < MAX_RETRIES:
             time.sleep(RETRY_DELAY * attempt)
 
@@ -94,17 +76,11 @@ def chat(
 
 
 def chat_json(prompt: str, model: str | None = None, system: str | None = None) -> dict:
-    """
-    Like chat() but parses and returns a dict.
-    Strips any accidental markdown fences before parsing.
-    """
-    raw = chat(prompt, model=model, as_json=True, system=system)
-    # Strip ```json ... ``` fences if the model wraps despite format=json
+    raw     = chat(prompt, model=model, as_json=True, system=system)
     cleaned = raw.strip()
     if cleaned.startswith("```"):
         cleaned = "\n".join(cleaned.split("\n")[1:])
         cleaned = cleaned.rstrip("`").strip()
-    # Extract outermost JSON object
     start = cleaned.find("{")
     end   = cleaned.rfind("}") + 1
     if start == -1 or end == 0:
