@@ -3,7 +3,7 @@ name: RS Intelligence Digest
 on:
   schedule:
     - cron: '0 22 * * 5'     # Friday 22:00 UTC every week
-  workflow_dispatch:          # manual trigger from Actions tab
+  workflow_dispatch:
 
 jobs:
   rs-digest:
@@ -26,7 +26,9 @@ jobs:
           cache: pip
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          pip install feedparser>=6.0.11
 
       - name: Fetch remote sensing news
         run: python scripts/fetch_rs_news.py
