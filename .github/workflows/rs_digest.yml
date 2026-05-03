@@ -1,0 +1,51 @@
+name: RS Intelligence Digest
+
+on:
+  schedule:
+    - cron: '0 22 * * 5'     # Friday 22:00 UTC every week
+  workflow_dispatch:          # manual trigger from Actions tab
+
+jobs:
+  rs-digest:
+    name: Fetch News + Generate Digest
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch remote sensing news
+        run: python scripts/fetch_rs_news.py
+        env:
+          GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
+
+      - name: Generate RS Intelligence Digest
+        run: python scripts/rs_newsletter.py
+        env:
+          OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          OLLAMA_MODEL: gpt-oss:20b
+
+      - name: Commit outputs
+        run: |
+          git config user.name  "quantagri-bot"
+          git config user.email "bot@quantagri.local"
+          git add data/rs_news/ data/rs_newsletter/
+          git diff --staged --quiet \
+            && echo "Nothing to commit" \
+            || (git commit -m "chore: RS digest $(date -u '+%Y-%m-%d %H:%M UTC')" \
+            && git pull --rebase origin main \
+            && git push origin main)
