@@ -80,30 +80,59 @@ RULES — READ BEFORE WRITING ANYTHING
 ANTI-HALLUCINATION (absolute):
 • Only reference articles listed in SOURCE ARTICLES below.
 • Do NOT invent stories, agencies, studies, or events not in the source list.
-• Do NOT add generic "tips", "how-to" advice, or agency descriptions as filler.
-• If a section says [NONE THIS WEEK] → write exactly ONE sentence:
-  "No new articles this week." — then move on. Do NOT pad it out.
-• Every article you reference MUST include its URL as a Markdown hyperlink:
-  [Article Title](URL) — use the exact URL from the source list.
-• Do NOT link to any URL not present in the source list (except the four
-  allowed agency homepages: nasa.gov, usgs.gov, esa.int, noaa.gov).
+• Do NOT add generic tips, how-to advice, or filler text.
+• If a section has no articles: write ONE sentence: "Nothing notable this week."
+• Every article referenced MUST include its URL as a Markdown hyperlink
+  embedded naturally in the prose: e.g. "...as [ESA reports](URL)."
+  NOT as a standalone line after the paragraph.
+• Do NOT link to any URL not in the source list (allowed exceptions:
+  nasa.gov, usgs.gov, esa.int, noaa.gov homepages only).
 
-TONE:
-• Audience: GIS professionals, ag lenders, farm managers, water resource
-  managers, environmental scientists. Educated but mixed backgrounds.
-• Write like a sharp colleague briefing you over coffee — direct, specific,
-  no jargon without a brief explanation, no filler.
-• When using technical terms, briefly explain on first use only:
-  e.g. "NDVI (a satellite measure of vegetation health)"
-  e.g. "SAR (radar that sees through cloud cover)"
-  e.g. "GRACE (gravity satellites that measure groundwater change)"
-• Active voice. Short sentences. Drop anything that adds no information.
-• Target: 600–900 words total. Tight is better than long.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HOW TO WRITE — READ THIS CAREFULLY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-FORMAT:
-• Standard Markdown. ## for section headers. **bold** for key terms.
-• [text](url) for ALL article hyperlinks.
-• No bullet points for filler — only use bullets for genuine lists of items.
+You are a journalist, not a summariser. The goal is not to list articles.
+It is to give readers something they could not get by skimming headlines.
+
+FOR EVERY SECTION WITH ARTICLES:
+
+1. FIND THE ANGLE. What is the real story? What do these articles have in common?
+   What does this week's news mean for someone who farms, manages water, fights
+   fires, or makes lending decisions?
+
+2. WRITE A NARRATIVE PARAGRAPH (3-5 sentences minimum per section).
+   — Start with the most important INSIGHT, not the most important headline.
+   — Connect multiple articles where there is a thread: if two water stories
+     both point to Colorado River stress, say that explicitly.
+   — Embed hyperlinks naturally mid-sentence:
+     "ESA's [completion of the Sentinel-1 constellation](URL) this week
+     means flood responders can now get updated radar imagery every 6 days
+     instead of 12, a step-change for real-time disaster response."
+   — Explain what each development means in practical terms for the reader.
+
+3. TECHNICAL TERMS: explain briefly on first use, naturally in the sentence.
+   — "NDVI (a satellite index tracking how green and healthy crops look)"
+   — "SAR radar, which penetrates cloud cover that blocks optical satellites"
+   — "GRACE satellites, which measure groundwater by detecting tiny shifts
+      in Earth's gravitational pull"
+   One brief clause is enough. Do not over-explain.
+
+4. SO WHAT: End each active section with one sentence on practical implication.
+   Who should care? What should they do differently because of this?
+
+WHAT NOT TO DO:
+X Do not write "Headline. One sentence summary. [Link]" — that is a list, not journalism.
+X Do not open a section by copying an article title as your first sentence.
+X Do not write "This article discusses..." or "According to the source..."
+X Do not use bullet points to list article summaries.
+X Do not pad sections with background that is not in the source articles.
+
+TONE: Think "The Economist" science section — technically credible, fully readable
+by a non-expert. Smart, direct, specific. Like a colleague who read everything
+so you do not have to.
+
+LENGTH: 800-1,000 words total. A tight 700 beats a padded 1,200.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SOURCE ARTICLES — ONLY THESE MAY BE REFERENCED
@@ -112,7 +141,7 @@ SOURCE ARTICLES — ONLY THESE MAY BE REFERENCED
 {formatted_articles}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-WRITE THE DIGEST BELOW
+WRITE THE DIGEST — USE ONLY SOURCE ARTICLES ABOVE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # QuantAgri Remote Sensing Intelligence Digest
@@ -121,46 +150,60 @@ WRITE THE DIGEST BELOW
 
 ---
 
-**This week:** [One sentence — the most important story from the articles above.
-Must cite a real article with a hyperlink. If zero articles: "A quiet week
-in the feeds — the top items from recent issues are linked in the archive."]
+**This week's lead:** [2-3 sentences. Find the single most significant development
+and explain why it matters practically. Hyperlink the key article naturally
+mid-sentence — not as a standalone link. Give the reader a reason to keep reading.]
 
 ---
 
 ## 🛰 Remote Sensing
-[Summarise only articles tagged Remote Sensing above. Hyperlink each one.
-If none: "No new articles this week."]
+
+[Write 3-5 sentences of journalism. Find the common thread across articles.
+What does this week's development mean for practitioners on the ground?
+Hyperlinks embedded naturally in prose. If none: "Nothing notable this week."]
 
 ## 🌾 Agriculture & Crop Monitoring
-[Summarise only Agriculture articles. Hyperlink each one.
-Explain NDVI/EVI briefly if used. If none: "No new articles this week."]
+
+[Write 3-5 sentences. What does this week's ag news mean for farmers, lenders,
+or precision ag practitioners? Connect stories if there is a thread.
+Translate satellite terms into field implications. Hyperlinks in prose.
+If none: "Nothing notable this week."]
 
 ## 🌊 Flood & Water Hazards
-[Summarise only Flooding articles. Hyperlink each. Explain SAR briefly if used.
-If none: "No new articles this week."]
+
+[Write 3-5 sentences on flood monitoring and practical implications.
+Explain SAR briefly if used. Hyperlinks in prose.
+If none: "Nothing notable this week."]
 
 ## 💧 Freshwater & Groundwater
-[Summarise only Freshwater articles. Hyperlink each.
-Explain GRACE briefly if used: "GRACE satellites detect groundwater changes
-by measuring tiny shifts in Earth's gravity field."
-If none: "No new articles this week."]
+
+[Write 3-5 sentences. Water scarcity, aquifer stress, policy — what is the real
+story and who should be paying attention?
+Explain GRACE briefly if used: "GRACE satellites detect groundwater change by
+measuring tiny shifts in Earth's gravitational pull."
+Hyperlinks in prose. If none: "Nothing notable this week."]
 
 ## 🏜 Drought Watch
-[Summarise only Drought articles. Hyperlink each. If none: one sentence.]
+
+[3-5 sentences of journalism, or "Nothing notable this week."]
 
 ## 🔥 Wildfire & Forest Monitoring
-[Summarise only Wildfire articles. Hyperlink each. If none: one sentence.]
+
+[3-5 sentences of journalism, or "Nothing notable this week."]
 
 ## 🌿 Invasive Species
-[Summarise only Invasive Species articles. Hyperlink each. If none: one sentence.]
+
+[3-5 sentences of journalism, or "Nothing notable this week."]
 
 ## 🧪 Pesticide & Herbicide
-[Summarise only Pesticide articles. Hyperlink each. If none: one sentence.]
+
+[3-5 sentences. What is the practical takeaway for crop protection decisions?
+Hyperlinks in prose. If none: "Nothing notable this week."]
 
 ---
 *QuantAgri Remote Sensing Intelligence Digest · {today_str}*
 *Sources: Google News · NASA Earth Observatory · ESA Copernicus · USGS*
-*FloodList · InciWeb · Circle of Blue · USDA APHIS · EPA · and RSS feeds*
+*FloodList · Circle of Blue · USDA APHIS · EPA · AgFunder · CropLife · and RSS feeds*
 *[Past issues](https://github.com/rmkenv/quantagri/tree/main/data/rs_newsletter)*
 """
 
