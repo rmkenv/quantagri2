@@ -82,11 +82,34 @@ ANTI-HALLUCINATION (absolute):
 • Do NOT invent stories, agencies, studies, or events not in the source list.
 • Do NOT add generic tips, how-to advice, or filler text.
 • If a section has no articles: write ONE sentence: "Nothing notable this week."
-• Every article referenced MUST include its URL as a Markdown hyperlink
-  embedded naturally in the prose: e.g. "...as [ESA reports](URL)."
-  NOT as a standalone line after the paragraph.
-• Do NOT link to any URL not in the source list (allowed exceptions:
-  nasa.gov, usgs.gov, esa.int, noaa.gov homepages only).
+• Every article you reference MUST have its URL embedded as a Markdown
+  hyperlink directly in the prose sentence that mentions it.
+  The link text should be a meaningful phrase, not the full article title.
+
+  CORRECT — hyperlink mid-sentence on a natural anchor phrase:
+    "ESA's [completion of the Sentinel-1 radar constellation](https://esa.int/...) 
+     cuts revisit time from 12 days to 6 for any field or floodplain."
+
+  CORRECT — hyperlink on source name:
+    "According to [Circle of Blue](https://circleofblue.org/...), Corpus Christi
+     is preparing to declare a water emergency..."
+
+  WRONG — standalone link as its own line after the paragraph:
+    "Sentinel-1D goes live.
+     [Read more](https://...)"
+
+  WRONG — article title as link text dumped at end of paragraph:
+    "...this is significant for flood response.
+     [Sentinel-1D goes live: a milestone for Europe's radar mission](https://...)"
+
+  WRONG — no hyperlink at all when the article is mentioned.
+
+• Every distinct article you mention must have exactly ONE hyperlink.
+  If you mention the same article twice, link it only on first mention.
+• Do NOT invent URLs. Use ONLY the exact URLs from the SOURCE ARTICLES below.
+• Allowed agency homepage exceptions (no article URL needed for these):
+  [NASA](https://nasa.gov), [USGS](https://usgs.gov),
+  [ESA](https://esa.int), [NOAA](https://noaa.gov).
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 HOW TO WRITE — READ THIS CAREFULLY
@@ -210,13 +233,58 @@ Hyperlinks in prose. If none: "Nothing notable this week."]
 
 def check_for_fabricated_urls(markdown: str, source_articles: list[dict]) -> list[str]:
     """Return list of URLs in output that weren't in the source articles."""
-    source_urls  = {a.get("url", "") for a in source_articles}
+    source_urls     = {a.get("url", "") for a in source_articles}
     allowed_domains = {"nasa.gov", "usgs.gov", "esa.int", "noaa.gov", "github.com"}
-    output_urls  = set(re.findall(r'\]\((https?://[^\)]+)\)', markdown))
+    output_urls     = set(re.findall(r'\]\((https?://[^\)]+)\)', markdown))
     return [
         u for u in output_urls
         if u not in source_urls and not any(d in u for d in allowed_domains)
     ]
+
+
+def append_missing_links(markdown: str, articles: list[dict]) -> tuple[str, int]:
+    """
+    Scan the markdown for articles that were mentioned in the text but
+    whose URLs never appeared as hyperlinks. Append a 'Further Reading'
+    section at the bottom with any missing links so readers can always
+    find the source — even when the LLM forgot to embed the link inline.
+
+    Returns (updated_markdown, count_appended).
+    """
+    if not articles:
+        return markdown, 0
+
+    # URLs already present in the output
+    linked_urls = set(re.findall(r'\]\((https?://[^\)]+)\)', markdown))
+
+    missing = []
+    for a in articles:
+        url   = a.get("url", "")
+        title = a.get("title", "")
+        src   = a.get("source", "")
+        if not url or not title:
+            continue
+        if url in linked_urls:
+            continue
+        # Check if substantive words from the title appear in the text
+        # Filter out stop-words and short words, need 2+ matches
+        stop = {'this','that','with','from','have','been','they','will',
+                'were','what','when','into','than','also','some','more'}
+        key_words = [w for w in title.split()
+                     if len(w) > 4 and w.lower() not in stop][:7]
+        mentioned = sum(1 for w in key_words if w.lower() in markdown.lower())
+        if mentioned >= 2:
+            # Article was mentioned but not linked — add it
+            missing.append((title, url, src))
+
+    if not missing:
+        return markdown, 0
+
+    lines = ["\n\n---\n**Further Reading** *(articles referenced above without inline links)*\n"]
+    for title, url, src in missing:
+        lines.append(f"- [{title}]({url}) — *{src}*")
+
+    return markdown + "\n".join(lines), len(missing)
 
 
 def run():
@@ -233,13 +301,10 @@ def run():
     print(f"  [DATA] {count} articles from {news_data.get('date','?')}")
 
     if count < MIN_ARTICLES_TO_PUBLISH:
-        msg = (
-            f"Only {count} articles retrieved — below minimum of "
-            f"{MIN_ARTICLES_TO_PUBLISH}. Check that fetch_rs_news.py ran "
-            f"successfully and that GitHub Actions has internet access."
+        print(
+            f"  [WARN] Only {count} articles — below minimum of {MIN_ARTICLES_TO_PUBLISH}. "
+            f"Check fetch_rs_news.py ran and Actions has internet access."
         )
-        print(f"  [WARN] {msg}")
-        # Write a minimal placeholder rather than a hallucinated digest
         placeholder = (
             f"# QuantAgri Remote Sensing Intelligence Digest\n"
             f"## {today_str}\n\n"
@@ -258,19 +323,25 @@ def run():
     print(f"  [LLM ] {len(prompt):,} chars — calling Ollama Cloud...")
     markdown = chat(prompt, as_json=False, temperature=0.25)
 
-    # Post-process: flag any fabricated URLs
+    # Post-process 1: flag fabricated URLs
     bad_urls = check_for_fabricated_urls(markdown, articles)
     if bad_urls:
-        print(f"  [WARN] {len(bad_urls)} fabricated URL(s) detected — review output:")
+        print(f"  [WARN] {len(bad_urls)} unverified URL(s) — review output:")
         for u in bad_urls[:5]:
             print(f"         {u}")
+
+    # Post-process 2: append any missing article links as Further Reading
+    markdown, n_appended = append_missing_links(markdown, articles)
+    if n_appended:
+        print(f"  [LINK] {n_appended} article(s) mentioned but not linked — "
+              f"appended to Further Reading section")
 
     (RS_NEWS_NL_DIR / f"{date_str}.md").write_text(markdown)
     (RS_NEWS_NL_DIR / "latest.md").write_text(markdown)
 
-    print(f"  [OUT ] {RS_NEWS_NL_DIR}/latest.md ({len(markdown):,} chars)")
-    if bad_urls:
-        print(f"  [WARN] Review output for {len(bad_urls)} unverified URL(s)")
+    linked_count = len(set(re.findall(r'\]\((https?://[^\)]+)\)', markdown)))
+    print(f"  [OUT ] {RS_NEWS_NL_DIR}/latest.md "
+          f"({len(markdown):,} chars · {linked_count} hyperlinks)")
     print(f"\n[RS NEWSLETTER] Done\n")
 
 
