@@ -1,22 +1,15 @@
 """
 QuantAgri — Remote Sensing Intelligence Digest
 ===============================================
-Weekly roundup of remote sensing news covering:
-  agriculture, flooding, freshwater & aquifers, drought,
-  wildfires, invasive species, pesticide/herbicide drift.
+Weekly roundup. Primary news source: Google News RSS (always fresh).
+Supplemented by specialist feeds and optional GNews API.
 
-Anti-hallucination: LLM only references articles in source data.
-Hyperlinks: article URLs passed as source material and embedded in output.
-Tone: accessible, informative, practitioner-focused — not overly technical.
-
-Output:
-    data/rs_newsletter/latest.md
-    data/rs_newsletter/{YYYY-MM-DD}.md
-
-Schedule: Friday 22:00 UTC (cron: '0 22 * * 5')
+Anti-hallucination: strict source-only rule with URL post-processing check.
+Fallback: if fewer than 3 articles retrieved, postpones and logs warning.
 """
 
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -24,69 +17,52 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from config import DATA_DIR
 from ollama_client import chat
-from fetch_rs_news import RS_NEWS_DIR, format_news_for_prompt
+from fetch_rs_news import RS_NEWS_DIR, format_news_for_prompt, CATEGORY_ORDER
 
 RS_NEWS_NL_DIR = DATA_DIR / "rs_newsletter"
 RS_NEWS_NL_DIR.mkdir(parents=True, exist_ok=True)
 
-MAX_ARTICLES_PER_SECTION = 5   # cap per section so digest stays readable
+MIN_ARTICLES_TO_PUBLISH = 3   # skip if feed returned too little
 
 
 def load_latest_news() -> dict:
     path = RS_NEWS_DIR / "latest.json"
     if not path.exists():
-        print("  [WARN] No RS news data — run fetch_rs_news.py first")
+        print("  [WARN] No RS news — run fetch_rs_news.py first")
         return {"articles": [], "date": "unknown", "articleCount": 0}
     return json.loads(path.read_text())
 
 
-def group_articles_by_category(articles: list[dict]) -> dict[str, list]:
-    """Group articles by category, sorted newest-first within each group."""
+def format_articles_for_prompt(articles: list[dict], max_per_cat: int = 5) -> str:
+    """
+    Structured article list for LLM. Each entry includes:
+    title, source, date, URL, and summary snippet.
+    URLs are passed explicitly so the LLM can embed them as hyperlinks.
+    """
+    if not articles:
+        return "NO_ARTICLES_RETRIEVED"
+
     by_cat: dict[str, list] = {}
     for a in articles:
         by_cat.setdefault(a.get("category", "other"), []).append(a)
-    # Sort each group newest-first
     for cat in by_cat:
         by_cat[cat].sort(key=lambda x: x.get("published") or "", reverse=True)
-    return by_cat
 
-
-def format_articles_for_prompt(articles: list[dict], max_per_cat: int = MAX_ARTICLES_PER_SECTION) -> str:
-    """
-    Build a structured article list for LLM injection.
-    Includes full URL for each article so LLM can embed hyperlinks.
-    """
-    if not articles:
-        return "NO ARTICLES RETRIEVED THIS WEEK."
-
-    category_order = [
-        ("remote_sensing",     "REMOTE SENSING SCIENCE & APPLICATIONS"),
-        ("agriculture",        "AGRICULTURE & PRECISION FARMING"),
-        ("flooding",           "FLOOD MONITORING & MAPPING"),
-        ("freshwater",         "FRESHWATER AVAILABILITY & AQUIFERS"),
-        ("drought",            "DROUGHT MONITORING"),
-        ("wildfire",           "WILDFIRE DETECTION & RESPONSE"),
-        ("invasive_species",   "INVASIVE SPECIES DETECTION"),
-        ("pesticide_herbicide","PESTICIDE, HERBICIDE & CROP PROTECTION"),
-        ("gnews",              "ADDITIONAL EARTH OBSERVATION NEWS"),
-    ]
-
-    by_cat = group_articles_by_category(articles)
-    lines  = [f"TOTAL ARTICLES: {len(articles)}", ""]
-
-    for cat, label in category_order:
+    lines = [f"TOTAL ARTICLES: {len(articles)}", ""]
+    for cat, label in CATEGORY_ORDER:
         arts = by_cat.get(cat, [])[:max_per_cat]
+        status = f"{len(arts)} articles" if arts else "NONE THIS WEEK"
+        lines.append(f"### {label} [{status}]")
         if not arts:
-            lines.append(f"### {label}\n[No articles this week]\n")
+            lines.append("(skip this section or write one honest sentence)\n")
             continue
-        lines.append(f"### {label}")
         for i, a in enumerate(arts, 1):
-            pub  = (a.get("published") or "")[:10] or "recent"
+            pub = (a.get("published") or "")[:10] or "this week"
             lines.append(
-                f"{i}. TITLE: {a.get('title','(no title)')}\n"
-                f"   SOURCE: {a.get('source','unknown')} | DATE: {pub}\n"
-                f"   URL: {a.get('url','')}\n"
-                f"   SUMMARY: {a.get('summary','')[:300]}"
+                f"{i}. TITLE: {a['title']}\n"
+                f"   SOURCE: {a['source']} | DATE: {pub}\n"
+                f"   URL: {a['url']}\n"
+                f"   SUMMARY: {a['summary'][:350]}"
             )
         lines.append("")
 
@@ -94,111 +70,110 @@ def format_articles_for_prompt(articles: list[dict], max_per_cat: int = MAX_ARTI
 
 
 def build_rs_newsletter_prompt(today_str: str, formatted_articles: str, article_count: int) -> str:
-    return f"""You are the editor of the "QuantAgri Remote Sensing Intelligence Digest",
-a weekly newsletter read by GIS professionals, environmental scientists, precision
-agriculture practitioners, water resource managers, and policy researchers.
+    return f"""You are the editor of the QuantAgri Remote Sensing Intelligence Digest.
+Today is {today_str}. You retrieved {article_count} articles from RSS feeds this week.
 
-Today is {today_str}. You have {article_count} source articles below.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RULES — READ BEFORE WRITING ANYTHING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-═══════════════════════════════════════════════════════════════
-ANTI-HALLUCINATION RULES — THESE ARE ABSOLUTE AND NON-NEGOTIABLE
-═══════════════════════════════════════════════════════════════
-1. ONLY reference articles that appear in the SOURCE ARTICLES section below.
-   Do NOT invent, fabricate, or imagine articles that are not listed.
-2. If a section has [No articles this week], write 1-2 sentences noting
-   limited coverage — do NOT invent stories for that section.
-3. Every claim must trace back to a specific article in the source list.
-4. HYPERLINKS: For every article you reference, embed the URL as a Markdown
-   hyperlink in the text: [Article Title](URL). Use the exact URL from the source.
-5. If an article URL is missing or blank, cite as: Source Name (date) — no link.
-6. Do NOT add links to external sites that are not in the source articles.
-   Exception: you may link to well-known government/agency homepages
-   (nasa.gov, usgs.gov, esa.int, epa.gov) as context, but not as article citations.
-═══════════════════════════════════════════════════════════════
+ANTI-HALLUCINATION (absolute):
+• Only reference articles listed in SOURCE ARTICLES below.
+• Do NOT invent stories, agencies, studies, or events not in the source list.
+• Do NOT add generic "tips", "how-to" advice, or agency descriptions as filler.
+• If a section says [NONE THIS WEEK] → write exactly ONE sentence:
+  "No new articles this week." — then move on. Do NOT pad it out.
+• Every article you reference MUST include its URL as a Markdown hyperlink:
+  [Article Title](URL) — use the exact URL from the source list.
+• Do NOT link to any URL not present in the source list (except the four
+  allowed agency homepages: nasa.gov, usgs.gov, esa.int, noaa.gov).
 
-TONE AND STYLE RULES:
-- Write for an educated but mixed audience — avoid unexplained jargon
-- When technical terms are necessary, briefly explain them in plain language
+TONE:
+• Audience: GIS professionals, ag lenders, farm managers, water resource
+  managers, environmental scientists. Educated but mixed backgrounds.
+• Write like a sharp colleague briefing you over coffee — direct, specific,
+  no jargon without a brief explanation, no filler.
+• When using technical terms, briefly explain on first use only:
   e.g. "NDVI (a satellite measure of vegetation health)"
-- Active voice, clear sentences, 15-25 words per sentence target
-- Each section should feel like a knowledgeable colleague briefing you,
-  not an academic abstract or a press release
-- Accessible but credible — think "The Economist" science section,
-  not a journal article and not a tabloid
+  e.g. "SAR (radar that sees through cloud cover)"
+  e.g. "GRACE (gravity satellites that measure groundwater change)"
+• Active voice. Short sentences. Drop anything that adds no information.
+• Target: 600–900 words total. Tight is better than long.
 
-LENGTH: 800-1,000 words total. Quality over quantity — shorter and accurate
-beats longer and speculative.
+FORMAT:
+• Standard Markdown. ## for section headers. **bold** for key terms.
+• [text](url) for ALL article hyperlinks.
+• No bullet points for filler — only use bullets for genuine lists of items.
 
-FORMAT: Standard Markdown. Use ## headers, **bold** for key terms on first use,
-and [text](url) for all hyperlinks.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SOURCE ARTICLES — ONLY THESE MAY BE REFERENCED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-═══════════════════════════════════════════════════════════════
-SOURCE ARTICLES (these are the ONLY articles you may reference)
-═══════════════════════════════════════════════════════════════
 {formatted_articles}
-═══════════════════════════════════════════════════════════════
 
-Write the newsletter now using ONLY the source articles above:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WRITE THE DIGEST BELOW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # QuantAgri Remote Sensing Intelligence Digest
 ## {today_str}
-*Weekly earth observation news for agriculture, water, hazards, and environmental monitoring*
+*Earth observation news for agriculture, water, hazards, and environmental monitoring*
 
 ---
 
-**THIS WEEK:** [1-2 sentences only — the single most important story from the source
-articles above. Must cite a real article with a hyperlink.]
+**This week:** [One sentence — the most important story from the articles above.
+Must cite a real article with a hyperlink. If zero articles: "A quiet week
+in the feeds — the top items from recent issues are linked in the archive."]
 
 ---
 
-## 🛰 Remote Sensing: What's New
-[2-3 paragraphs. Reference only articles in the Remote Sensing or GNews categories above.
-Each article referenced must have a hyperlink. If no articles, say so briefly.]
+## 🛰 Remote Sensing
+[Summarise only articles tagged Remote Sensing above. Hyperlink each one.
+If none: "No new articles this week."]
 
 ## 🌾 Agriculture & Crop Monitoring
-[Satellite crop monitoring, yield mapping, soil moisture, precision ag.
-Reference only articles in the Agriculture category. Hyperlink every article cited.
-Explain any technical terms briefly. If no articles, say so.]
+[Summarise only Agriculture articles. Hyperlink each one.
+Explain NDVI/EVI briefly if used. If none: "No new articles this week."]
 
 ## 🌊 Flood & Water Hazards
-[SAR flood mapping, real-time flood alerts, post-event damage mapping.
-Reference only articles in the Flooding category. Hyperlink every article cited.]
+[Summarise only Flooding articles. Hyperlink each. Explain SAR briefly if used.
+If none: "No new articles this week."]
 
 ## 💧 Freshwater & Groundwater
-[Aquifer depletion tracked by GRACE satellites (gravity-based groundwater monitoring),
-river flow, reservoir levels, transboundary water stress.
-Reference only articles in the Freshwater category. Hyperlink every article cited.
-If no articles this week, briefly note which GRACE data products practitioners should check.]
+[Summarise only Freshwater articles. Hyperlink each.
+Explain GRACE briefly if used: "GRACE satellites detect groundwater changes
+by measuring tiny shifts in Earth's gravity field."
+If none: "No new articles this week."]
 
 ## 🏜 Drought Watch
-[Satellite drought indices, soil moisture anomalies, agricultural drought impacts.
-Reference only Drought category articles. Hyperlink every article cited.]
+[Summarise only Drought articles. Hyperlink each. If none: one sentence.]
 
 ## 🔥 Wildfire & Forest Monitoring
-[Active fire detection via VIIRS/MODIS, burn severity, smoke, post-fire recovery.
-Reference only Wildfire category articles. Hyperlink every article cited.]
+[Summarise only Wildfire articles. Hyperlink each. If none: one sentence.]
 
-## 🌿 Invasive Species & Land Cover
-[Satellite detection of invasive plants, habitat change, aquatic invasives.
-Reference only Invasive Species articles. Hyperlink every article cited.]
+## 🌿 Invasive Species
+[Summarise only Invasive Species articles. Hyperlink each. If none: one sentence.]
 
-## 🧪 Pesticide & Herbicide Watch
-[Drift events, application monitoring, regulatory updates.
-Reference only Pesticide/Herbicide articles. Hyperlink every article cited.
-If no articles, one sentence noting limited coverage is fine.]
-
-## 📌 Quick Picks
-[2-3 short bullets — additional noteworthy items from any category not already covered.
-Each must be a real article from the source list with a hyperlink.]
+## 🧪 Pesticide & Herbicide
+[Summarise only Pesticide articles. Hyperlink each. If none: one sentence.]
 
 ---
 *QuantAgri Remote Sensing Intelligence Digest · {today_str}*
-*Compiled from: NASA Earth Observatory · ESA Copernicus · USGS · NASA GRACE/JPL*
-*Circle of Blue · UN Water · FloodList · InciWeb · NIFC · USDA APHIS*
-*EPA · MDPI Remote Sensing · AgFunder · GIS Geography · and additional RSS feeds*
-*Articles sourced automatically from public RSS feeds.*
-*[View past issues on GitHub](https://github.com/rmkenv/quantagri/tree/main/data/rs_newsletter)*
+*Sources: Google News · NASA Earth Observatory · ESA Copernicus · USGS*
+*FloodList · InciWeb · Circle of Blue · USDA APHIS · EPA · and RSS feeds*
+*[Past issues](https://github.com/rmkenv/quantagri/tree/main/data/rs_newsletter)*
 """
+
+
+def check_for_fabricated_urls(markdown: str, source_articles: list[dict]) -> list[str]:
+    """Return list of URLs in output that weren't in the source articles."""
+    source_urls  = {a.get("url", "") for a in source_articles}
+    allowed_domains = {"nasa.gov", "usgs.gov", "esa.int", "noaa.gov", "github.com"}
+    output_urls  = set(re.findall(r'\]\((https?://[^\)]+)\)', markdown))
+    return [
+        u for u in output_urls
+        if u not in source_urls and not any(d in u for d in allowed_domains)
+    ]
 
 
 def run():
@@ -208,44 +183,51 @@ def run():
 
     print(f"\n[RS NEWSLETTER] {today_str}\n")
 
-    news_data     = load_latest_news()
-    articles      = news_data.get("articles", [])
-    article_count = len(articles)
+    news_data = load_latest_news()
+    articles  = news_data.get("articles", [])
+    count     = len(articles)
 
-    print(f"  [DATA] {article_count} articles from {news_data.get('date','?')}")
+    print(f"  [DATA] {count} articles from {news_data.get('date','?')}")
 
-    if article_count == 0:
-        print("  [WARN] No articles retrieved — digest will note limited coverage")
+    if count < MIN_ARTICLES_TO_PUBLISH:
+        msg = (
+            f"Only {count} articles retrieved — below minimum of "
+            f"{MIN_ARTICLES_TO_PUBLISH}. Check that fetch_rs_news.py ran "
+            f"successfully and that GitHub Actions has internet access."
+        )
+        print(f"  [WARN] {msg}")
+        # Write a minimal placeholder rather than a hallucinated digest
+        placeholder = (
+            f"# QuantAgri Remote Sensing Intelligence Digest\n"
+            f"## {today_str}\n\n"
+            f"*Feed retrieval returned {count} articles this week — "
+            f"below the minimum threshold for a full digest. "
+            f"Check the pipeline logs and retry.*\n"
+        )
+        (RS_NEWS_NL_DIR / f"{date_str}.md").write_text(placeholder)
+        (RS_NEWS_NL_DIR / "latest.md").write_text(placeholder)
+        print(f"  [OUT ] Placeholder written — no LLM call made")
+        return
 
     formatted = format_articles_for_prompt(articles)
-    prompt    = build_rs_newsletter_prompt(today_str, formatted, article_count)
+    prompt    = build_rs_newsletter_prompt(today_str, formatted, count)
 
     print(f"  [LLM ] {len(prompt):,} chars — calling Ollama Cloud...")
-    markdown = chat(prompt, as_json=False, temperature=0.3)
+    markdown = chat(prompt, as_json=False, temperature=0.25)
 
-    # Post-process: verify no fabricated links slipped through
-    # (basic check — flag any URLs in output not present in source articles)
-    source_urls = {a.get("url","") for a in articles if a.get("url")}
-    import re
-    output_urls = set(re.findall(r'\]\((https?://[^\)]+)\)', markdown))
-    allowed_domains = {"nasa.gov","usgs.gov","esa.int","epa.gov","noaa.gov",
-                       "github.com","copernicus.eu","un.org","unwater.org"}
-    suspicious = []
-    for url in output_urls:
-        in_sources = url in source_urls
-        from_allowed = any(d in url for d in allowed_domains)
-        if not in_sources and not from_allowed:
-            suspicious.append(url)
-
-    if suspicious:
-        print(f"  [WARN] {len(suspicious)} output URLs not in source articles — review:")
-        for u in suspicious[:5]:
+    # Post-process: flag any fabricated URLs
+    bad_urls = check_for_fabricated_urls(markdown, articles)
+    if bad_urls:
+        print(f"  [WARN] {len(bad_urls)} fabricated URL(s) detected — review output:")
+        for u in bad_urls[:5]:
             print(f"         {u}")
 
     (RS_NEWS_NL_DIR / f"{date_str}.md").write_text(markdown)
     (RS_NEWS_NL_DIR / "latest.md").write_text(markdown)
 
     print(f"  [OUT ] {RS_NEWS_NL_DIR}/latest.md ({len(markdown):,} chars)")
+    if bad_urls:
+        print(f"  [WARN] Review output for {len(bad_urls)} unverified URL(s)")
     print(f"\n[RS NEWSLETTER] Done\n")
 
 
