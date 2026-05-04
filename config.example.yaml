@@ -1,0 +1,17 @@
+api:
+  serpapi_key: YOUR_SERPAPI_KEY          # serpapi.com/manage-api-key
+  ollama_api_key: YOUR_OLLAMA_API_KEY    # ollama.com/settings/keys
+  user_agent: yourname@example.com       # required by OSM Nominatim policy
+
+geocoding:
+  rate_limit_sec: 1.0     # OSM Nominatim: max 1 req/sec
+  timeout_sec: 10
+
+screening:
+  rate_limit_sec: 0.5     # pause between Ollama API calls
+
+etl:
+  lookback_days: 1        # fetch last N × 24 hours
+  data_dir: data
+  log_level: INFO
+  log_file: null          # set a path to write logs to a file

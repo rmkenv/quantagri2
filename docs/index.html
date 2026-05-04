@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>climatewire — live climate hazard feed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root {
+    --bg:       #0a0c0f;
+    --surface:  #111318;
+    --border:   #1e2229;
+    --muted:    #3a3f4a;
+    --text:     #c8cdd6;
+    --bright:   #e8ecf2;
+    --heat:     #ff5c35;
+    --drought:  #d4a843;
+    --fire:     #ff8c42;
+    --water:    #4ab8e8;
+    --mono:     'IBM Plex Mono', monospace;
+    --sans:     'IBM Plex Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* ── HEADER ── */
+  #header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    height: 52px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 20px;
+  }
+
+  #wordmark {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--bright);
+    text-transform: lowercase;
+  }
+
+  #wordmark span { color: var(--heat); }
+
+  #header-desc {
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    border-left: 1px solid var(--border);
+    padding-left: 20px;
+  }
+
+  #last-updated {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── LAYOUT ── */
+  #layout {
+    position: fixed;
+    top: 52px; left: 0; right: 0; bottom: 0;
+    display: flex;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* wire filter toggles */
+  #wire-toggles {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .toggle-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .wire-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    transition: border-color 0.15s, background 0.15s;
+    user-select: none;
+  }
+
+  .wire-toggle:hover { background: var(--border); }
+  .wire-toggle.active { border-color: var(--border); }
+
+  .wire-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .wire-toggle-name {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--bright);
+    flex: 1;
+  }
+
+  .wire-toggle-count {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  /* feed */
+  #feed-header {
+    padding: 10px 16px 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  #feed-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  #feed-count {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  #feed {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .feed-item {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.1s;
+    animation: fadeIn 0.3s ease both;
+  }
+
+  .feed-item:hover { background: var(--border); }
+  .feed-item.selected { background: #161b22; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .feed-item-wire {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .feed-item-title {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--bright);
+    line-height: 1.4;
+    margin-bottom: 5px;
+  }
+
+  .feed-item-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .feed-item-sensor {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 2px 5px;
+    border-radius: 2px;
+    border: 1px solid;
+  }
+
+  .feed-item-date {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  /* ── MAP ── */
+  #map {
+    flex: 1;
+    background: var(--bg);
+  }
+
+  /* Leaflet dark override */
+  .leaflet-tile-pane { filter: brightness(0.45) saturate(0.3) hue-rotate(180deg); }
+  .leaflet-control-attribution { display: none; }
+  .leaflet-control-zoom a {
+    background: var(--surface) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
+  }
+
+  /* ── POPUP ── */
+  .leaflet-popup-content-wrapper {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    color: var(--text);
+    font-family: var(--sans);
+    max-width: 280px;
+  }
+  .leaflet-popup-tip { background: var(--surface); }
+  .leaflet-popup-content { margin: 14px 16px; font-size: 12px; }
+
+  .popup-wire {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .popup-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--bright);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .popup-sensors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+
+  .popup-sensor-chip {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 3px 6px;
+    border-radius: 2px;
+    border: 1px solid;
+  }
+
+  .popup-meta {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .popup-link {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--water);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+  .popup-link:hover { text-decoration: underline; }
+
+  /* ── LOADING ── */
+  #loading {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    transition: opacity 0.4s;
+  }
+
+  #loading.hidden { opacity: 0; pointer-events: none; }
+
+  .loading-word {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--bright);
+  }
+
+  .loading-bars {
+    display: flex;
+    gap: 4px;
+    align-items: flex-end;
+    height: 24px;
+  }
+
+  .loading-bar {
+    width: 3px;
+    background: var(--muted);
+    border-radius: 2px;
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+
+  .loading-bar:nth-child(1) { animation-delay: 0s;    height: 8px; }
+  .loading-bar:nth-child(2) { animation-delay: 0.15s; height: 14px; }
+  .loading-bar:nth-child(3) { animation-delay: 0.3s;  height: 20px; }
+  .loading-bar:nth-child(4) { animation-delay: 0.45s; height: 14px; }
+  .loading-bar:nth-child(5) { animation-delay: 0.6s;  height: 8px; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50%       { opacity: 1; }
+  }
+
+  .loading-status {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── EMPTY STATE ── */
+  #empty-feed {
+    padding: 24px 16px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  /* ── FOOTER STRIP ── */
+  #footer {
+    position: fixed;
+    bottom: 0; left: 300px; right: 0;
+    height: 24px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 16px;
+    z-index: 500;
+  }
+
+  .footer-item {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .footer-item a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .footer-item a:hover { color: var(--text); }
+
+  /* wire color helpers */
+  .c-heat   { color: var(--heat); }
+  .c-drought { color: var(--drought); }
+  .c-fire   { color: var(--fire); }
+  .c-water  { color: var(--water); }
+  .b-heat   { border-color: var(--heat); }
+  .b-drought { border-color: var(--drought); }
+  .b-fire   { border-color: var(--fire); }
+  .b-water  { border-color: var(--water); }
+  .bg-heat   { background: rgba(255,92,53,0.12); }
+  .bg-drought { background: rgba(212,168,67,0.12); }
+  .bg-fire   { background: rgba(255,140,66,0.12); }
+  .bg-water  { background: rgba(74,184,232,0.12); }
+</style>
+</head>
+<body>
+
+<!-- Loading -->
+<div id="loading">
+  <div class="loading-word">climatewire</div>
+  <div class="loading-bars">
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+  </div>
+  <div class="loading-status" id="loading-status">fetching feeds…</div>
+</div>
+
+<!-- Header -->
+<div id="header">
+  <div id="wordmark">climate<span>wire</span></div>
+  <div id="header-desc">live US climate hazard feed — heat · drought · fire · water</div>
+  <div id="last-updated" id="last-updated"></div>
+</div>
+
+<!-- Layout -->
+<div id="layout">
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div id="wire-toggles">
+      <div class="toggle-label">wires</div>
+      <div class="wire-toggle active" data-wire="heat" onclick="toggleWire('heat', this)">
+        <div class="wire-dot" style="background:var(--heat)"></div>
+        <span class="wire-toggle-name">🌡️ heatwire</span>
+        <span class="wire-toggle-count" id="count-heat">—</span>
+      </div>
+      <div class="wire-toggle active" data-wire="drought" onclick="toggleWire('drought', this)">
+        <div class="wire-dot" style="background:var(--drought)"></div>
+        <span class="wire-toggle-name">🌵 droughtwire</span>
+        <span class="wire-toggle-count" id="count-drought">—</span>
+      </div>
+      <div class="wire-toggle active" data-wire="fire" onclick="toggleWire('fire', this)">
+        <div class="wire-dot" style="background:var(--fire)"></div>
+        <span class="wire-toggle-name">🔥 firewire</span>
+        <span class="wire-toggle-count" id="count-fire">—</span>
+      </div>
+      <div class="wire-toggle active" data-wire="water" onclick="toggleWire('water', this)">
+        <div class="wire-dot" style="background:var(--water)"></div>
+        <span class="wire-toggle-name">💧 waterwire</span>
+        <span class="wire-toggle-count" id="count-water">—</span>
+      </div>
+    </div>
+
+    <div id="feed-header">
+      <span id="feed-title">recent events</span>
+      <span id="feed-count"></span>
+    </div>
+    <div id="feed">
+      <div id="empty-feed">loading…</div>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div id="map"></div>
+</div>
+
+<!-- Footer -->
+<div id="footer">
+  <span class="footer-item">data updates nightly via github actions</span>
+  <span class="footer-item">sensors: open-meteo · noaa usdm · nasa firms · usgs</span>
+  <span class="footer-item" style="margin-left:auto">
+    <a href="https://github.com/rmkenv/climatewire" target="_blank">github.com/rmkenv/climatewire</a>
+  </span>
+</div>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────────────────
+const REPO = 'rmkenv/climatewire';
+const BRANCH = 'main';
+const BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/data`;
+
+const WIRES = {
+  heat:   { label: 'heatwire',   color: '#ff5c35', emoji: '🌡️' },
+  drought:{ label: 'droughtwire',color: '#d4a843', emoji: '🌵' },
+  fire:   { label: 'firewire',   color: '#ff8c42', emoji: '🔥' },
+  water:  { label: 'waterwire',  color: '#4ab8e8', emoji: '💧' },
+};
+
+// which wires are currently visible
+const visible = { heat: true, drought: true, fire: true, water: true };
+
+// all loaded features keyed by wire
+const allFeatures = { heat: [], drought: [], fire: [], water: [] };
+
+// leaflet layers
+const layers = {};
+
+let map, selectedMarker = null;
+
+// ── MAP INIT ─────────────────────────────────────────────────────────────────
+function initMap() {
+  map = L.map('map', {
+    center: [38.5, -96],
+    zoom: 4,
+    zoomControl: true,
+    attributionControl: false,
+  });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+  }).addTo(map);
+
+  // padding for footer
+  map.setView([38.5, -96], 4);
+}
+
+// ── MARKER ICON ──────────────────────────────────────────────────────────────
+function makeIcon(wire) {
+  const c = WIRES[wire].color;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+    <circle cx="7" cy="7" r="5" fill="${c}" fill-opacity="0.85" stroke="${c}" stroke-width="1.5"/>
+    <circle cx="7" cy="7" r="9" fill="${c}" fill-opacity="0.15"/>
+  </svg>`;
+  return L.divIcon({
+    html: svg,
+    className: '',
+    iconSize: [18, 18],
+    iconAnchor: [9, 9],
+    popupAnchor: [0, -10],
+  });
+}
+
+// ── SENSOR CHIPS ─────────────────────────────────────────────────────────────
+function sensorChips(wire, props) {
+  const chips = [];
+  if (wire === 'heat') {
+    if (props.wbgt_flag) {
+      const flagColors = {
+        green: '#2d8a4e', yellow: '#c9a227', red: '#c0392b',
+        black: '#555', black_plus: '#333'
+      };
+      const fc = flagColors[props.wbgt_flag] || '#555';
+      chips.push({ label: `WBGT ${props.wbgt_flag.replace('_',' ').toUpperCase()}`, color: fc });
+    }
+    if (props.wbgt_f) chips.push({ label: `${props.wbgt_f}°F`, color: WIRES.heat.color });
+  }
+  if (wire === 'drought') {
+    if (props.usdm_dm_label && props.usdm_dm_label !== 'none') {
+      chips.push({ label: props.usdm_dm_label.replace('_',' '), color: WIRES.drought.color });
+    }
+    if (!props.usdm_in_drought) chips.push({ label: 'outside drought area', color: '#555' });
+  }
+  if (wire === 'fire') {
+    if (props.firms_active_fire_nearby) {
+      chips.push({ label: `fire detected`, color: WIRES.fire.color });
+      if (props.firms_dist_km) chips.push({ label: `${props.firms_dist_km} km`, color: WIRES.fire.color });
+      if (props.firms_frp_mw)  chips.push({ label: `${props.firms_frp_mw} MW FRP`, color: WIRES.fire.color });
+    } else {
+      chips.push({ label: 'no active detection', color: '#555' });
+    }
+  }
+  if (wire === 'water') {
+    if (props.usgs_streamflow_cfs != null)
+      chips.push({ label: `${Math.round(props.usgs_streamflow_cfs)} cfs`, color: WIRES.water.color });
+    if (props.usgs_gw_depth_ft != null)
+      chips.push({ label: `GW ${props.usgs_gw_depth_ft.toFixed(1)} ft`, color: WIRES.water.color });
+    if (props.usgs_streamflow_cfs == null && props.usgs_gw_depth_ft == null)
+      chips.push({ label: 'no gauge nearby', color: '#555' });
+  }
+  return chips;
+}
+
+function renderChips(chips) {
+  return chips.map(c =>
+    `<span class="popup-sensor-chip" style="color:${c.color};border-color:${c.color};background:${c.color}22">${c.label}</span>`
+  ).join('');
+}
+
+// ── POPUP HTML ───────────────────────────────────────────────────────────────
+function popupHtml(wire, props) {
+  const chips = sensorChips(wire, props);
+  const date = props.published_at
+    ? new Date(props.published_at).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })
+    : '';
+  const evtype = (props.event_type || '').replace(/_/g, ' ');
+  return `
+    <div class="popup-wire c-${wire}">${WIRES[wire].emoji} ${WIRES[wire].label}</div>
+    <div class="popup-title">${props.title || '(no title)'}</div>
+    <div class="popup-sensors">${renderChips(chips)}</div>
+    <div class="popup-meta">${evtype}${date ? ' · ' + date : ''}${props.source ? ' · ' + props.source : ''}</div>
+    ${props.url ? `<a class="popup-link" href="${props.url}" target="_blank">read article →</a>` : ''}
+  `;
+}
+
+// ── FEED ITEM HTML ────────────────────────────────────────────────────────────
+function feedItemHtml(wire, props) {
+  const chips = sensorChips(wire, props);
+  const date = props.published_at
+    ? new Date(props.published_at).toLocaleDateString('en-US', { month:'short', day:'numeric' })
+    : '';
+  const sensorHtml = chips.slice(0,2).map(c =>
+    `<span class="feed-item-sensor c-${wire} b-${wire} bg-${wire}">${c.label}</span>`
+  ).join('');
+  return `
+    <div class="feed-item-wire c-${wire}">${WIRES[wire].emoji} ${WIRES[wire].label}</div>
+    <div class="feed-item-title">${props.title || '(no title)'}</div>
+    <div class="feed-item-meta">
+      ${sensorHtml}
+      <span class="feed-item-date">${date}</span>
+    </div>
+  `;
+}
+
+// ── LOAD ONE WIRE ─────────────────────────────────────────────────────────────
+async function loadWire(wire) {
+  const url = `${BASE}/${wire}.geojson`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(res.status);
+    const geojson = await res.json();
+    const features = (geojson.features || []).filter(f =>
+      f.geometry && f.geometry.coordinates && f.geometry.coordinates.length === 2
+    );
+    allFeatures[wire] = features;
+    document.getElementById(`count-${wire}`).textContent = features.length;
+    return { wire, geojson, features };
+  } catch(e) {
+    console.warn(`[${wire}] fetch failed:`, e);
+    document.getElementById(`count-${wire}`).textContent = 'err';
+    allFeatures[wire] = [];
+    return { wire, geojson: { features: [] }, features: [] };
+  }
+}
+
+// ── RENDER LAYER ──────────────────────────────────────────────────────────────
+function renderLayer(wire) {
+  if (layers[wire]) {
+    map.removeLayer(layers[wire]);
+  }
+  const features = allFeatures[wire];
+  const icon = makeIcon(wire);
+  const lg = L.layerGroup();
+
+  features.forEach(f => {
+    const [lon, lat] = f.geometry.coordinates;
+    const props = f.properties || {};
+    const marker = L.marker([lat, lon], { icon })
+      .bindPopup(popupHtml(wire, props), { maxWidth: 280 });
+    lg.addLayer(marker);
+  });
+
+  layers[wire] = lg;
+  if (visible[wire]) lg.addTo(map);
+}
+
+// ── RENDER FEED ───────────────────────────────────────────────────────────────
+function renderFeed() {
+  const feed = document.getElementById('feed');
+  const items = [];
+
+  Object.keys(WIRES).forEach(wire => {
+    if (!visible[wire]) return;
+    allFeatures[wire].forEach(f => {
+      const props = f.properties || {};
+      const ts = props.run_at || props.published_at || '';
+      items.push({ wire, props, ts, coords: f.geometry.coordinates });
+    });
+  });
+
+  // sort by run_at desc, take top 60
+  items.sort((a, b) => b.ts.localeCompare(a.ts));
+  const top = items.slice(0, 60);
+
+  if (top.length === 0) {
+    feed.innerHTML = '<div id="empty-feed">no events match current filters</div>';
+    document.getElementById('feed-count').textContent = '';
+    return;
+  }
+
+  document.getElementById('feed-count').textContent = `${top.length} of ${items.length}`;
+
+  feed.innerHTML = top.map((item, i) => `
+    <div class="feed-item" data-idx="${i}" onclick="feedClick(${item.coords[1]}, ${item.coords[0]}, this)">
+      ${feedItemHtml(item.wire, item.props)}
+    </div>
+  `).join('');
+
+  // stagger animation
+  feed.querySelectorAll('.feed-item').forEach((el, i) => {
+    el.style.animationDelay = `${i * 18}ms`;
+  });
+}
+
+// ── FEED CLICK ────────────────────────────────────────────────────────────────
+function feedClick(lat, lon, el) {
+  // deselect previous
+  document.querySelectorAll('.feed-item.selected').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  map.flyTo([lat, lon], Math.max(map.getZoom(), 7), { duration: 0.6 });
+}
+
+// ── TOGGLE WIRE ───────────────────────────────────────────────────────────────
+function toggleWire(wire, el) {
+  visible[wire] = !visible[wire];
+  el.classList.toggle('active', visible[wire]);
+  el.style.opacity = visible[wire] ? '1' : '0.4';
+  if (layers[wire]) {
+    if (visible[wire]) layers[wire].addTo(map);
+    else map.removeLayer(layers[wire]);
+  }
+  renderFeed();
+}
+
+// ── LAST UPDATED ─────────────────────────────────────────────────────────────
+function updateLastUpdated() {
+  const allDates = [];
+  Object.values(allFeatures).forEach(feats => {
+    feats.forEach(f => {
+      const ts = f.properties && f.properties.run_at;
+      if (ts) allDates.push(ts);
+    });
+  });
+  if (allDates.length) {
+    allDates.sort();
+    const latest = new Date(allDates[allDates.length - 1]);
+    const rel = latest.toLocaleDateString('en-US', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+    document.getElementById('last-updated').textContent = `updated ${rel}`;
+  }
+}
+
+// ── MAIN ─────────────────────────────────────────────────────────────────────
+async function main() {
+  initMap();
+
+  const status = document.getElementById('loading-status');
+  const wires = Object.keys(WIRES);
+
+  // load all four wires in parallel
+  status.textContent = 'fetching heat · drought · fire · water…';
+  const results = await Promise.all(wires.map(loadWire));
+
+  status.textContent = 'rendering…';
+  results.forEach(({ wire }) => renderLayer(wire));
+  renderFeed();
+  updateLastUpdated();
+
+  // hide loader
+  const loader = document.getElementById('loading');
+  loader.classList.add('hidden');
+  setTimeout(() => loader.remove(), 500);
+}
+
+main();
+</script>
+</body>
+</html>
