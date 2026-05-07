@@ -1,0 +1,91 @@
+{
+  "commodity": "Soybeans",
+  "region": "Mato_Grosso_BR",
+  "bbox": [
+    -61.0,
+    -18.0,
+    -50.0,
+    -7.0
+  ],
+  "year": 2026,
+  "source": "simulated",
+  "composites": [
+    {
+      "month": 1,
+      "ndvi": 0.1014,
+      "lswi": 0.0543,
+      "velocity": 0.01216
+    },
+    {
+      "month": 2,
+      "ndvi": 0.1135,
+      "lswi": 0.0906,
+      "velocity": 0.03772
+    },
+    {
+      "month": 3,
+      "ndvi": 0.1768,
+      "lswi": 0.0822,
+      "velocity": 0.10193
+    },
+    {
+      "month": 4,
+      "ndvi": 0.3174,
+      "lswi": 0.1717,
+      "velocity": 0.18547
+    },
+    {
+      "month": 5,
+      "ndvi": 0.5478,
+      "lswi": 0.2855,
+      "velocity": 0.23179
+    },
+    {
+      "month": 6,
+      "ndvi": 0.781,
+      "lswi": 0.4093,
+      "velocity": 0.18165
+    },
+    {
+      "month": 7,
+      "ndvi": 0.9111,
+      "lswi": 0.4683,
+      "velocity": 0.01269
+    },
+    {
+      "month": 8,
+      "ndvi": 0.8064,
+      "lswi": 0.4477,
+      "velocity": -0.16578
+    },
+    {
+      "month": 9,
+      "ndvi": 0.5795,
+      "lswi": 0.2783,
+      "velocity": -0.26146
+    },
+    {
+      "month": 10,
+      "ndvi": 0.2835,
+      "lswi": 0.1668,
+      "velocity": -0.18077
+    },
+    {
+      "month": 11,
+      "ndvi": 0.218,
+      "lswi": 0.0788,
+      "velocity": -0.06393
+    },
+    {
+      "month": 12,
+      "ndvi": 0.1556,
+      "lswi": 0.0394,
+      "velocity": -0.06237
+    }
+  ],
+  "peak_ndvi": 0.9111,
+  "peak_lswi": 0.4683,
+  "peak_velocity": 0.23179,
+  "cloud_cover_pct": 0.0,
+  "scene_count": 0
+}
