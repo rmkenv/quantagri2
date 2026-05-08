@@ -123,6 +123,22 @@ Today is {today_str}. Write a complete institutional newsletter in Markdown.
    from Planetary Computer Sentinel-2 time series via the QuantAgri internal pipeline and
    may differ from third-party vegetation indices.
 7. LENGTH: Minimum 1,200 words across all sections.
+8. NORTHERN HEMISPHERE SEASONAL CALENDAR (today = May, early growing season):
+   - U.S. CORN (Iowa, Illinois, etc.): May = PLANTING SEASON. Negative NDVI velocity means
+     pre-emergent or slow emergence — NOT late-season senescence. Never use "senescence"
+     for Northern Hemisphere corn in April–June.
+   - U.S. SOYBEANS (Iowa, Illinois): May = PRE-PLANTING to early emergence. Positive NDVI
+     velocity means early greening post-planting.
+   - U.S. WHEAT (Kansas): May = grain-filling to early ripening. Positive velocity = healthy fill.
+   - XINJIANG COTTON (China): Planting April–May, harvest SEPTEMBER–OCTOBER. A negative
+     NDVI velocity in May signals slow emergence or poor establishment — NOT harvest-ready
+     or post-harvest decline. Never describe May Xinjiang cotton as "harvest-ready."
+9. SOUTHERN HEMISPHERE SEASONAL CALENDAR (today = May, post-harvest):
+   - BRAZIL CORN (Mato Grosso): May = safrinha (second crop) HARVEST COMPLETION.
+     Negative NDVI velocity is expected and bearish.
+   - BRAZIL SOYBEANS (Mato Grosso): May = post-harvest decline. Negative velocity is normal.
+   - ARGENTINA SOYBEANS (Buenos Aires): May = post-harvest. Positive velocity may indicate
+     late-harvest holdovers or cover crops.
 
 == LIVE MARKET DATA (Yahoo Finance, {price_date}) ==
 
