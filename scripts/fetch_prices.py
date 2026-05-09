@@ -102,25 +102,64 @@ def fetch_prices() -> dict:
             return None
 
         current   = float(series.iloc[-1])
-        prev_week = float(series.iloc[-6]) if len(series) >= 6 else float(series.iloc[0])
-        prev_day  = float(series.iloc[-2])
-        week_chg  = ((current - prev_week) / prev_week) * 100
-        day_chg   = ((current - prev_day)  / prev_day)  * 100
-        high_52w  = float(series.max())
-        low_52w   = float(series.min())
         last_date = str(series.index[-1])[:10]
 
-        return {
-            "ticker":    ticker,
-            "name":      label,
-            "price":     round(current, 4),
-            "dayChg":    round(day_chg, 2),
-            "weekChg":   round(week_chg, 2),
-            "high52w":   round(high_52w, 4),
-            "low52w":    round(low_52w, 4),
-            "pctOf52wH": round((current / high_52w) * 100, 1),
-            "lastDate":  last_date,
+        # ── Day change: use iloc[-2] only if it is the immediately prior
+        #    *calendar* trading day (≤3 calendar days gap, covers Mon/holiday).
+        #    If the gap is larger, day_chg is unreliable — omit it.
+        from datetime import date as _date
+        import pandas as _pd
+        try:
+            last_ts   = _pd.Timestamp(series.index[-1]).date()
+            prev_ts   = _pd.Timestamp(series.index[-2]).date()
+            cal_gap   = (last_ts - prev_ts).days
+        except Exception:
+            cal_gap = 99  # force omit on parse error
+
+        if cal_gap <= 3:
+            prev_day = float(series.iloc[-2])
+            day_chg  = ((current - prev_day) / prev_day) * 100
+        else:
+            # Gap too large — stale data or missing session; mark as N/A
+            day_chg = None
+
+        # ── Week change: 5 trading sessions back (≈ 1 calendar week)
+        #    Clamp to the last 7 calendar days to avoid multi-week drift.
+        prev_week = None
+        for offset in range(5, min(10, len(series))):
+            candidate_ts = _pd.Timestamp(series.index[-offset]).date()
+            if (last_ts - candidate_ts).days <= 8:
+                prev_week = float(series.iloc[-offset])
+                break
+        if prev_week is None:
+            prev_week = float(series.iloc[0])
+        week_chg = ((current - prev_week) / prev_week) * 100
+
+        # ── 52w range: use the downloaded 1y series.
+        #    For continuous =F tickers this spans rolled contracts and may
+        #    differ from a specific expiry contract's 52w range. Flag this
+        #    in the output so downstream consumers are aware.
+        high_52w  = float(series.max())
+        low_52w   = float(series.min())
+
+        result = {
+            "ticker":       ticker,
+            "name":         label,
+            "price":        round(current, 4),
+            "weekChg":      round(week_chg, 2),
+            "high52w":      round(high_52w, 4),
+            "low52w":       round(low_52w, 4),
+            "pctOf52wH":    round((current / high_52w) * 100, 1),
+            "lastDate":     last_date,
+            "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
         }
+        # Only include dayChg if it is reliable
+        if day_chg is not None:
+            result["dayChg"] = round(day_chg, 2)
+        else:
+            result["dayChg"] = None
+            result["dayChgNote"] = f"Day change omitted — data gap of {cal_gap} calendar days between sessions"
+        return result
 
     for ticker, name in ETF_TICKERS.items():
         result = parse_ticker(ticker, name)
@@ -178,10 +217,11 @@ def format_price_summary(prices: dict) -> str:
     if futures:
         for ticker, d in futures.items():
             chg_sym = "▲" if d["weekChg"] > 0 else "▼" if d["weekChg"] < 0 else "→"
+            day_str = f"{d['dayChg']:+.2f}%" if d.get('dayChg') is not None else "n/a"
             lines.append(
                 f"  {ticker:<8} {d['name']:<28} "
                 f"${d['price']:>10,.4f}  "
-                f"Day: {d['dayChg']:+.2f}%  "
+                f"Day: {day_str}  "
                 f"Week: {d['weekChg']:+.2f}% {chg_sym}  "
                 f"52wk: ${d['low52w']:,.2f}–${d['high52w']:,.2f} "
                 f"({d['pctOf52wH']:.0f}% of high)"
@@ -195,10 +235,11 @@ def format_price_summary(prices: dict) -> str:
     if etfs:
         for ticker, d in etfs.items():
             chg_sym = "▲" if d["weekChg"] > 0 else "▼" if d["weekChg"] < 0 else "→"
+            day_str = f"{d['dayChg']:+.2f}%" if d.get('dayChg') is not None else "n/a"
             lines.append(
                 f"  {ticker:<6} {d['name']:<35} "
                 f"${d['price']:>8.4f}  "
-                f"Day: {d['dayChg']:+.2f}%  "
+                f"Day: {day_str}  "
                 f"Week: {d['weekChg']:+.2f}% {chg_sym}  "
                 f"52wk: ${d['low52w']:,.2f}–${d['high52w']:,.2f}"
             )
