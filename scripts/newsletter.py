@@ -60,8 +60,9 @@ def build_etf_table(prices: dict) -> str:
     for ticker, d in etfs.items():
         # Compute % of high precisely from the actual numbers
         pct = round((d['price'] / d['high52w']) * 100, 1) if d['high52w'] else 0
+        day_str = f"{d['dayChg']:+.2f}%" if d.get('dayChg') is not None else "n/a"
         rows.append(
-            f"| {ticker} | {d['name']} | ${d['price']:.4f} | {d['dayChg']:+.2f}% | "
+            f"| {ticker} | {d['name']} | ${d['price']:.4f} | {day_str} | "
             f"{d['weekChg']:+.2f}% | ${d['low52w']:.2f} | ${d['high52w']:.2f} | {pct:.1f}% |"
         )
     return "\n".join(rows)
@@ -75,8 +76,9 @@ def build_futures_table(prices: dict) -> str:
             "|----------|------|------:|----:|-----:|--------:|---------:|----------:|"]
     for ticker, d in futures.items():
         pct = round((d['price'] / d['high52w']) * 100, 1) if d['high52w'] else 0
+        day_str = f"{d['dayChg']:+.2f}%" if d.get('dayChg') is not None else "n/a"
         rows.append(
-            f"| {ticker} | {d['name']} | ${d['price']:,.4f} | {d['dayChg']:+.2f}% | "
+            f"| {ticker} | {d['name']} | ${d['price']:,.4f} | {day_str} | "
             f"{d['weekChg']:+.2f}% | ${d['low52w']:,.2f} | ${d['high52w']:,.2f} | {pct:.1f}% |"
         )
     return "\n".join(rows)
@@ -93,9 +95,10 @@ def build_newsletter_prompt(today_str: str, signal_summary: str, prices: dict) -
         if commodity in cp:
             d = cp[commodity]
             pct = round((d['price'] / d['high52w']) * 100, 1) if d.get('high52w') else 0
+            day_str = f"{d['dayChg']:+.2f}%" if d.get('dayChg') is not None else "n/a"
             cplines.append(
                 f"  {commodity}: {d['ticker']} ${d['price']:,.4f} | "
-                f"Day: {d['dayChg']:+.2f}% | Week: {d['weekChg']:+.2f}% | "
+                f"Day: {day_str} | Week: {d['weekChg']:+.2f}% | "
                 f"52wk: ${d['low52w']:,.2f}--${d['high52w']:,.2f} | "
                 f"% of 52w high: {pct:.1f}%"
             )
@@ -107,6 +110,8 @@ Today is {today_str}. Write a complete institutional newsletter in Markdown.
 
 == ACCURACY RULES — FOLLOW PRECISELY ==
 1. PRICES: Use ONLY the exact prices from the tables below. Never fabricate or round differently.
+   NOTE: If a Day Change cell shows "n/a", omit that figure from the newsletter or note it as unavailable
+   rather than inventing a percentage. This occurs when the data gap between sessions exceeds one trading day.
 2. PERCENT OF 52-WEEK HIGH: The % of 52w high is pre-calculated in the tables. Use those exact
    figures. Do not recalculate or round — quote them verbatim (e.g. 99.1%, not 100% if the
    table says 99.1%).
@@ -230,7 +235,9 @@ price levels. The core thesis: where does NDVI trend diverge most sharply from p
 *The QuantAgri Intelligence Weekly · {today_str}*
 *Prices: Yahoo Finance (live, {price_date}). Spectral data: Planetary Computer Sentinel-2 L2A.*
 *NDVI velocity and z-scores computed by QuantAgri internal pipeline from Sentinel-2 time series;*
-*figures may differ from third-party vegetation indices. Not investment advice.*
+*figures may differ from third-party vegetation indices.*
+*Futures prices: Yahoo Finance continuous front-month (=F) contracts; 52-week ranges span rolled contracts*
+*and may differ from specific expiry-contract ranges (e.g., Jul-2026). Not investment advice.*
 """
 
 
