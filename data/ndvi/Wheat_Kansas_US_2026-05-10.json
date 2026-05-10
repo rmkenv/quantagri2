@@ -1,0 +1,91 @@
+{
+  "commodity": "Wheat",
+  "region": "Kansas_US",
+  "bbox": [
+    -102.0,
+    37.0,
+    -94.6,
+    40.0
+  ],
+  "year": 2026,
+  "source": "simulated",
+  "composites": [
+    {
+      "month": 1,
+      "ndvi": 0.2173,
+      "lswi": 0.0699,
+      "velocity": 0.08312
+    },
+    {
+      "month": 2,
+      "ndvi": 0.3005,
+      "lswi": 0.1513,
+      "velocity": 0.14646
+    },
+    {
+      "month": 3,
+      "ndvi": 0.5102,
+      "lswi": 0.2573,
+      "velocity": 0.22526
+    },
+    {
+      "month": 4,
+      "ndvi": 0.751,
+      "lswi": 0.3749,
+      "velocity": 0.16548
+    },
+    {
+      "month": 5,
+      "ndvi": 0.8412,
+      "lswi": 0.4248,
+      "velocity": 0.00998
+    },
+    {
+      "month": 6,
+      "ndvi": 0.7709,
+      "lswi": 0.3561,
+      "velocity": -0.14536
+    },
+    {
+      "month": 7,
+      "ndvi": 0.5505,
+      "lswi": 0.2599,
+      "velocity": -0.2354
+    },
+    {
+      "month": 8,
+      "ndvi": 0.3001,
+      "lswi": 0.1346,
+      "velocity": -0.16347
+    },
+    {
+      "month": 9,
+      "ndvi": 0.2235,
+      "lswi": 0.0599,
+      "velocity": -0.07843
+    },
+    {
+      "month": 10,
+      "ndvi": 0.1433,
+      "lswi": 0.0822,
+      "velocity": -0.0482
+    },
+    {
+      "month": 11,
+      "ndvi": 0.1271,
+      "lswi": 0.0513,
+      "velocity": -0.02479
+    },
+    {
+      "month": 12,
+      "ndvi": 0.0937,
+      "lswi": 0.0362,
+      "velocity": -0.03343
+    }
+  ],
+  "peak_ndvi": 0.8412,
+  "peak_lswi": 0.4248,
+  "peak_velocity": 0.22526,
+  "cloud_cover_pct": 0.0,
+  "scene_count": 0
+}
