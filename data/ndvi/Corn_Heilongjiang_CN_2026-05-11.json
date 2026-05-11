@@ -1,0 +1,91 @@
+{
+  "commodity": "Corn",
+  "region": "Heilongjiang_CN",
+  "bbox": [
+    125.0,
+    44.0,
+    135.0,
+    53.0
+  ],
+  "year": 2026,
+  "source": "simulated",
+  "composites": [
+    {
+      "month": 1,
+      "ndvi": 0.0875,
+      "lswi": 0.068,
+      "velocity": 0.05965
+    },
+    {
+      "month": 2,
+      "ndvi": 0.1471,
+      "lswi": 0.0252,
+      "velocity": 0.06645
+    },
+    {
+      "month": 3,
+      "ndvi": 0.2204,
+      "lswi": 0.0886,
+      "velocity": 0.09477
+    },
+    {
+      "month": 4,
+      "ndvi": 0.3367,
+      "lswi": 0.1538,
+      "velocity": 0.18268
+    },
+    {
+      "month": 5,
+      "ndvi": 0.5857,
+      "lswi": 0.2447,
+      "velocity": 0.26834
+    },
+    {
+      "month": 6,
+      "ndvi": 0.8733,
+      "lswi": 0.3778,
+      "velocity": 0.18213
+    },
+    {
+      "month": 7,
+      "ndvi": 0.95,
+      "lswi": 0.4667,
+      "velocity": -0.02131
+    },
+    {
+      "month": 8,
+      "ndvi": 0.8307,
+      "lswi": 0.3821,
+      "velocity": -0.16572
+    },
+    {
+      "month": 9,
+      "ndvi": 0.6186,
+      "lswi": 0.2804,
+      "velocity": -0.22958
+    },
+    {
+      "month": 10,
+      "ndvi": 0.3716,
+      "lswi": 0.1292,
+      "velocity": -0.17797
+    },
+    {
+      "month": 11,
+      "ndvi": 0.2626,
+      "lswi": 0.0757,
+      "velocity": -0.1211
+    },
+    {
+      "month": 12,
+      "ndvi": 0.1294,
+      "lswi": 0.0721,
+      "velocity": -0.13326
+    }
+  ],
+  "peak_ndvi": 0.95,
+  "peak_lswi": 0.4667,
+  "peak_velocity": 0.26834,
+  "cloud_cover_pct": 0.0,
+  "scene_count": 0
+}
