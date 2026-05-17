@@ -1,0 +1,91 @@
+{
+  "commodity": "Wheat",
+  "region": "Grand_Est_FR",
+  "bbox": [
+    3.5,
+    47.5,
+    8.2,
+    49.5
+  ],
+  "year": 2026,
+  "source": "simulated",
+  "composites": [
+    {
+      "month": 1,
+      "ndvi": 0.1743,
+      "lswi": 0.0668,
+      "velocity": 0.13382
+    },
+    {
+      "month": 2,
+      "ndvi": 0.3082,
+      "lswi": 0.1611,
+      "velocity": 0.16871
+    },
+    {
+      "month": 3,
+      "ndvi": 0.5118,
+      "lswi": 0.252,
+      "velocity": 0.2314
+    },
+    {
+      "month": 4,
+      "ndvi": 0.771,
+      "lswi": 0.3842,
+      "velocity": 0.15045
+    },
+    {
+      "month": 5,
+      "ndvi": 0.8127,
+      "lswi": 0.4061,
+      "velocity": -0.00238
+    },
+    {
+      "month": 6,
+      "ndvi": 0.7662,
+      "lswi": 0.3552,
+      "velocity": -0.14232
+    },
+    {
+      "month": 7,
+      "ndvi": 0.528,
+      "lswi": 0.2802,
+      "velocity": -0.23522
+    },
+    {
+      "month": 8,
+      "ndvi": 0.2958,
+      "lswi": 0.1536,
+      "velocity": -0.15882
+    },
+    {
+      "month": 9,
+      "ndvi": 0.2104,
+      "lswi": 0.0543,
+      "velocity": -0.055
+    },
+    {
+      "month": 10,
+      "ndvi": 0.1858,
+      "lswi": 0.0407,
+      "velocity": -0.05651
+    },
+    {
+      "month": 11,
+      "ndvi": 0.0974,
+      "lswi": 0.0302,
+      "velocity": -0.0331
+    },
+    {
+      "month": 12,
+      "ndvi": 0.1196,
+      "lswi": 0.0273,
+      "velocity": 0.0222
+    }
+  ],
+  "peak_ndvi": 0.8127,
+  "peak_lswi": 0.4061,
+  "peak_velocity": 0.2314,
+  "cloud_cover_pct": 0.0,
+  "scene_count": 0
+}
