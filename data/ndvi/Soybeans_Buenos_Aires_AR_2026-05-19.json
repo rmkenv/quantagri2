@@ -1,0 +1,91 @@
+{
+  "commodity": "Soybeans",
+  "region": "Buenos_Aires_AR",
+  "bbox": [
+    -63.0,
+    -39.0,
+    -57.0,
+    -33.0
+  ],
+  "year": 2026,
+  "source": "simulated",
+  "composites": [
+    {
+      "month": 1,
+      "ndvi": 0.1106,
+      "lswi": 0.0412,
+      "velocity": 0.03993
+    },
+    {
+      "month": 2,
+      "ndvi": 0.1505,
+      "lswi": 0.0766,
+      "velocity": 0.04213
+    },
+    {
+      "month": 3,
+      "ndvi": 0.1948,
+      "lswi": 0.08,
+      "velocity": 0.09344
+    },
+    {
+      "month": 4,
+      "ndvi": 0.3374,
+      "lswi": 0.1505,
+      "velocity": 0.18434
+    },
+    {
+      "month": 5,
+      "ndvi": 0.5635,
+      "lswi": 0.2677,
+      "velocity": 0.24315
+    },
+    {
+      "month": 6,
+      "ndvi": 0.8237,
+      "lswi": 0.407,
+      "velocity": 0.18704
+    },
+    {
+      "month": 7,
+      "ndvi": 0.9376,
+      "lswi": 0.4745,
+      "velocity": -0.00744
+    },
+    {
+      "month": 8,
+      "ndvi": 0.8088,
+      "lswi": 0.4354,
+      "velocity": -0.18248
+    },
+    {
+      "month": 9,
+      "ndvi": 0.5726,
+      "lswi": 0.2714,
+      "velocity": -0.24785
+    },
+    {
+      "month": 10,
+      "ndvi": 0.3131,
+      "lswi": 0.1742,
+      "velocity": -0.19146
+    },
+    {
+      "month": 11,
+      "ndvi": 0.1897,
+      "lswi": 0.0789,
+      "velocity": -0.08724
+    },
+    {
+      "month": 12,
+      "ndvi": 0.1386,
+      "lswi": 0.047,
+      "velocity": -0.05108
+    }
+  ],
+  "peak_ndvi": 0.9376,
+  "peak_lswi": 0.4745,
+  "peak_velocity": 0.24315,
+  "cloud_cover_pct": 0.0,
+  "scene_count": 0
+}
