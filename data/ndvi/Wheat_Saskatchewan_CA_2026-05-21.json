@@ -1,0 +1,91 @@
+{
+  "commodity": "Wheat",
+  "region": "Saskatchewan_CA",
+  "bbox": [
+    -110.0,
+    49.0,
+    -101.0,
+    55.0
+  ],
+  "year": 2026,
+  "source": "simulated",
+  "composites": [
+    {
+      "month": 1,
+      "ndvi": 0.178,
+      "lswi": 0.0842,
+      "velocity": 0.14274
+    },
+    {
+      "month": 2,
+      "ndvi": 0.3207,
+      "lswi": 0.117,
+      "velocity": 0.18719
+    },
+    {
+      "month": 3,
+      "ndvi": 0.5524,
+      "lswi": 0.2689,
+      "velocity": 0.1924
+    },
+    {
+      "month": 4,
+      "ndvi": 0.7055,
+      "lswi": 0.3568,
+      "velocity": 0.14635
+    },
+    {
+      "month": 5,
+      "ndvi": 0.8451,
+      "lswi": 0.432,
+      "velocity": 0.01597
+    },
+    {
+      "month": 6,
+      "ndvi": 0.7375,
+      "lswi": 0.3754,
+      "velocity": -0.15565
+    },
+    {
+      "month": 7,
+      "ndvi": 0.5338,
+      "lswi": 0.2607,
+      "velocity": -0.21084
+    },
+    {
+      "month": 8,
+      "ndvi": 0.3158,
+      "lswi": 0.1351,
+      "velocity": -0.18198
+    },
+    {
+      "month": 9,
+      "ndvi": 0.1698,
+      "lswi": 0.0448,
+      "velocity": -0.0844
+    },
+    {
+      "month": 10,
+      "ndvi": 0.147,
+      "lswi": 0.0645,
+      "velocity": -0.02382
+    },
+    {
+      "month": 11,
+      "ndvi": 0.1222,
+      "lswi": 0.0521,
+      "velocity": -0.00213
+    },
+    {
+      "month": 12,
+      "ndvi": 0.1428,
+      "lswi": 0.053,
+      "velocity": 0.02057
+    }
+  ],
+  "peak_ndvi": 0.8451,
+  "peak_lswi": 0.432,
+  "peak_velocity": 0.1924,
+  "cloud_cover_pct": 0.0,
+  "scene_count": 0
+}
