@@ -1,0 +1,91 @@
+{
+  "commodity": "Wheat",
+  "region": "Rostov_RU",
+  "bbox": [
+    38.0,
+    46.0,
+    44.5,
+    48.5
+  ],
+  "year": 2026,
+  "source": "simulated",
+  "composites": [
+    {
+      "month": 1,
+      "ndvi": 0.1855,
+      "lswi": 0.0901,
+      "velocity": 0.16382
+    },
+    {
+      "month": 2,
+      "ndvi": 0.3493,
+      "lswi": 0.1503,
+      "velocity": 0.17581
+    },
+    {
+      "month": 3,
+      "ndvi": 0.5371,
+      "lswi": 0.258,
+      "velocity": 0.2167
+    },
+    {
+      "month": 4,
+      "ndvi": 0.7827,
+      "lswi": 0.3743,
+      "velocity": 0.15393
+    },
+    {
+      "month": 5,
+      "ndvi": 0.845,
+      "lswi": 0.4308,
+      "velocity": 0.00169
+    },
+    {
+      "month": 6,
+      "ndvi": 0.7861,
+      "lswi": 0.3512,
+      "velocity": -0.15855
+    },
+    {
+      "month": 7,
+      "ndvi": 0.5279,
+      "lswi": 0.2524,
+      "velocity": -0.22767
+    },
+    {
+      "month": 8,
+      "ndvi": 0.3307,
+      "lswi": 0.162,
+      "velocity": -0.15577
+    },
+    {
+      "month": 9,
+      "ndvi": 0.2163,
+      "lswi": 0.0696,
+      "velocity": -0.10493
+    },
+    {
+      "month": 10,
+      "ndvi": 0.1209,
+      "lswi": 0.0539,
+      "velocity": -0.06192
+    },
+    {
+      "month": 11,
+      "ndvi": 0.0925,
+      "lswi": 0.0393,
+      "velocity": -0.01222
+    },
+    {
+      "month": 12,
+      "ndvi": 0.0964,
+      "lswi": 0.0299,
+      "velocity": 0.00396
+    }
+  ],
+  "peak_ndvi": 0.845,
+  "peak_lswi": 0.4308,
+  "peak_velocity": 0.2167,
+  "cloud_cover_pct": 0.0,
+  "scene_count": 0
+}

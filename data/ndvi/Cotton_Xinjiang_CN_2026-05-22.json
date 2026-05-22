@@ -1,0 +1,91 @@
+{
+  "commodity": "Cotton",
+  "region": "Xinjiang_CN",
+  "bbox": [
+    73.5,
+    36.0,
+    96.5,
+    49.0
+  ],
+  "year": 2026,
+  "source": "simulated",
+  "composites": [
+    {
+      "month": 1,
+      "ndvi": 0.1133,
+      "lswi": 0.0382,
+      "velocity": -0.02978
+    },
+    {
+      "month": 2,
+      "ndvi": 0.0835,
+      "lswi": 0.044,
+      "velocity": -1e-05
+    },
+    {
+      "month": 3,
+      "ndvi": 0.1133,
+      "lswi": 0.0558,
+      "velocity": 0.05233
+    },
+    {
+      "month": 4,
+      "ndvi": 0.1882,
+      "lswi": 0.0841,
+      "velocity": 0.10765
+    },
+    {
+      "month": 5,
+      "ndvi": 0.3286,
+      "lswi": 0.1386,
+      "velocity": 0.15586
+    },
+    {
+      "month": 6,
+      "ndvi": 0.4999,
+      "lswi": 0.2144,
+      "velocity": 0.18218
+    },
+    {
+      "month": 7,
+      "ndvi": 0.6929,
+      "lswi": 0.3184,
+      "velocity": 0.15316
+    },
+    {
+      "month": 8,
+      "ndvi": 0.8062,
+      "lswi": 0.3352,
+      "velocity": -0.0045
+    },
+    {
+      "month": 9,
+      "ndvi": 0.6839,
+      "lswi": 0.2829,
+      "velocity": -0.15737
+    },
+    {
+      "month": 10,
+      "ndvi": 0.4915,
+      "lswi": 0.2021,
+      "velocity": -0.21273
+    },
+    {
+      "month": 11,
+      "ndvi": 0.2584,
+      "lswi": 0.1356,
+      "velocity": -0.15703
+    },
+    {
+      "month": 12,
+      "ndvi": 0.1774,
+      "lswi": 0.0832,
+      "velocity": -0.08104
+    }
+  ],
+  "peak_ndvi": 0.8062,
+  "peak_lswi": 0.3352,
+  "peak_velocity": 0.18218,
+  "cloud_cover_pct": 0.0,
+  "scene_count": 0
+}

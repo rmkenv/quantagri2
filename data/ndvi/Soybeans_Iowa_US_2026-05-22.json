@@ -1,0 +1,91 @@
+{
+  "commodity": "Soybeans",
+  "region": "Iowa_US",
+  "bbox": [
+    -96.7,
+    40.5,
+    -90.1,
+    43.5
+  ],
+  "year": 2026,
+  "source": "simulated",
+  "composites": [
+    {
+      "month": 1,
+      "ndvi": 0.1235,
+      "lswi": 0.0516,
+      "velocity": 0.01681
+    },
+    {
+      "month": 2,
+      "ndvi": 0.1403,
+      "lswi": 0.0634,
+      "velocity": 0.03112
+    },
+    {
+      "month": 3,
+      "ndvi": 0.1857,
+      "lswi": 0.0821,
+      "velocity": 0.07818
+    },
+    {
+      "month": 4,
+      "ndvi": 0.2967,
+      "lswi": 0.1929,
+      "velocity": 0.17726
+    },
+    {
+      "month": 5,
+      "ndvi": 0.5403,
+      "lswi": 0.2919,
+      "velocity": 0.26378
+    },
+    {
+      "month": 6,
+      "ndvi": 0.8242,
+      "lswi": 0.4264,
+      "velocity": 0.18879
+    },
+    {
+      "month": 7,
+      "ndvi": 0.9178,
+      "lswi": 0.4749,
+      "velocity": -0.01077
+    },
+    {
+      "month": 8,
+      "ndvi": 0.8027,
+      "lswi": 0.416,
+      "velocity": -0.18054
+    },
+    {
+      "month": 9,
+      "ndvi": 0.5568,
+      "lswi": 0.2938,
+      "velocity": -0.22715
+    },
+    {
+      "month": 10,
+      "ndvi": 0.3484,
+      "lswi": 0.1566,
+      "velocity": -0.17726
+    },
+    {
+      "month": 11,
+      "ndvi": 0.2022,
+      "lswi": 0.083,
+      "velocity": -0.10461
+    },
+    {
+      "month": 12,
+      "ndvi": 0.1392,
+      "lswi": 0.0536,
+      "velocity": -0.06306
+    }
+  ],
+  "peak_ndvi": 0.9178,
+  "peak_lswi": 0.4749,
+  "peak_velocity": 0.26378,
+  "cloud_cover_pct": 0.0,
+  "scene_count": 0
+}
