@@ -1,0 +1,91 @@
+{
+  "commodity": "Cotton",
+  "region": "Texas_US",
+  "bbox": [
+    -106.6,
+    25.8,
+    -93.5,
+    36.5
+  ],
+  "year": 2026,
+  "source": "simulated",
+  "composites": [
+    {
+      "month": 1,
+      "ndvi": 0.0863,
+      "lswi": 0.036,
+      "velocity": 0.01199
+    },
+    {
+      "month": 2,
+      "ndvi": 0.0983,
+      "lswi": 0.0412,
+      "velocity": 0.0092
+    },
+    {
+      "month": 3,
+      "ndvi": 0.1047,
+      "lswi": 0.0655,
+      "velocity": 0.03422
+    },
+    {
+      "month": 4,
+      "ndvi": 0.1667,
+      "lswi": 0.0742,
+      "velocity": 0.10064
+    },
+    {
+      "month": 5,
+      "ndvi": 0.306,
+      "lswi": 0.128,
+      "velocity": 0.17591
+    },
+    {
+      "month": 6,
+      "ndvi": 0.5185,
+      "lswi": 0.2177,
+      "velocity": 0.20738
+    },
+    {
+      "month": 7,
+      "ndvi": 0.7207,
+      "lswi": 0.2821,
+      "velocity": 0.14702
+    },
+    {
+      "month": 8,
+      "ndvi": 0.8126,
+      "lswi": 0.3673,
+      "velocity": -0.01095
+    },
+    {
+      "month": 9,
+      "ndvi": 0.6988,
+      "lswi": 0.3106,
+      "velocity": -0.16175
+    },
+    {
+      "month": 10,
+      "ndvi": 0.4891,
+      "lswi": 0.1917,
+      "velocity": -0.19921
+    },
+    {
+      "month": 11,
+      "ndvi": 0.3004,
+      "lswi": 0.1265,
+      "velocity": -0.16179
+    },
+    {
+      "month": 12,
+      "ndvi": 0.1655,
+      "lswi": 0.0956,
+      "velocity": -0.13492
+    }
+  ],
+  "peak_ndvi": 0.8126,
+  "peak_lswi": 0.3673,
+  "peak_velocity": 0.20738,
+  "cloud_cover_pct": 0.0,
+  "scene_count": 0
+}
