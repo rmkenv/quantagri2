@@ -1,11 +1,21 @@
+# Planetary Computer / remote sensing
 pystac-client>=0.7.5
 planetary-computer>=1.0.0
 stackstac>=0.4.4
 xarray>=2024.1.0
+
+# Data / numerics
 numpy>=1.26.0
 pandas>=2.2.0
 scipy>=1.12.0
+
+# Market data
+yfinance>=0.2.40
+
+# HTTP / utilities
 requests>=2.31.0
 python-dotenv>=1.0.0
-yfinance>=0.2.40
 feedparser>=6.0.11
+
+# NEW in v2 (no extra cost — already in scipy)
+# scipy.stats.t used for LOOCV p-values — already listed above
