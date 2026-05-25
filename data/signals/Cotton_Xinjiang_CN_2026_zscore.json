@@ -1,0 +1,54 @@
+{
+  "commodity": "Cotton",
+  "region": "Xinjiang_CN",
+  "year": 2026,
+  "gate_months": [
+    6,
+    7,
+    8
+  ],
+  "composites": [
+    {
+      "date": "2026-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.5199,
+      "lswi": 0.0853,
+      "velocity": 0.20974,
+      "vel_zscore": 2.983,
+      "lswi_zscore": -7.659,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2026-07-01",
+      "month": 7,
+      "doy": 182,
+      "ndvi": 0.728,
+      "lswi": 0.1468,
+      "velocity": 0.14452,
+      "vel_zscore": 1.509,
+      "lswi_zscore": -14.894,
+      "quadrant": "II",
+      "baseline_doy": 177
+    },
+    {
+      "date": "2026-08-01",
+      "month": 8,
+      "doy": 213,
+      "ndvi": 0.8089,
+      "lswi": 0.164,
+      "velocity": -0.00982,
+      "vel_zscore": -0.509,
+      "lswi_zscore": -13.868,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    }
+  ],
+  "season_vel_z_mean": 1.328,
+  "season_vel_z_max": 2.983,
+  "season_vel_z_min": -0.509,
+  "season_lswi_z_mean": -12.14,
+  "dominant_quadrant": "II",
+  "baseline_source": "synthetic"
+}

@@ -1,0 +1,54 @@
+{
+  "commodity": "Corn",
+  "region": "Ohio_US",
+  "year": 2026,
+  "gate_months": [
+    6,
+    7,
+    8
+  ],
+  "composites": [
+    {
+      "date": "2026-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.8533,
+      "lswi": 0.2894,
+      "velocity": 0.16004,
+      "vel_zscore": 1.033,
+      "lswi_zscore": -6.859,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2026-07-01",
+      "month": 7,
+      "doy": 182,
+      "ndvi": 0.9304,
+      "lswi": 0.3622,
+      "velocity": -0.00764,
+      "vel_zscore": -5.284,
+      "lswi_zscore": -20.899,
+      "quadrant": "IV",
+      "baseline_doy": 177
+    },
+    {
+      "date": "2026-08-01",
+      "month": 8,
+      "doy": 213,
+      "ndvi": 0.838,
+      "lswi": 0.3025,
+      "velocity": -0.17197,
+      "vel_zscore": -6.776,
+      "lswi_zscore": -22.992,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    }
+  ],
+  "season_vel_z_mean": -3.676,
+  "season_vel_z_max": 1.033,
+  "season_vel_z_min": -6.776,
+  "season_lswi_z_mean": -16.917,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}
