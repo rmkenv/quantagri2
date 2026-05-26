@@ -1,0 +1,137 @@
+name: QuantAgri v2 Pipeline
+
+on:
+  schedule:
+    - cron: '0 6 * * *'       # daily 06:00 UTC — NDVI + prices + signals
+    - cron: '0 3 1 4 *'       # 1 Apr 07:00 UTC — annual MODIS baseline rebuild
+    - cron: '0 22 * * 5'      # Friday 22:00 UTC — RS news + digest
+    - cron: '0 23 * * 5'      # Friday 23:00 UTC — main newsletter
+    - cron: '30 7 1 * *'      # 1st of month 07:30 UTC — podcast
+  workflow_dispatch:
+    inputs:
+      run_newsletter:
+        description: 'Force run main newsletter'
+        type: boolean
+        default: false
+      run_rs_newsletter:
+        description: 'Force run RS digest'
+        type: boolean
+        default: false
+      run_podcast:
+        description: 'Force run podcast'
+        type: boolean
+        default: false
+      backfill_years:
+        description: 'Backfill years (space-separated, e.g. "2016 2017 2018")'
+        type: string
+        default: ''
+      rebuild_baseline:
+        description: 'Rebuild MODIS baseline — use build_baseline.yml workflow instead'
+        type: boolean
+        default: false
+
+jobs:
+  pipeline:
+    name: QuantAgri v2 Nightly
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # ── Step 1a: Historical backfill (workflow_dispatch only) ──────────
+      - name: Backfill historical NDVI
+        if: github.event.inputs.backfill_years != ''
+        run: |
+          python scripts/pc_pipeline.py --years ${{ github.event.inputs.backfill_years }}
+          python scripts/compute_zscore.py --years ${{ github.event.inputs.backfill_years }}
+        env:
+          PC_SDK_SUBSCRIPTION_KEY: ${{ secrets.PC_SDK_SUBSCRIPTION_KEY }}
+
+      # ── Step 1b: Current-year NDVI (daily) ────────────────────────────
+      - name: Run PC pipeline (current year NDVI)
+        run: python scripts/pc_pipeline.py
+        env:
+          PC_SDK_SUBSCRIPTION_KEY: ${{ secrets.PC_SDK_SUBSCRIPTION_KEY }}
+
+      # ── Step 2: Compute z-scores (current year) ───────────────────────
+      - name: Compute velocity z-scores
+        run: python scripts/compute_zscore.py
+        # No PC key needed — reads local NDVI files + baseline
+
+      # ── Step 3: Live market prices ────────────────────────────────────
+      - name: Fetch live prices
+        run: python scripts/fetch_prices.py
+
+      # ── Step 4: Trading signals via Ollama Cloud ──────────────────────
+      # Signal prompt now receives z-scored velocity instead of raw velocity
+      - name: Generate signals
+        run: python scripts/generate_signals.py
+        env:
+          OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          OLLAMA_MODEL: gpt-oss:20b
+
+      # ── Step 5: RS news fetch (Friday 22:00 UTC or forced) ────────────
+      - name: Fetch remote sensing news
+        if: |
+          github.event.schedule == '0 22 * * 5' ||
+          github.event.inputs.run_rs_newsletter == 'true'
+        run: python scripts/fetch_rs_news.py
+        env:
+          GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
+
+      # ── Step 6: RS Intelligence Digest ────────────────────────────────
+      - name: Generate RS Intelligence Digest
+        if: |
+          github.event.schedule == '0 22 * * 5' ||
+          github.event.inputs.run_rs_newsletter == 'true'
+        run: python scripts/rs_newsletter.py
+        env:
+          OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          OLLAMA_MODEL: gpt-oss:20b
+
+      # ── Step 7: Main ag newsletter (Friday 23:00 UTC or forced) ───────
+      - name: Generate weekly newsletter
+        if: |
+          github.event.schedule == '0 23 * * 5' ||
+          github.event.inputs.run_newsletter == 'true'
+        run: python scripts/newsletter.py
+        env:
+          OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          OLLAMA_MODEL: gpt-oss:20b
+
+      # ── Step 8: Monthly podcast ────────────────────────────────────────
+      - name: Generate monthly podcast script
+        if: |
+          github.event.schedule == '30 7 1 * *' ||
+          github.event.inputs.run_podcast == 'true'
+        run: python scripts/podcast.py
+        env:
+          OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          OLLAMA_MODEL: gpt-oss:20b
+
+      # ── Step 9: Commit all data/ outputs back to repo ─────────────────
+      - name: Commit outputs
+        run: |
+          git config user.name  "quantagri-bot"
+          git config user.email "bot@quantagri.local"
+          git add data/
+          git diff --staged --quiet \
+            && echo "Nothing to commit" \
+            || (git commit -m "chore: pipeline $(date -u '+%Y-%m-%d %H:%M UTC')" \
+            && git pull --rebase origin main \
+            && git push origin main)
