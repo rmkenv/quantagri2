@@ -1,0 +1,54 @@
+{
+  "commodity": "Wheat",
+  "region": "Kansas_US",
+  "year": 2018,
+  "gate_months": [
+    4,
+    5,
+    6
+  ],
+  "composites": [
+    {
+      "date": "2018-04-01",
+      "month": 4,
+      "doy": 91,
+      "ndvi": 0.7487,
+      "lswi": 0.1431,
+      "velocity": 0.14044,
+      "vel_zscore": 1.528,
+      "lswi_zscore": -14.149,
+      "quadrant": "II",
+      "baseline_doy": 97
+    },
+    {
+      "date": "2018-05-01",
+      "month": 5,
+      "doy": 121,
+      "ndvi": 0.8427,
+      "lswi": 0.1774,
+      "velocity": 0.0205,
+      "vel_zscore": -3.341,
+      "lswi_zscore": -15.983,
+      "quadrant": "IV",
+      "baseline_doy": 113
+    },
+    {
+      "date": "2018-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.7897,
+      "lswi": 0.1885,
+      "velocity": -0.13324,
+      "vel_zscore": -2.365,
+      "lswi_zscore": -21.124,
+      "quadrant": "IV",
+      "baseline_doy": 145
+    }
+  ],
+  "season_vel_z_mean": -1.393,
+  "season_vel_z_max": 1.528,
+  "season_vel_z_min": -3.341,
+  "season_lswi_z_mean": -17.085,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

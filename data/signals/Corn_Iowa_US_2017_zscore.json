@@ -1,0 +1,54 @@
+{
+  "commodity": "Corn",
+  "region": "Iowa_US",
+  "year": 2017,
+  "gate_months": [
+    6,
+    7,
+    8
+  ],
+  "composites": [
+    {
+      "date": "2017-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.8596,
+      "lswi": 0.2998,
+      "velocity": 0.1616,
+      "vel_zscore": 0.698,
+      "lswi_zscore": -8.664,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2017-07-01",
+      "month": 7,
+      "doy": 182,
+      "ndvi": 0.95,
+      "lswi": 0.3553,
+      "velocity": -0.01218,
+      "vel_zscore": -7.591,
+      "lswi_zscore": -10.033,
+      "quadrant": "IV",
+      "baseline_doy": 177
+    },
+    {
+      "date": "2017-08-01",
+      "month": 8,
+      "doy": 213,
+      "ndvi": 0.8352,
+      "lswi": 0.3035,
+      "velocity": -0.16815,
+      "vel_zscore": -4.217,
+      "lswi_zscore": -17.699,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    }
+  ],
+  "season_vel_z_mean": -3.703,
+  "season_vel_z_max": 0.698,
+  "season_vel_z_min": -7.591,
+  "season_lswi_z_mean": -12.132,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

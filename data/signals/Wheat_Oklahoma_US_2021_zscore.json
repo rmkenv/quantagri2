@@ -1,0 +1,54 @@
+{
+  "commodity": "Wheat",
+  "region": "Oklahoma_US",
+  "year": 2021,
+  "gate_months": [
+    4,
+    5,
+    6
+  ],
+  "composites": [
+    {
+      "date": "2021-04-01",
+      "month": 4,
+      "doy": 91,
+      "ndvi": 0.7433,
+      "lswi": 0.175,
+      "velocity": 0.16427,
+      "vel_zscore": 1.729,
+      "lswi_zscore": -11.097,
+      "quadrant": "II",
+      "baseline_doy": 97
+    },
+    {
+      "date": "2021-05-01",
+      "month": 5,
+      "doy": 121,
+      "ndvi": 0.8607,
+      "lswi": 0.2248,
+      "velocity": 0.00258,
+      "vel_zscore": -6.705,
+      "lswi_zscore": -24.921,
+      "quadrant": "IV",
+      "baseline_doy": 113
+    },
+    {
+      "date": "2021-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.7485,
+      "lswi": 0.1578,
+      "velocity": -0.16602,
+      "vel_zscore": -4.432,
+      "lswi_zscore": -26.531,
+      "quadrant": "IV",
+      "baseline_doy": 145
+    }
+  ],
+  "season_vel_z_mean": -3.136,
+  "season_vel_z_max": 1.729,
+  "season_vel_z_min": -6.705,
+  "season_lswi_z_mean": -20.85,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

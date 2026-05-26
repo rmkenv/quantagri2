@@ -1,0 +1,67 @@
+{
+  "commodity": "Sugar",
+  "region": "Uttar_Pradesh_IN",
+  "year": 2019,
+  "gate_months": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "composites": [
+    {
+      "date": "2019-04-01",
+      "month": 4,
+      "doy": 91,
+      "ndvi": 0.1351,
+      "lswi": -0.0434,
+      "velocity": 0.02109,
+      "vel_zscore": 1.204,
+      "lswi_zscore": -4.666,
+      "quadrant": "II",
+      "baseline_doy": 97
+    },
+    {
+      "date": "2019-05-01",
+      "month": 5,
+      "doy": 121,
+      "ndvi": 0.1816,
+      "lswi": 0.0454,
+      "velocity": 0.10776,
+      "vel_zscore": 5.341,
+      "lswi_zscore": -2.554,
+      "quadrant": "II",
+      "baseline_doy": 113
+    },
+    {
+      "date": "2019-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.3506,
+      "lswi": 0.1357,
+      "velocity": 0.18127,
+      "vel_zscore": 9.048,
+      "lswi_zscore": -2.965,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2019-07-01",
+      "month": 7,
+      "doy": 182,
+      "ndvi": 0.5442,
+      "lswi": 0.2922,
+      "velocity": 0.21731,
+      "vel_zscore": 3.737,
+      "lswi_zscore": -3.618,
+      "quadrant": "II",
+      "baseline_doy": 177
+    }
+  ],
+  "season_vel_z_mean": 4.832,
+  "season_vel_z_max": 9.048,
+  "season_vel_z_min": 1.204,
+  "season_lswi_z_mean": -3.451,
+  "dominant_quadrant": "II",
+  "baseline_source": "synthetic"
+}

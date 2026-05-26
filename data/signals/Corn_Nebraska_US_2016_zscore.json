@@ -1,0 +1,54 @@
+{
+  "commodity": "Corn",
+  "region": "Nebraska_US",
+  "year": 2016,
+  "gate_months": [
+    6,
+    7,
+    8
+  ],
+  "composites": [
+    {
+      "date": "2016-06-01",
+      "month": 6,
+      "doy": 153,
+      "ndvi": 0.8457,
+      "lswi": 0.3029,
+      "velocity": 0.16585,
+      "vel_zscore": 1.043,
+      "lswi_zscore": -6.412,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2016-07-01",
+      "month": 7,
+      "doy": 183,
+      "ndvi": 0.9376,
+      "lswi": 0.3633,
+      "velocity": 0.01455,
+      "vel_zscore": -3.231,
+      "lswi_zscore": -8.86,
+      "quadrant": "IV",
+      "baseline_doy": 177
+    },
+    {
+      "date": "2016-08-01",
+      "month": 8,
+      "doy": 214,
+      "ndvi": 0.8748,
+      "lswi": 0.3152,
+      "velocity": -0.18531,
+      "vel_zscore": -5.333,
+      "lswi_zscore": -15.913,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    }
+  ],
+  "season_vel_z_mean": -2.507,
+  "season_vel_z_max": 1.043,
+  "season_vel_z_min": -5.333,
+  "season_lswi_z_mean": -10.395,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

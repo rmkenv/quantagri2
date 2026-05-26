@@ -1,0 +1,54 @@
+{
+  "commodity": "Wheat",
+  "region": "Colorado_US",
+  "year": 2023,
+  "gate_months": [
+    4,
+    5,
+    6
+  ],
+  "composites": [
+    {
+      "date": "2023-04-01",
+      "month": 4,
+      "doy": 91,
+      "ndvi": 0.7285,
+      "lswi": 0.1827,
+      "velocity": 0.14846,
+      "vel_zscore": 0.942,
+      "lswi_zscore": -26.495,
+      "quadrant": "II",
+      "baseline_doy": 97
+    },
+    {
+      "date": "2023-05-01",
+      "month": 5,
+      "doy": 121,
+      "ndvi": 0.8465,
+      "lswi": 0.1915,
+      "velocity": 0.02453,
+      "vel_zscore": -2.078,
+      "lswi_zscore": -11.029,
+      "quadrant": "IV",
+      "baseline_doy": 113
+    },
+    {
+      "date": "2023-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.7776,
+      "lswi": 0.1727,
+      "velocity": -0.16573,
+      "vel_zscore": -7.634,
+      "lswi_zscore": -23.391,
+      "quadrant": "IV",
+      "baseline_doy": 145
+    }
+  ],
+  "season_vel_z_mean": -2.923,
+  "season_vel_z_max": 0.942,
+  "season_vel_z_min": -7.634,
+  "season_lswi_z_mean": -20.305,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

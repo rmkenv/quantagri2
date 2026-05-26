@@ -1,0 +1,54 @@
+{
+  "commodity": "Corn",
+  "region": "Heilongjiang_CN",
+  "year": 2016,
+  "gate_months": [
+    6,
+    7,
+    8
+  ],
+  "composites": [
+    {
+      "date": "2016-06-01",
+      "month": 6,
+      "doy": 153,
+      "ndvi": 0.864,
+      "lswi": 0.297,
+      "velocity": 0.1906,
+      "vel_zscore": 3.626,
+      "lswi_zscore": -8.4,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2016-07-01",
+      "month": 7,
+      "doy": 183,
+      "ndvi": 0.95,
+      "lswi": 0.36,
+      "velocity": 0.00486,
+      "vel_zscore": -5.437,
+      "lswi_zscore": -22.441,
+      "quadrant": "IV",
+      "baseline_doy": 177
+    },
+    {
+      "date": "2016-08-01",
+      "month": 8,
+      "doy": 214,
+      "ndvi": 0.8737,
+      "lswi": 0.2828,
+      "velocity": -0.16391,
+      "vel_zscore": -4.42,
+      "lswi_zscore": -17.517,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    }
+  ],
+  "season_vel_z_mean": -2.077,
+  "season_vel_z_max": 3.626,
+  "season_vel_z_min": -5.437,
+  "season_lswi_z_mean": -16.119,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

@@ -1,0 +1,54 @@
+{
+  "commodity": "Corn",
+  "region": "Illinois_US",
+  "year": 202,
+  "gate_months": [
+    6,
+    7,
+    8
+  ],
+  "composites": [
+    {
+      "date": "202-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.838,
+      "lswi": 0.3021,
+      "velocity": 0.17173,
+      "vel_zscore": 1.601,
+      "lswi_zscore": -6.762,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "202-07-01",
+      "month": 7,
+      "doy": 182,
+      "ndvi": 0.95,
+      "lswi": 0.3444,
+      "velocity": -0.00498,
+      "vel_zscore": -6.374,
+      "lswi_zscore": -15.78,
+      "quadrant": "IV",
+      "baseline_doy": 177
+    },
+    {
+      "date": "202-08-01",
+      "month": 8,
+      "doy": 213,
+      "ndvi": 0.828,
+      "lswi": 0.3088,
+      "velocity": -0.15369,
+      "vel_zscore": -7.139,
+      "lswi_zscore": -12.83,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    }
+  ],
+  "season_vel_z_mean": -3.971,
+  "season_vel_z_max": 1.601,
+  "season_vel_z_min": -7.139,
+  "season_lswi_z_mean": -11.791,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

@@ -1,0 +1,67 @@
+{
+  "commodity": "Sugar",
+  "region": "Sao_Paulo_BR",
+  "year": 2022,
+  "gate_months": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "composites": [
+    {
+      "date": "2022-04-01",
+      "month": 4,
+      "doy": 91,
+      "ndvi": 0.0916,
+      "lswi": -0.0373,
+      "velocity": 0.03724,
+      "vel_zscore": 2.894,
+      "lswi_zscore": -6.87,
+      "quadrant": "II",
+      "baseline_doy": 97
+    },
+    {
+      "date": "2022-05-01",
+      "month": 5,
+      "doy": 121,
+      "ndvi": 0.18,
+      "lswi": -0.0181,
+      "velocity": 0.12294,
+      "vel_zscore": 6.956,
+      "lswi_zscore": -6.407,
+      "quadrant": "II",
+      "baseline_doy": 113
+    },
+    {
+      "date": "2022-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.3375,
+      "lswi": 0.0867,
+      "velocity": 0.18246,
+      "vel_zscore": 5.531,
+      "lswi_zscore": -3.558,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2022-07-01",
+      "month": 7,
+      "doy": 182,
+      "ndvi": 0.5449,
+      "lswi": 0.2777,
+      "velocity": 0.22513,
+      "vel_zscore": 9.588,
+      "lswi_zscore": -3.214,
+      "quadrant": "II",
+      "baseline_doy": 177
+    }
+  ],
+  "season_vel_z_mean": 6.242,
+  "season_vel_z_max": 9.588,
+  "season_vel_z_min": 2.894,
+  "season_lswi_z_mean": -5.012,
+  "dominant_quadrant": "II",
+  "baseline_source": "synthetic"
+}

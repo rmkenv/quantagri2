@@ -1,0 +1,54 @@
+{
+  "commodity": "Corn",
+  "region": "Nebraska_US",
+  "year": 2020,
+  "gate_months": [
+    6,
+    7,
+    8
+  ],
+  "composites": [
+    {
+      "date": "2020-06-01",
+      "month": 6,
+      "doy": 153,
+      "ndvi": 0.8224,
+      "lswi": 0.2966,
+      "velocity": 0.17374,
+      "vel_zscore": 1.371,
+      "lswi_zscore": -6.566,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2020-07-01",
+      "month": 7,
+      "doy": 183,
+      "ndvi": 0.95,
+      "lswi": 0.3405,
+      "velocity": 0.01085,
+      "vel_zscore": -3.411,
+      "lswi_zscore": -9.304,
+      "quadrant": "IV",
+      "baseline_doy": 177
+    },
+    {
+      "date": "2020-08-01",
+      "month": 8,
+      "doy": 214,
+      "ndvi": 0.8441,
+      "lswi": 0.2975,
+      "velocity": -0.1777,
+      "vel_zscore": -5.015,
+      "lswi_zscore": -16.444,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    }
+  ],
+  "season_vel_z_mean": -2.352,
+  "season_vel_z_max": 1.371,
+  "season_vel_z_min": -5.015,
+  "season_lswi_z_mean": -10.771,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

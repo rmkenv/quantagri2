@@ -1,0 +1,67 @@
+{
+  "commodity": "Sugar",
+  "region": "Uttar_Pradesh_IN",
+  "year": 2016,
+  "gate_months": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "composites": [
+    {
+      "date": "2016-04-01",
+      "month": 4,
+      "doy": 92,
+      "ndvi": 0.1292,
+      "lswi": -0.009,
+      "velocity": 0.02798,
+      "vel_zscore": 1.816,
+      "lswi_zscore": -3.723,
+      "quadrant": "II",
+      "baseline_doy": 97
+    },
+    {
+      "date": "2016-05-01",
+      "month": 5,
+      "doy": 122,
+      "ndvi": 0.1812,
+      "lswi": 0.0018,
+      "velocity": 0.11104,
+      "vel_zscore": 6.866,
+      "lswi_zscore": -7.228,
+      "quadrant": "II",
+      "baseline_doy": 129
+    },
+    {
+      "date": "2016-06-01",
+      "month": 6,
+      "doy": 153,
+      "ndvi": 0.3513,
+      "lswi": 0.0948,
+      "velocity": 0.19544,
+      "vel_zscore": 10.079,
+      "lswi_zscore": -4.774,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2016-07-01",
+      "month": 7,
+      "doy": 183,
+      "ndvi": 0.5721,
+      "lswi": 0.2581,
+      "velocity": 0.20227,
+      "vel_zscore": 3.166,
+      "lswi_zscore": -5.05,
+      "quadrant": "II",
+      "baseline_doy": 177
+    }
+  ],
+  "season_vel_z_mean": 5.482,
+  "season_vel_z_max": 10.079,
+  "season_vel_z_min": 1.816,
+  "season_lswi_z_mean": -5.194,
+  "dominant_quadrant": "II",
+  "baseline_source": "synthetic"
+}

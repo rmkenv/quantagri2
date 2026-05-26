@@ -1,0 +1,41 @@
+{
+  "commodity": "Soybeans",
+  "region": "Minnesota_US",
+  "year": 202,
+  "gate_months": [
+    8,
+    9
+  ],
+  "composites": [
+    {
+      "date": "202-08-01",
+      "month": 8,
+      "doy": 213,
+      "ndvi": 0.9089,
+      "lswi": 0.3807,
+      "velocity": 0.00214,
+      "vel_zscore": -7.347,
+      "lswi_zscore": -10.704,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    },
+    {
+      "date": "202-09-01",
+      "month": 9,
+      "doy": 244,
+      "ndvi": 0.8476,
+      "lswi": 0.3175,
+      "velocity": -0.16055,
+      "vel_zscore": -4.251,
+      "lswi_zscore": -14.068,
+      "quadrant": "IV",
+      "baseline_doy": 241
+    }
+  ],
+  "season_vel_z_mean": -5.799,
+  "season_vel_z_max": -4.251,
+  "season_vel_z_min": -7.347,
+  "season_lswi_z_mean": -12.386,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

@@ -1,0 +1,41 @@
+{
+  "commodity": "Soybeans",
+  "region": "Nebraska_US",
+  "year": 2020,
+  "gate_months": [
+    8,
+    9
+  ],
+  "composites": [
+    {
+      "date": "2020-08-01",
+      "month": 8,
+      "doy": 214,
+      "ndvi": 0.9152,
+      "lswi": 0.3898,
+      "velocity": -0.00709,
+      "vel_zscore": -3.962,
+      "lswi_zscore": -12.52,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    },
+    {
+      "date": "2020-09-01",
+      "month": 9,
+      "doy": 245,
+      "ndvi": 0.8133,
+      "lswi": 0.341,
+      "velocity": -0.16026,
+      "vel_zscore": -10.801,
+      "lswi_zscore": -21.475,
+      "quadrant": "IV",
+      "baseline_doy": 241
+    }
+  ],
+  "season_vel_z_mean": -7.381,
+  "season_vel_z_max": -3.962,
+  "season_vel_z_min": -10.801,
+  "season_lswi_z_mean": -16.998,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

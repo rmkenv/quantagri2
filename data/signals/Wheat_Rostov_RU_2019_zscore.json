@@ -1,0 +1,54 @@
+{
+  "commodity": "Wheat",
+  "region": "Rostov_RU",
+  "year": 2019,
+  "gate_months": [
+    4,
+    5,
+    6
+  ],
+  "composites": [
+    {
+      "date": "2019-04-01",
+      "month": 4,
+      "doy": 91,
+      "ndvi": 0.7334,
+      "lswi": 0.1803,
+      "velocity": 0.16343,
+      "vel_zscore": 1.873,
+      "lswi_zscore": -12.227,
+      "quadrant": "II",
+      "baseline_doy": 97
+    },
+    {
+      "date": "2019-05-01",
+      "month": 5,
+      "doy": 121,
+      "ndvi": 0.8702,
+      "lswi": 0.2134,
+      "velocity": 0.02494,
+      "vel_zscore": -3.314,
+      "lswi_zscore": -23.818,
+      "quadrant": "IV",
+      "baseline_doy": 113
+    },
+    {
+      "date": "2019-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.7833,
+      "lswi": 0.1742,
+      "velocity": -0.15864,
+      "vel_zscore": -7.981,
+      "lswi_zscore": -18.411,
+      "quadrant": "IV",
+      "baseline_doy": 145
+    }
+  ],
+  "season_vel_z_mean": -3.141,
+  "season_vel_z_max": 1.873,
+  "season_vel_z_min": -7.981,
+  "season_lswi_z_mean": -18.152,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

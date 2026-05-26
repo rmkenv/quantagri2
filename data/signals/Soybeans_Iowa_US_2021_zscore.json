@@ -1,0 +1,41 @@
+{
+  "commodity": "Soybeans",
+  "region": "Iowa_US",
+  "year": 2021,
+  "gate_months": [
+    8,
+    9
+  ],
+  "composites": [
+    {
+      "date": "2021-08-01",
+      "month": 8,
+      "doy": 213,
+      "ndvi": 0.9296,
+      "lswi": 0.4045,
+      "velocity": -0.01364,
+      "vel_zscore": -3.867,
+      "lswi_zscore": -13.144,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    },
+    {
+      "date": "2021-09-01",
+      "month": 9,
+      "doy": 244,
+      "ndvi": 0.8227,
+      "lswi": 0.329,
+      "velocity": -0.19052,
+      "vel_zscore": -5.016,
+      "lswi_zscore": -19.374,
+      "quadrant": "IV",
+      "baseline_doy": 241
+    }
+  ],
+  "season_vel_z_mean": -4.441,
+  "season_vel_z_max": -3.867,
+  "season_vel_z_min": -5.016,
+  "season_lswi_z_mean": -16.259,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

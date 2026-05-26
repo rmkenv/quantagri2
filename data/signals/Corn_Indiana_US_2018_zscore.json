@@ -1,0 +1,54 @@
+{
+  "commodity": "Corn",
+  "region": "Indiana_US",
+  "year": 2018,
+  "gate_months": [
+    6,
+    7,
+    8
+  ],
+  "composites": [
+    {
+      "date": "2018-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.8167,
+      "lswi": 0.2878,
+      "velocity": 0.15955,
+      "vel_zscore": 0.728,
+      "lswi_zscore": -6.78,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2018-07-01",
+      "month": 7,
+      "doy": 182,
+      "ndvi": 0.9016,
+      "lswi": 0.322,
+      "velocity": 0.00664,
+      "vel_zscore": -6.676,
+      "lswi_zscore": -11.294,
+      "quadrant": "IV",
+      "baseline_doy": 177
+    },
+    {
+      "date": "2018-08-01",
+      "month": 8,
+      "doy": 213,
+      "ndvi": 0.83,
+      "lswi": 0.3282,
+      "velocity": -0.15903,
+      "vel_zscore": -4.363,
+      "lswi_zscore": -9.979,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    }
+  ],
+  "season_vel_z_mean": -3.437,
+  "season_vel_z_max": 0.728,
+  "season_vel_z_min": -6.676,
+  "season_lswi_z_mean": -9.351,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

@@ -1,0 +1,41 @@
+{
+  "commodity": "Soybeans",
+  "region": "Buenos_Aires_AR",
+  "year": 2022,
+  "gate_months": [
+    8,
+    9
+  ],
+  "composites": [
+    {
+      "date": "2022-08-01",
+      "month": 8,
+      "doy": 213,
+      "ndvi": 0.9194,
+      "lswi": 0.3872,
+      "velocity": 0.0004,
+      "vel_zscore": -3.513,
+      "lswi_zscore": -11.098,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    },
+    {
+      "date": "2022-09-01",
+      "month": 9,
+      "doy": 244,
+      "ndvi": 0.8002,
+      "lswi": 0.3253,
+      "velocity": -0.16591,
+      "vel_zscore": -6.967,
+      "lswi_zscore": -25.698,
+      "quadrant": "IV",
+      "baseline_doy": 241
+    }
+  ],
+  "season_vel_z_mean": -5.24,
+  "season_vel_z_max": -3.513,
+  "season_vel_z_min": -6.967,
+  "season_lswi_z_mean": -18.398,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

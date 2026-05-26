@@ -1,0 +1,41 @@
+{
+  "commodity": "Soybeans",
+  "region": "Mato_Grosso_BR",
+  "year": 2022,
+  "gate_months": [
+    8,
+    9
+  ],
+  "composites": [
+    {
+      "date": "2022-08-01",
+      "month": 8,
+      "doy": 213,
+      "ndvi": 0.889,
+      "lswi": 0.3841,
+      "velocity": 0.02263,
+      "vel_zscore": -2.271,
+      "lswi_zscore": -16.972,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    },
+    {
+      "date": "2022-09-01",
+      "month": 9,
+      "doy": 244,
+      "ndvi": 0.8348,
+      "lswi": 0.3592,
+      "velocity": -0.1587,
+      "vel_zscore": -4.572,
+      "lswi_zscore": -8.929,
+      "quadrant": "IV",
+      "baseline_doy": 241
+    }
+  ],
+  "season_vel_z_mean": -3.421,
+  "season_vel_z_max": -2.271,
+  "season_vel_z_min": -4.572,
+  "season_lswi_z_mean": -12.951,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

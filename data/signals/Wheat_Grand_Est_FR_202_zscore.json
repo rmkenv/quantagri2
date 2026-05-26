@@ -1,0 +1,54 @@
+{
+  "commodity": "Wheat",
+  "region": "Grand_Est_FR",
+  "year": 202,
+  "gate_months": [
+    4,
+    5,
+    6
+  ],
+  "composites": [
+    {
+      "date": "202-04-01",
+      "month": 4,
+      "doy": 91,
+      "ndvi": 0.7612,
+      "lswi": 0.153,
+      "velocity": 0.17331,
+      "vel_zscore": 4.558,
+      "lswi_zscore": -14.509,
+      "quadrant": "II",
+      "baseline_doy": 97
+    },
+    {
+      "date": "202-05-01",
+      "month": 5,
+      "doy": 121,
+      "ndvi": 0.8614,
+      "lswi": 0.2084,
+      "velocity": 0.00027,
+      "vel_zscore": -6.374,
+      "lswi_zscore": -13.586,
+      "quadrant": "IV",
+      "baseline_doy": 113
+    },
+    {
+      "date": "202-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.7617,
+      "lswi": 0.1537,
+      "velocity": -0.18784,
+      "vel_zscore": -9.411,
+      "lswi_zscore": -12.224,
+      "quadrant": "IV",
+      "baseline_doy": 145
+    }
+  ],
+  "season_vel_z_mean": -3.742,
+  "season_vel_z_max": 4.558,
+  "season_vel_z_min": -9.411,
+  "season_lswi_z_mean": -13.44,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

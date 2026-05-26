@@ -1,0 +1,41 @@
+{
+  "commodity": "Soybeans",
+  "region": "Indiana_US",
+  "year": 2020,
+  "gate_months": [
+    8,
+    9
+  ],
+  "composites": [
+    {
+      "date": "2020-08-01",
+      "month": 8,
+      "doy": 214,
+      "ndvi": 0.9107,
+      "lswi": 0.4123,
+      "velocity": -0.00242,
+      "vel_zscore": -3.879,
+      "lswi_zscore": -7.614,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    },
+    {
+      "date": "2020-09-01",
+      "month": 9,
+      "doy": 245,
+      "ndvi": 0.8191,
+      "lswi": 0.3437,
+      "velocity": -0.17278,
+      "vel_zscore": -4.879,
+      "lswi_zscore": -13.45,
+      "quadrant": "IV",
+      "baseline_doy": 241
+    }
+  ],
+  "season_vel_z_mean": -4.379,
+  "season_vel_z_max": -3.879,
+  "season_vel_z_min": -4.879,
+  "season_lswi_z_mean": -10.532,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

@@ -1,0 +1,67 @@
+{
+  "commodity": "Sugar",
+  "region": "Sao_Paulo_BR",
+  "year": 2016,
+  "gate_months": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "composites": [
+    {
+      "date": "2016-04-01",
+      "month": 4,
+      "doy": 92,
+      "ndvi": 0.1221,
+      "lswi": -0.0359,
+      "velocity": 0.03747,
+      "vel_zscore": 2.916,
+      "lswi_zscore": -6.812,
+      "quadrant": "II",
+      "baseline_doy": 97
+    },
+    {
+      "date": "2016-05-01",
+      "month": 5,
+      "doy": 122,
+      "ndvi": 0.188,
+      "lswi": -0.0048,
+      "velocity": 0.0819,
+      "vel_zscore": 1.705,
+      "lswi_zscore": -4.53,
+      "quadrant": "II",
+      "baseline_doy": 129
+    },
+    {
+      "date": "2016-06-01",
+      "month": 6,
+      "doy": 153,
+      "ndvi": 0.2859,
+      "lswi": 0.112,
+      "velocity": 0.18978,
+      "vel_zscore": 5.853,
+      "lswi_zscore": -2.782,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2016-07-01",
+      "month": 7,
+      "doy": 183,
+      "ndvi": 0.5676,
+      "lswi": 0.2683,
+      "velocity": 0.22986,
+      "vel_zscore": 10.015,
+      "lswi_zscore": -3.514,
+      "quadrant": "II",
+      "baseline_doy": 177
+    }
+  ],
+  "season_vel_z_mean": 5.122,
+  "season_vel_z_max": 10.015,
+  "season_vel_z_min": 1.705,
+  "season_lswi_z_mean": -4.41,
+  "dominant_quadrant": "II",
+  "baseline_source": "synthetic"
+}

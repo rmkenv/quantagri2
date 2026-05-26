@@ -1,0 +1,54 @@
+{
+  "commodity": "Corn",
+  "region": "Mato_Grosso_BR",
+  "year": 2020,
+  "gate_months": [
+    6,
+    7,
+    8
+  ],
+  "composites": [
+    {
+      "date": "2020-06-01",
+      "month": 6,
+      "doy": 153,
+      "ndvi": 0.8553,
+      "lswi": 0.2881,
+      "velocity": 0.17759,
+      "vel_zscore": 2.716,
+      "lswi_zscore": -8.545,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2020-07-01",
+      "month": 7,
+      "doy": 183,
+      "ndvi": 0.95,
+      "lswi": 0.3457,
+      "velocity": -0.0041,
+      "vel_zscore": -4.114,
+      "lswi_zscore": -15.949,
+      "quadrant": "IV",
+      "baseline_doy": 177
+    },
+    {
+      "date": "2020-08-01",
+      "month": 8,
+      "doy": 214,
+      "ndvi": 0.8471,
+      "lswi": 0.2971,
+      "velocity": -0.1851,
+      "vel_zscore": -4.441,
+      "lswi_zscore": -22.008,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    }
+  ],
+  "season_vel_z_mean": -1.946,
+  "season_vel_z_max": 2.716,
+  "season_vel_z_min": -4.441,
+  "season_lswi_z_mean": -15.501,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

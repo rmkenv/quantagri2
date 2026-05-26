@@ -1,0 +1,41 @@
+{
+  "commodity": "Soybeans",
+  "region": "Illinois_US",
+  "year": 2021,
+  "gate_months": [
+    8,
+    9
+  ],
+  "composites": [
+    {
+      "date": "2021-08-01",
+      "month": 8,
+      "doy": 213,
+      "ndvi": 0.9152,
+      "lswi": 0.378,
+      "velocity": 0.00672,
+      "vel_zscore": -6.021,
+      "lswi_zscore": -10.256,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    },
+    {
+      "date": "2021-09-01",
+      "month": 9,
+      "doy": 244,
+      "ndvi": 0.7992,
+      "lswi": 0.3226,
+      "velocity": -0.16848,
+      "vel_zscore": -7.97,
+      "lswi_zscore": -13.237,
+      "quadrant": "IV",
+      "baseline_doy": 241
+    }
+  ],
+  "season_vel_z_mean": -6.995,
+  "season_vel_z_max": -6.021,
+  "season_vel_z_min": -7.97,
+  "season_lswi_z_mean": -11.747,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

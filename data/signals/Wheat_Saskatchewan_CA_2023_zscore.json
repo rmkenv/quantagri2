@@ -1,0 +1,54 @@
+{
+  "commodity": "Wheat",
+  "region": "Saskatchewan_CA",
+  "year": 2023,
+  "gate_months": [
+    4,
+    5,
+    6
+  ],
+  "composites": [
+    {
+      "date": "2023-04-01",
+      "month": 4,
+      "doy": 91,
+      "ndvi": 0.75,
+      "lswi": 0.1587,
+      "velocity": 0.14418,
+      "vel_zscore": 0.894,
+      "lswi_zscore": -10.434,
+      "quadrant": "II",
+      "baseline_doy": 97
+    },
+    {
+      "date": "2023-05-01",
+      "month": 5,
+      "doy": 121,
+      "ndvi": 0.8157,
+      "lswi": 0.1921,
+      "velocity": 0.01835,
+      "vel_zscore": -1.856,
+      "lswi_zscore": -13.109,
+      "quadrant": "IV",
+      "baseline_doy": 113
+    },
+    {
+      "date": "2023-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.7867,
+      "lswi": 0.1967,
+      "velocity": -0.13397,
+      "vel_zscore": -3.868,
+      "lswi_zscore": -29.921,
+      "quadrant": "IV",
+      "baseline_doy": 145
+    }
+  ],
+  "season_vel_z_mean": -1.61,
+  "season_vel_z_max": 0.894,
+  "season_vel_z_min": -3.868,
+  "season_lswi_z_mean": -17.821,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

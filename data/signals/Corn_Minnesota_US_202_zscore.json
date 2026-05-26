@@ -1,0 +1,54 @@
+{
+  "commodity": "Corn",
+  "region": "Minnesota_US",
+  "year": 202,
+  "gate_months": [
+    6,
+    7,
+    8
+  ],
+  "composites": [
+    {
+      "date": "202-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.8608,
+      "lswi": 0.305,
+      "velocity": 0.15999,
+      "vel_zscore": 1.413,
+      "lswi_zscore": -7.43,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "202-07-01",
+      "month": 7,
+      "doy": 182,
+      "ndvi": 0.95,
+      "lswi": 0.3706,
+      "velocity": -0.01148,
+      "vel_zscore": -9.093,
+      "lswi_zscore": -14.711,
+      "quadrant": "IV",
+      "baseline_doy": 177
+    },
+    {
+      "date": "202-08-01",
+      "month": 8,
+      "doy": 213,
+      "ndvi": 0.8379,
+      "lswi": 0.2885,
+      "velocity": -0.16055,
+      "vel_zscore": -8.833,
+      "lswi_zscore": -13.985,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    }
+  ],
+  "season_vel_z_mean": -5.504,
+  "season_vel_z_max": 1.413,
+  "season_vel_z_min": -9.093,
+  "season_lswi_z_mean": -12.042,
+  "dominant_quadrant": "IV",
+  "baseline_source": "synthetic"
+}

@@ -1,0 +1,54 @@
+{
+  "commodity": "Cotton",
+  "region": "Texas_US",
+  "year": 2022,
+  "gate_months": [
+    6,
+    7,
+    8
+  ],
+  "composites": [
+    {
+      "date": "2022-06-01",
+      "month": 6,
+      "doy": 152,
+      "ndvi": 0.5077,
+      "lswi": 0.0753,
+      "velocity": 0.20596,
+      "vel_zscore": 6.989,
+      "lswi_zscore": -6.46,
+      "quadrant": "II",
+      "baseline_doy": 145
+    },
+    {
+      "date": "2022-07-01",
+      "month": 7,
+      "doy": 182,
+      "ndvi": 0.6942,
+      "lswi": 0.1477,
+      "velocity": 0.14043,
+      "vel_zscore": 0.635,
+      "lswi_zscore": -19.443,
+      "quadrant": "II",
+      "baseline_doy": 177
+    },
+    {
+      "date": "2022-08-01",
+      "month": 8,
+      "doy": 213,
+      "ndvi": 0.7886,
+      "lswi": 0.1748,
+      "velocity": -0.00257,
+      "vel_zscore": -0.316,
+      "lswi_zscore": -30.222,
+      "quadrant": "IV",
+      "baseline_doy": 209
+    }
+  ],
+  "season_vel_z_mean": 2.436,
+  "season_vel_z_max": 6.989,
+  "season_vel_z_min": -0.316,
+  "season_lswi_z_mean": -18.708,
+  "dominant_quadrant": "II",
+  "baseline_source": "synthetic"
+}
