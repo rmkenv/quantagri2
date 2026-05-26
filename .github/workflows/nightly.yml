@@ -26,7 +26,7 @@ on:
         type: string
         default: ''
       rebuild_baseline:
-        description: 'Rebuild MODIS baseline (slow, ~30 min)'
+        description: 'Rebuild MODIS baseline — use build_baseline.yml workflow instead'
         type: boolean
         default: false
 
@@ -52,15 +52,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      # ── Step 0: MODIS baseline (annual rebuild or forced) ─────────────
-      - name: Build MODIS baseline
-        if: |
-          github.event.schedule == '0 3 1 4 *' ||
-          github.event.inputs.rebuild_baseline == 'true'
-        run: python scripts/build_modis_baseline.py
-        env:
-          PC_SDK_SUBSCRIPTION_KEY: ${{ secrets.PC_SDK_SUBSCRIPTION_KEY }}
 
       # ── Step 1a: Historical backfill (workflow_dispatch only) ──────────
       - name: Backfill historical NDVI
