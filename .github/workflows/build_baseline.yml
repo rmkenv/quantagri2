@@ -1,244 +1,48 @@
-name: Build MODIS Baseline
+name: Build Self-Baseline
 
-# Run manually from Actions UI only — this is a one-time setup step.
-# It runs 25 nodes in parallel batches, each taking ~5-15 min.
-# Total wall-clock time: ~20-40 min.
-# Commits real baseline files to data/baseline/ when done.
+# Runs in ~2 minutes. No external data dependencies.
+# Builds baseline from existing Sentinel-2 NDVI files in data/ndvi/.
+# Falls back to agronomic parameterisation for nodes with no S2 data yet.
+# Run this once after initial backfill, or after adding new regions.
 
 on:
   workflow_dispatch:
     inputs:
-      sample_deg:
-        description: 'Sample window size in degrees (default 0.5)'
+      years:
+        description: 'Years to include (space-separated, default: 2016-2024)'
         type: string
-        default: '0.5'
-      force_rebuild:
-        description: 'Rebuild even if baseline already exists'
+        default: '2016 2017 2018 2019 2020 2021 2022 2023 2024'
+      force:
+        description: 'Rebuild even if real baseline already exists'
         type: boolean
         default: false
 
 jobs:
-
-  # ── JOB 1: Build baselines in parallel batches of 5 ─────────────────
-  # GitHub Actions free tier allows up to 20 concurrent jobs.
-  # We split 25 nodes into 5 batches of 5 to stay within limits
-  # and avoid hammering the PC rate limiter.
-
-  build-batch-1:
-    name: Baseline batch 1 (Corn US)
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: pip
-      - name: Install
-        run: pip install pystac-client planetary-computer stackstac xarray numpy scipy requests -q
-      - name: Run batch 1
-        run: |
-          python scripts/build_modis_baseline.py \
-            --nodes "Corn_Iowa_US" "Corn_Illinois_US" "Corn_Indiana_US" \
-                    "Corn_Minnesota_US" "Corn_Nebraska_US" \
-            --sample-deg ${{ github.event.inputs.sample_deg }} \
-            ${{ github.event.inputs.force_rebuild == 'true' && '--force' || '' }}
-      - name: Upload baseline artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: baseline-batch-1
-          path: data/baseline/
-          retention-days: 1
-
-  build-batch-2:
-    name: Baseline batch 2 (Corn intl + Soy US)
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: pip
-      - name: Install
-        run: pip install pystac-client planetary-computer stackstac xarray numpy scipy requests -q
-      - name: Run batch 2
-        run: |
-          python scripts/build_modis_baseline.py \
-            --nodes "Corn_Ohio_US" "Corn_Mato_Grosso_BR" "Corn_Heilongjiang_CN" \
-                    "Soybeans_Iowa_US" "Soybeans_Illinois_US" \
-            --sample-deg ${{ github.event.inputs.sample_deg }} \
-            ${{ github.event.inputs.force_rebuild == 'true' && '--force' || '' }}
-      - name: Upload baseline artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: baseline-batch-2
-          path: data/baseline/
-          retention-days: 1
-
-  build-batch-3:
-    name: Baseline batch 3 (Soy intl)
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: pip
-      - name: Install
-        run: pip install pystac-client planetary-computer stackstac xarray numpy scipy requests -q
-      - name: Run batch 3
-        run: |
-          python scripts/build_modis_baseline.py \
-            --nodes "Soybeans_Indiana_US" "Soybeans_Minnesota_US" "Soybeans_Nebraska_US" \
-                    "Soybeans_Mato_Grosso_BR" "Soybeans_Buenos_Aires_AR" \
-            --sample-deg ${{ github.event.inputs.sample_deg }} \
-            ${{ github.event.inputs.force_rebuild == 'true' && '--force' || '' }}
-      - name: Upload baseline artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: baseline-batch-3
-          path: data/baseline/
-          retention-days: 1
-
-  build-batch-4:
-    name: Baseline batch 4 (Wheat)
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: pip
-      - name: Install
-        run: pip install pystac-client planetary-computer stackstac xarray numpy scipy requests -q
-      - name: Run batch 4
-        run: |
-          python scripts/build_modis_baseline.py \
-            --nodes "Wheat_Kansas_US" "Wheat_Oklahoma_US" "Wheat_Colorado_US" \
-                    "Wheat_Rostov_RU" "Wheat_Saskatchewan_CA" \
-            --sample-deg ${{ github.event.inputs.sample_deg }} \
-            ${{ github.event.inputs.force_rebuild == 'true' && '--force' || '' }}
-      - name: Upload baseline artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: baseline-batch-4
-          path: data/baseline/
-          retention-days: 1
-
-  build-batch-5:
-    name: Baseline batch 5 (Wheat intl + Sugar + Cotton)
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: pip
-      - name: Install
-        run: pip install pystac-client planetary-computer stackstac xarray numpy scipy requests -q
-      - name: Run batch 5
-        run: |
-          python scripts/build_modis_baseline.py \
-            --nodes "Wheat_Grand_Est_FR" "Sugar_Sao_Paulo_BR" "Sugar_Uttar_Pradesh_IN" \
-                    "Cotton_Texas_US" "Cotton_Xinjiang_CN" \
-            --sample-deg ${{ github.event.inputs.sample_deg }} \
-            ${{ github.event.inputs.force_rebuild == 'true' && '--force' || '' }}
-      - name: Upload baseline artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: baseline-batch-5
-          path: data/baseline/
-          retention-days: 1
-
-  # ── JOB 2: Merge all baseline files and commit ────────────────────────
-  commit:
-    name: Merge and commit baselines
+  build:
+    name: Build self-baseline
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    needs:
-      - build-batch-1
-      - build-batch-2
-      - build-batch-3
-      - build-batch-4
-      - build-batch-5
     permissions:
       contents: write
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Download all 5 batch artifacts into data/baseline/
-      - name: Download batch 1
-        uses: actions/download-artifact@v4
-        with:
-          name: baseline-batch-1
-          path: data/baseline/
-
-      - name: Download batch 2
-        uses: actions/download-artifact@v4
-        with:
-          name: baseline-batch-2
-          path: data/baseline/
-
-      - name: Download batch 3
-        uses: actions/download-artifact@v4
-        with:
-          name: baseline-batch-3
-          path: data/baseline/
-
-      - name: Download batch 4
-        uses: actions/download-artifact@v4
-        with:
-          name: baseline-batch-4
-          path: data/baseline/
-
-      - name: Download batch 5
-        uses: actions/download-artifact@v4
-        with:
-          name: baseline-batch-5
-          path: data/baseline/
-
-      # Verify all 25 files are real (not synthetic)
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Verify baselines
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install numpy scipy -q
+
+      - name: Build self-baseline
         run: |
-          python << 'PYEOF'
-          import json, glob, sys
-          files  = sorted(glob.glob('data/baseline/*.json'))
-          real   = []
-          synth  = []
-          for f in files:
-              d = json.load(open(f))
-              src = d.get('doy_bins', [{}])[0].get('source', 'unknown')
-              n   = d.get('doy_bins', [{}])[10].get('n_obs', 0)
-              name = f.split('/')[-1]
-              if src == 'modis_mod13q1_pc' and n > 0:
-                  real.append(name)
-                  print(f'  ✓ {name}  n_obs={n}')
-              else:
-                  synth.append(name)
-                  print(f'  ✗ {name}  source={src}  n_obs={n}')
-          print(f'\nReal: {len(real)}/25   Synthetic: {len(synth)}/25')
-          if synth:
-              print('WARNING: some baselines still synthetic — check batch logs')
-          PYEOF
+          python scripts/build_self_baseline.py \
+            --years ${{ github.event.inputs.years }} \
+            ${{ github.event.inputs.force == 'true' && '--force' || '' }}
 
       - name: Commit baselines
         run: |
@@ -246,7 +50,7 @@ jobs:
           git config user.email "bot@quantagri.local"
           git add data/baseline/
           git diff --staged --quiet \
-            && echo "Nothing to commit — baselines unchanged" \
-            || (git commit -m "feat: real MODIS baseline $(date -u '+%Y-%m-%d') sample_deg=${{ github.event.inputs.sample_deg }}" \
+            && echo "Nothing to commit" \
+            || (git commit -m "feat: self-baseline from S2 archive $(date -u '+%Y-%m-%d')" \
             && git pull --rebase origin main \
             && git push origin main)
