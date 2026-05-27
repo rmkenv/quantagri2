@@ -185,10 +185,14 @@ def process_node(node: dict, year: int) -> dict | None:
 
         # Z-scores against MODIS baseline
         bin_  = nearest_baseline_bin(doy, doy_bins) if doy_bins else None
-        vel_z  = zscore(vel,  bin_["vel_mean"],  bin_["vel_std"])  if (bin_ and vel  is not None) else None
-        lswi_z = zscore(lswi, bin_["ndvi_mean"], bin_["ndvi_std"]) if (bin_ and lswi is not None) else None
-        # Note: using ndvi baseline for lswi z-score is a pragmatic fallback;
-        # ideally build a separate LSWI baseline. Flag this in paper limitations.
+        vel_z  = zscore(vel,  bin_["vel_mean"],  bin_["vel_std"])   if (bin_ and vel  is not None) else None
+        # Use lswi_mean/lswi_std if available (self-baseline), else fall back to ndvi stats
+        if bin_ and lswi is not None:
+            lswi_mean = bin_.get("lswi_mean", bin_.get("ndvi_mean", 0.0))
+            lswi_std  = bin_.get("lswi_std",  bin_.get("ndvi_std",  0.05))
+            lswi_z    = zscore(lswi, lswi_mean, lswi_std)
+        else:
+            lswi_z = None
 
         composites_out.append({
             "date":   comp.get("date", f"{year}-{month:02d}-01"),
