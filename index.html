@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QuantAgri · Spectral Velocity Engine</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.auth0.com/js/auth0-spa-js/2.1/auth0-spa-js.production.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@200;400;600;800&display=swap');
 :root {
@@ -175,6 +176,19 @@ pre{background:var(--bg0);border:1px solid var(--b0);padding:10px 12px;font-size
 ::-webkit-scrollbar-track{background:var(--bg0)}
 ::-webkit-scrollbar-thumb{background:var(--b2)}
 @media(max-width:680px){.layout{grid-template-columns:1fr}.sidebar{border-right:none;border-bottom:1px solid var(--b0)}.fgrid{grid-template-columns:1fr}}
+
+/* AUTH */
+#login-wall{position:fixed;inset:0;z-index:10000;background:var(--bg0);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px}
+.auth-logo{font-family:var(--disp);font-weight:800;font-size:32px;color:var(--g0);letter-spacing:.04em;text-shadow:0 0 28px rgba(0,255,106,.45)}
+.auth-logo sub{font-size:12px;font-weight:200;color:var(--t2);letter-spacing:.14em;vertical-align:middle;margin-left:8px}
+.auth-tagline{font-size:11px;color:var(--t2);letter-spacing:.16em;text-transform:uppercase}
+.auth-box{background:var(--bg1);border:1px solid var(--b1);padding:28px 32px;display:flex;flex-direction:column;gap:14px;min-width:280px;text-align:center}
+.auth-box p{font-size:10px;color:var(--t2);line-height:1.7}
+.auth-login-btn{background:var(--g0);border:none;color:#000;font-family:var(--disp);font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:13px 0;width:100%;cursor:pointer;transition:background .15s,box-shadow .15s;box-shadow:0 0 18px rgba(0,255,106,.3)}
+.auth-login-btn:hover{background:var(--g1);box-shadow:0 0 28px rgba(0,255,106,.55)}
+.auth-note{font-size:9px;color:var(--t3);letter-spacing:.08em}
+.auth-user-btn{background:none;border:1px solid var(--b1);color:var(--t2);font-family:var(--mono);font-size:9px;letter-spacing:.1em;padding:3px 9px;cursor:pointer;text-transform:uppercase;transition:border-color .15s,color .15s}
+.auth-user-btn:hover{border-color:var(--red);color:var(--red)}
 </style>
 </head>
 <body>
@@ -186,6 +200,8 @@ pre{background:var(--bg0);border:1px solid var(--b0);padding:10px 12px;font-size
     <span class="pill pg">OLLAMA CLOUD</span>
     <span class="pill pc">PC PIPELINE</span>
     <span id="clk">--:--:-- UTC</span>
+    <span id="auth-user" style="font-size:9px;color:var(--t2);display:none;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+    <button id="auth-btn" class="auth-user-btn" onclick="handleAuth()" style="display:none">LOGOUT</button>
   </div>
 </header>
 
@@ -448,6 +464,79 @@ velocity  = ndvi_16d.diff("time")          # dNDVI/dt</pre>
 </div>
 
 <script>
+// ── Auth0 ─────────────────────────────────────────────────
+const AUTH0_DOMAIN   = 'dev-g16rnfa683u3toes.us.auth0.com';
+const AUTH0_CLIENT   = '2Sv6JMJUoersboUJGIh1t6ywVoRlTwiZ';
+const AUTH0_REDIRECT = window.location.origin + window.location.pathname;
+
+let auth0Client = null;
+
+async function initAuth() {
+  auth0Client = await auth0.createAuth0Client({
+    domain: AUTH0_DOMAIN,
+    clientId: AUTH0_CLIENT,
+    authorizationParams: { redirect_uri: AUTH0_REDIRECT }
+  });
+
+  // Handle redirect back from Auth0 login
+  if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
+    try {
+      await auth0Client.handleRedirectCallback();
+    } catch(e) {
+      console.warn('Auth0 callback error:', e);
+    }
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
+  const authed = await auth0Client.isAuthenticated();
+  if (authed) {
+    const user = await auth0Client.getUser();
+    showAuthedUI(user);
+    loadSnapshot();
+  } else {
+    showLoginWall();
+  }
+}
+
+function showAuthedUI(user) {
+  const wall = document.getElementById('login-wall');
+  if (wall) wall.remove();
+  const emailEl = document.getElementById('auth-user');
+  const btnEl   = document.getElementById('auth-btn');
+  emailEl.textContent = user.email || user.name || 'Authenticated';
+  emailEl.style.display = 'inline';
+  btnEl.style.display = 'inline';
+}
+
+async function handleAuth() {
+  const authed = await auth0Client.isAuthenticated();
+  if (authed) {
+    await auth0Client.logout({ logoutParams: { returnTo: AUTH0_REDIRECT } });
+  } else {
+    await auth0Client.loginWithRedirect();
+  }
+}
+
+function showLoginWall() {
+  // Don't create duplicate
+  if (document.getElementById('login-wall')) return;
+  const wall = document.createElement('div');
+  wall.id = 'login-wall';
+  wall.innerHTML = `
+    <div class="auth-logo">QuantAgri <sub>SPECTRAL VELOCITY ENGINE</sub></div>
+    <div class="auth-tagline">Satellite-Driven Commodity Intelligence</div>
+    <div class="auth-box">
+      <p>Access restricted to authorized users.<br>Sign in to view live NDVI signals,<br>regional snapshots, and the signal engine.</p>
+      <button class="auth-login-btn" onclick="auth0Client.loginWithRedirect()">▶ Sign In / Register</button>
+      <div class="auth-note">Powered by Auth0 · Your data stays private</div>
+    </div>`;
+  document.body.appendChild(wall);
+}
+
+// Boot — Auth0 must resolve before anything else runs
+initAuth();
+// ── End Auth0 ─────────────────────────────────────────────
+
 // ── Globals ──────────────────────────────────────────────
 let ndviChart = null, geoChart = null, abortCtrl = null;
 let snapshotData = null;
@@ -952,7 +1041,7 @@ function toggleM(btn) {
 }
 
 // ── Init ───────────────────────────────────────────────────
-loadSnapshot();
+// loadSnapshot() is called by initAuth() after successful authentication
 </script>
 </body>
 </html>
