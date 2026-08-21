@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-21T22:23:02.709178+00:00",
+  "fetchedAt": "2026-08-21T23:33:29.978502+00:00",
   "date": "2026-08-21",
   "etfs": {
     "CORN": {
@@ -124,6 +124,18 @@
       "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
       "dayChg": 0.46
     },
+    "CT=F": {
+      "ticker": "CT=F",
+      "name": "Cotton #2 (ICE)",
+      "price": 88.6,
+      "weekChg": 5.39,
+      "high52w": 88.6,
+      "low52w": 61.06,
+      "pctOf52wH": 100.0,
+      "lastDate": "2026-08-21",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 1.82
+    },
     "ZL=F": {
       "ticker": "ZL=F",
       "name": "Soybean Oil (CBOT)",
@@ -209,6 +221,18 @@
       "lastDate": "2026-08-21",
       "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
       "dayChg": 0.46
+    },
+    "Cotton": {
+      "ticker": "CT=F",
+      "name": "Cotton #2 (ICE)",
+      "price": 88.6,
+      "weekChg": 5.39,
+      "high52w": 88.6,
+      "low52w": 61.06,
+      "pctOf52wH": 100.0,
+      "lastDate": "2026-08-21",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 1.82
     }
   }
 }
