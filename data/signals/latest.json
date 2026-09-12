@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+  "generatedAt": "2026-09-12T09:57:16.979141+00:00",
   "date": "2026-09-12",
   "version": "v2",
   "signalCount": 25,
@@ -10,54 +10,54 @@
       "region": "Iowa US",
       "sentiment": "Bearish",
       "confidence": 0.85,
-      "rationale": "The season\u2019s velocity z\u2011score of \u20138.16 indicates a pronounced slowdown in greening relative to the 2000\u20112015 baseline, while the positive LSWI z\u2011score of +0.39 suggests moisture is not the limiting factor. The dominant Quadrant III (heat senescence) further signals that heat stress is curtailing growth, supporting a bearish outlook.",
-      "peakNdvi": 0.9433,
-      "peakLswi": 0.3945,
-      "velZscore": -8.162,
-      "lswiZscore": 0.385,
+      "rationale": "The season\u2011long velocity z\u2011score of \u20137.13 indicates a pronounced slowdown in greening relative to the 2000\u20112015 baseline, while the LSWI z\u2011score of +0.12 shows adequate moisture. The dominant Quadrant\u202fIII (+lswi, \u2013vel) signals heat\u2011induced senescence during the critical August\u2011September period, supporting a bearish outlook.",
+      "peakNdvi": 0.9304,
+      "peakLswi": 0.365,
+      "velZscore": -7.131,
+      "lswiZscore": 0.118,
       "dominantQuadrant": "III",
-      "spectralVelocity": "+0.24548/16d",
-      "macroRegime": "La Nina tightening",
+      "spectralVelocity": "+0.2468/16d",
+      "macroRegime": "neutral",
       "strategy": {
         "action": "SHORT",
-        "entryZone": "Current price \u00b12%",
-        "stopLoss": "2% above entry",
-        "takeProfit": "5% below entry",
+        "entryZone": "current price",
+        "stopLoss": "+2%",
+        "takeProfit": "\u20135%",
         "riskReward": "2.5:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity Z-Score",
           "status": "Fail",
-          "signal": "Strong negative velocity z\u2011score indicates reduced growth rate",
+          "signal": "Velocity z\u2011score < \u20135 indicates strong negative growth trend",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
           "status": "Pass",
-          "signal": "Positive moisture z\u2011score shows adequate water availability",
+          "signal": "LSWI z\u2011score near 0 indicates normal moisture conditions",
           "weight": 0.25
         },
         {
           "name": "Quadrant Classification",
           "status": "Fail",
-          "signal": "Quadrant III (heat senescence) signals heat\u2011induced growth decline",
+          "signal": "Quadrant\u202fIII (heat senescence) signals late\u2011season stress",
           "weight": 0.15
         },
         {
           "name": "Cloud Cover QA",
           "status": "Pass",
-          "signal": "Zero cloud cover ensures data integrity",
+          "signal": "0\u202f% cloud cover ensures data integrity",
           "weight": 0.1
         },
         {
           "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "La Nina tightening aligns with observed heat stress",
+          "status": "Caution",
+          "signal": "No clear ENSO signal; regime considered neutral",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     },
@@ -65,15 +65,15 @@
       "commodity": "Soybeans",
       "region": "Illinois US",
       "sentiment": "Bearish",
-      "confidence": 0.28,
-      "rationale": "Velocity z\u2011score of \u20136.873 indicates a severe slowdown in greening, while the dominant quadrant III (heat senescence) confirms stress during the growing season. The modest positive LSWI z\u2011score suggests moisture is not the limiting factor, but the overall negative trend points to a bearish outlook.",
-      "peakNdvi": 0.9078,
-      "peakLswi": 0.3854,
-      "velZscore": -6.873,
-      "lswiZscore": 0.202,
+      "confidence": 0.35,
+      "rationale": "The season velocity z\u2011score of \u20136.77 indicates a pronounced late\u2011season slowdown relative to the 2000\u20112015 baseline, and the dominant Quadrant III (+lswi, \u2013velocity) signals heat\u2011induced senescence. Combined with a modestly positive LSWI z\u2011score, the data suggest a bearish outlook for the upcoming contract.",
+      "peakNdvi": 0.9182,
+      "peakLswi": 0.3868,
+      "velZscore": -6.769,
+      "lswiZscore": 0.12,
       "dominantQuadrant": "III",
-      "spectralVelocity": "+0.23581/16d",
-      "macroRegime": "Neutral",
+      "spectralVelocity": "+0.24512/16d",
+      "macroRegime": "neutral",
       "strategy": {
         "action": "SHORT",
         "entryZone": "near current futures price",
@@ -85,243 +85,19 @@
         {
           "name": "NDVI Velocity Z-Score",
           "status": "Fail",
-          "signal": "Strong negative velocity trend",
+          "signal": "Strong negative velocity indicates late senescence",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
           "status": "Pass",
-          "signal": "Mildly positive moisture signal",
+          "signal": "Slightly above\u2011average moisture, not a stress factor",
           "weight": 0.25
         },
         {
           "name": "Quadrant Classification",
           "status": "Fail",
-          "signal": "Heat senescence dominates",
-          "weight": 0.15
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "Zero cloud cover, data quality high",
-          "weight": 0.1
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "No strong ENSO influence detected",
-          "weight": 0.2
-        }
-      ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
-      "ndviSource": "simulated",
-      "zscoreAvail": true
-    },
-    {
-      "commodity": "Soybeans",
-      "region": "Indiana US",
-      "sentiment": "Bearish",
-      "confidence": 0.88,
-      "rationale": "Velocity z-score of -6.967 and heat senescence quadrant III indicate rapid decline in growth, despite normal moisture levels (LSWI z-score 0.382). The crop is in senescence phase, suggesting bearish outlook.",
-      "peakNdvi": 0.8947,
-      "peakLswi": 0.3838,
-      "velZscore": -6.967,
-      "lswiZscore": 0.382,
-      "dominantQuadrant": "III",
-      "spectralVelocity": "+0.24979/16d",
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "current futures price",
-        "stopLoss": "5% above entry",
-        "takeProfit": "10% below entry",
-        "riskReward": "2:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity Z-Score",
-          "status": "Fail",
-          "signal": "Strong negative velocity indicates rapid senescence",
-          "weight": 0.3
-        },
-        {
-          "name": "LSWI Moisture Z-Score",
-          "status": "Pass",
-          "signal": "Moisture within normal range",
-          "weight": 0.25
-        },
-        {
-          "name": "Quadrant Classification",
-          "status": "Fail",
-          "signal": "Heat senescence quadrant",
-          "weight": 0.15
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "No cloud contamination",
-          "weight": 0.1
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "Neutral macro conditions",
-          "weight": 0.2
-        }
-      ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
-      "ndviSource": "simulated",
-      "zscoreAvail": true
-    },
-    {
-      "commodity": "Soybeans",
-      "region": "Minnesota US",
-      "sentiment": "Bearish",
-      "confidence": 0.82,
-      "rationale": "The season\u2019s velocity z\u2011score of \u20136.98 and dominant Quadrant\u202fIII (heat senescence) signal a pronounced early decline in growth, outweighing the modestly positive moisture z\u2011score.",
-      "peakNdvi": 0.925,
-      "peakLswi": 0.4181,
-      "velZscore": -6.982,
-      "lswiZscore": 0.859,
-      "dominantQuadrant": "III",
-      "spectralVelocity": "+0.2521/16d",
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "near current price",
-        "stopLoss": "+5%",
-        "takeProfit": "\u201310%",
-        "riskReward": "2:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity Z-Score",
-          "status": "Fail",
-          "signal": "Velocity far below baseline, indicating early senescence",
-          "weight": 0.3
-        },
-        {
-          "name": "LSWI Moisture Z-Score",
-          "status": "Pass",
-          "signal": "Moisture within normal range",
-          "weight": 0.25
-        },
-        {
-          "name": "Quadrant Classification",
-          "status": "Fail",
-          "signal": "Quadrant\u202fIII signals heat\u2011induced senescence",
-          "weight": 0.15
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "Zero cloud cover, data quality high",
-          "weight": 0.1
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "No strong El\u202fNi\u00f1o/La\u202fNi\u00f1a influence detected",
-          "weight": 0.2
-        }
-      ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
-      "ndviSource": "simulated",
-      "zscoreAvail": true
-    },
-    {
-      "commodity": "Soybeans",
-      "region": "Nebraska US",
-      "sentiment": "Bearish",
-      "confidence": 0.62,
-      "rationale": "The velocity z\u2011score of \u20136.005 indicates a markedly slower growth rate than the 2000\u20112015 baseline, while the positive LSWI z\u2011score (0.515) shows adequate moisture. Dominant quadrant III (+lswi, \u2013vel) signals heat\u2011induced senescence, a typical yield\u2011reducing stress in late season. Combined, these factors point to a bearish outlook for the 2026 soybean crop.",
-      "peakNdvi": 0.9063,
-      "peakLswi": 0.3893,
-      "velZscore": -6.005,
-      "lswiZscore": 0.515,
-      "dominantQuadrant": "III",
-      "spectralVelocity": "+0.23404/16d",
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "near current price",
-        "stopLoss": "5% above entry",
-        "takeProfit": "10% below entry",
-        "riskReward": "2.4:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity Z-Score",
-          "status": "Fail",
-          "signal": "Velocity z\u2011score far below baseline, indicating suppressed growth",
-          "weight": 0.3
-        },
-        {
-          "name": "LSWI Moisture Z-Score",
-          "status": "Pass",
-          "signal": "Positive moisture z\u2011score suggests adequate water availability",
-          "weight": 0.25
-        },
-        {
-          "name": "Quadrant Classification",
-          "status": "Caution",
-          "signal": "Quadrant III indicates heat senescence, a yield\u2011threatening stress",
-          "weight": 0.15
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "Zero cloud cover ensures data reliability",
-          "weight": 0.1
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "No clear macro anomaly detected, regime considered neutral",
-          "weight": 0.2
-        }
-      ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
-      "ndviSource": "simulated",
-      "zscoreAvail": true
-    },
-    {
-      "commodity": "Soybeans",
-      "region": "Mato Grosso BR",
-      "sentiment": "Bearish",
-      "confidence": 0.65,
-      "rationale": "Velocity z-score of -7.502 and heat\u2011senescence quadrant III signal a pronounced growth lag and heat stress, despite normal moisture levels. The late\u2011season decline in velocity after peak NDVI suggests a likely yield shortfall.",
-      "peakNdvi": 0.9369,
-      "peakLswi": 0.3764,
-      "velZscore": -7.502,
-      "lswiZscore": 0.167,
-      "dominantQuadrant": "III",
-      "spectralVelocity": "+0.24492/16d",
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "near current price",
-        "stopLoss": "+5% of entry",
-        "takeProfit": "-10% of entry",
-        "riskReward": "2.0:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity Z-Score",
-          "status": "Fail",
-          "signal": "Velocity z-score -7.502 indicates significant lagging growth",
-          "weight": 0.3
-        },
-        {
-          "name": "LSWI Moisture Z-Score",
-          "status": "Pass",
-          "signal": "Moisture within normal range (z=0.167)",
-          "weight": 0.25
-        },
-        {
-          "name": "Quadrant Classification",
-          "status": "Caution",
-          "signal": "Heat senescence (III) signals stress",
+          "signal": "Heat senescence quadrant dominates",
           "weight": 0.15
         },
         {
@@ -333,163 +109,51 @@
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "No strong El Ni\u00f1o/La Ni\u00f1a signals, regime neutral",
+          "signal": "Neutral macro conditions, no overriding climate bias",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     },
     {
       "commodity": "Soybeans",
-      "region": "Buenos Aires AR",
+      "region": "Indiana US",
       "sentiment": "Bearish",
-      "confidence": 0.23,
-      "rationale": "The velocity z\u2011score of \u20136.667 indicates a severe decline in growth rate relative to the 2000\u20112015 baseline, while the dominant Quadrant III (\u2013vel/+lswi) signals heat\u2011induced senescence. Combined with a near\u2011neutral LSWI z\u2011score, the seasonal context points to a stressed crop and a likely downward price trend.",
-      "peakNdvi": 0.897,
-      "peakLswi": 0.382,
-      "velZscore": -6.667,
-      "lswiZscore": -0.07,
+      "confidence": 0.82,
+      "rationale": "The season\u2019s velocity z\u2011score of \u20137.011 indicates a severe slowdown in greening, and the dominant Quadrant III (\u2013vel/+lswi) signals heat\u2011induced senescence. With peak NDVI already reached in early August and a subsequent decline, the outlook for the 2026 crop is negative.",
+      "peakNdvi": 0.9154,
+      "peakLswi": 0.4089,
+      "velZscore": -7.011,
+      "lswiZscore": 0.842,
       "dominantQuadrant": "III",
-      "spectralVelocity": "+0.25638/16d",
+      "spectralVelocity": "+0.23537/16d",
       "macroRegime": "neutral",
       "strategy": {
         "action": "SHORT",
-        "entryZone": "current price \u00b15%",
-        "stopLoss": "+3%",
-        "takeProfit": "-6%",
+        "entryZone": "current futures price",
+        "stopLoss": "+2% of entry",
+        "takeProfit": "\u20134% of entry",
         "riskReward": "2:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity Z-Score",
           "status": "Fail",
-          "signal": "Extreme negative z\u2011score indicates strong growth decline",
+          "signal": "Velocity far below baseline, indicating strong senescence",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
           "status": "Pass",
-          "signal": "Near\u2011zero z\u2011score shows adequate moisture",
-          "weight": 0.25
-        },
-        {
-          "name": "Quadrant Classification",
-          "status": "Fail",
-          "signal": "Quadrant III signals heat senescence",
-          "weight": 0.15
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "0% cloud cover ensures data integrity",
-          "weight": 0.1
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "No clear El Ni\u00f1o/La Ni\u00f1a signal, regime neutral",
-          "weight": 0.2
-        }
-      ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
-      "ndviSource": "simulated",
-      "zscoreAvail": true
-    },
-    {
-      "commodity": "Corn",
-      "region": "Iowa US",
-      "sentiment": "Bearish",
-      "confidence": 0.62,
-      "rationale": "Velocity z\u2011score of \u20132.39 indicates growth lagging the 2000\u20112015 baseline, while the LSWI z\u2011score is only slightly positive. The dominant Quadrant III (+lswi, \u2013vel) signals heat\u2011induced senescence early in the season, suggesting a weaker crop outlook.",
-      "peakNdvi": 0.95,
-      "peakLswi": 0.3633,
-      "velZscore": -2.389,
-      "lswiZscore": 0.124,
-      "dominantQuadrant": "III",
-      "spectralVelocity": "+0.24768/16d",
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "current price",
-        "stopLoss": "+5%",
-        "takeProfit": "\u201310%",
-        "riskReward": "2:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity Z-Score",
-          "status": "Fail",
-          "signal": "Velocity below baseline (\u20132.39)",
-          "weight": 0.3
-        },
-        {
-          "name": "LSWI Moisture Z-Score",
-          "status": "Pass",
-          "signal": "Slightly above baseline (+0.12)",
+          "signal": "Positive moisture signal, but insufficient to offset velocity decline",
           "weight": 0.25
         },
         {
           "name": "Quadrant Classification",
           "status": "Caution",
-          "signal": "Quadrant III indicates heat senescence",
-          "weight": 0.15
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "0% cloud cover",
-          "weight": 0.1
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "Neutral climate regime",
-          "weight": 0.2
-        }
-      ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
-      "ndviSource": "simulated",
-      "zscoreAvail": true
-    },
-    {
-      "commodity": "Corn",
-      "region": "Illinois US",
-      "sentiment": "Bearish",
-      "confidence": 0.68,
-      "rationale": "The season\u2019s velocity z\u2011score of \u20132.63 indicates a strong decline in greenness relative to the 2000\u20112015 baseline, while the positive LSWI z\u2011score of +0.57 suggests adequate moisture. However, the dominant quadrant III (+\u2011lswi, \u2013vel) signals heat\u2011induced senescence, pointing to a bearish outlook for the upcoming harvest.",
-      "peakNdvi": 0.95,
-      "peakLswi": 0.3707,
-      "velZscore": -2.632,
-      "lswiZscore": 0.57,
-      "dominantQuadrant": "III",
-      "spectralVelocity": "+0.24913/16d",
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "near current futures price",
-        "stopLoss": "+1.5%",
-        "takeProfit": "-3%",
-        "riskReward": "2.0:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity Z-Score",
-          "status": "Fail",
-          "signal": "Strong negative velocity indicates declining greenness",
-          "weight": 0.3
-        },
-        {
-          "name": "LSWI Moisture Z-Score",
-          "status": "Pass",
-          "signal": "Positive moisture signal, adequate water availability",
-          "weight": 0.25
-        },
-        {
-          "name": "Quadrant Classification",
-          "status": "Fail",
-          "signal": "Quadrant III signals heat senescence",
+          "signal": "Quadrant III confirms heat stress, but moisture remains adequate",
           "weight": 0.15
         },
         {
@@ -501,45 +165,269 @@
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "No clear El Ni\u00f1o/La Ni\u00f1a influence, regime neutral",
+          "signal": "No strong El Ni\u00f1o/La Ni\u00f1a signal, regime neutral",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     },
     {
-      "commodity": "Corn",
-      "region": "Indiana US",
+      "commodity": "Soybeans",
+      "region": "Minnesota US",
       "sentiment": "Bearish",
-      "confidence": 0.82,
-      "rationale": "Velocity z\u2011score of \u20132.57 indicates a sharp decline in greenness, and the dominant IV quadrant (-vel/-lswi) signals drought collapse. Seasonal timing in early summer shows a rapid drop in velocity after peak, confirming stress.",
-      "peakNdvi": 0.95,
-      "peakLswi": 0.3287,
-      "velZscore": -2.572,
-      "lswiZscore": -0.057,
-      "dominantQuadrant": "IV",
-      "spectralVelocity": "-0.001/16d",
-      "macroRegime": "neutral",
+      "confidence": 0.85,
+      "rationale": "Velocity z-score of -7.11 and heat senescence quadrant III indicate early senescence, despite slightly above baseline moisture. This points to a bearish outlook for soybeans futures.",
+      "peakNdvi": 0.9184,
+      "peakLswi": 0.3909,
+      "velZscore": -7.11,
+      "lswiZscore": 0.4,
+      "dominantQuadrant": "III",
+      "spectralVelocity": "+0.24118/16d",
+      "macroRegime": "Neutral",
       "strategy": {
         "action": "SHORT",
         "entryZone": "near current futures price",
-        "stopLoss": "+2% of entry",
-        "takeProfit": "-5% of entry",
+        "stopLoss": "2% above entry",
+        "takeProfit": "5% below entry",
         "riskReward": "2.5:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity Z-Score",
           "status": "Fail",
-          "signal": "Strong negative velocity z\u2011score indicates declining greenness",
+          "signal": "Velocity far below baseline, indicating early senescence.",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
           "status": "Pass",
-          "signal": "Near\u2011neutral moisture, not a primary driver",
+          "signal": "Moisture slightly above baseline, not a limiting factor.",
+          "weight": 0.25
+        },
+        {
+          "name": "Quadrant Classification",
+          "status": "Fail",
+          "signal": "Quadrant III indicates heat-induced senescence.",
+          "weight": 0.15
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "No cloud contamination.",
+          "weight": 0.1
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "Macro regime uncertain; neutral conditions assumed.",
+          "weight": 0.2
+        }
+      ],
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
+      "ndviSource": "simulated",
+      "zscoreAvail": true
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Nebraska US",
+      "sentiment": "Bearish",
+      "confidence": 0.68,
+      "rationale": "The velocity z\u2011score of \u20137.14 indicates a sharp decline in growth, while the positive LSWI z\u2011score of 0.42 shows moisture is adequate. Dominant Quadrant III (\u2013vel/+lswi) signals heat\u2011induced senescence in the post\u2011harvest period, supporting a bearish outlook.",
+      "peakNdvi": 0.8969,
+      "peakLswi": 0.3843,
+      "velZscore": -7.136,
+      "lswiZscore": 0.416,
+      "dominantQuadrant": "III",
+      "spectralVelocity": "+0.23229/16d",
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "Current price range",
+        "stopLoss": "+2%",
+        "takeProfit": "-5%",
+        "riskReward": "2.5:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity Z-Score",
+          "status": "Fail",
+          "signal": "Extreme negative velocity indicates rapid senescence",
+          "weight": 0.3
+        },
+        {
+          "name": "LSWI Moisture Z-Score",
+          "status": "Pass",
+          "signal": "Positive moisture trend, no drought stress",
+          "weight": 0.25
+        },
+        {
+          "name": "Quadrant Classification",
+          "status": "Fail",
+          "signal": "Quadrant III signals heat senescence",
+          "weight": 0.15
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "0% cloud cover, data quality high",
+          "weight": 0.1
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "No strong El Ni\u00f1o/La Ni\u00f1a influence detected",
+          "weight": 0.2
+        }
+      ],
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
+      "ndviSource": "simulated",
+      "zscoreAvail": true
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Mato Grosso BR",
+      "sentiment": "Bearish",
+      "confidence": 0.32,
+      "rationale": "The velocity z\u2011score of \u20136.9 indicates a severe slowdown in greening, while the dominant quadrant III (\u2013vel/+lswi) signals heat\u2011induced senescence. Combined with a modestly positive moisture z\u2011score, the seasonal pattern points to a stressed crop outlook.",
+      "peakNdvi": 0.9347,
+      "peakLswi": 0.3909,
+      "velZscore": -6.905,
+      "lswiZscore": 0.761,
+      "dominantQuadrant": "III",
+      "spectralVelocity": "+0.2323/16d",
+      "macroRegime": "El\u202fNino drought stress",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "Current price",
+        "stopLoss": "+0.05",
+        "takeProfit": "-0.10",
+        "riskReward": "2:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity Z-Score",
+          "status": "Fail",
+          "signal": "Velocity z\u2011score far below baseline, indicating rapid senescence",
+          "weight": 0.3
+        },
+        {
+          "name": "LSWI Moisture Z-Score",
+          "status": "Pass",
+          "signal": "Positive moisture z\u2011score suggests adequate water, mitigating drought risk",
+          "weight": 0.25
+        },
+        {
+          "name": "Quadrant Classification",
+          "status": "Fail",
+          "signal": "Quadrant III confirms heat\u2011induced senescence",
+          "weight": 0.15
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "Zero cloud cover ensures data integrity",
+          "weight": 0.1
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "El\u202fNino conditions align with observed stress patterns",
+          "weight": 0.2
+        }
+      ],
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
+      "ndviSource": "simulated",
+      "zscoreAvail": true
+    },
+    {
+      "commodity": "Soybeans",
+      "region": "Buenos Aires AR",
+      "sentiment": "Bearish",
+      "confidence": 0.65,
+      "rationale": "Velocity z\u2011score of \u20137.8 indicates growth far below the 2000\u20112015 baseline, while the positive LSWI z\u2011score (+0.88) shows adequate moisture. The dominant Quadrant\u202fIII (\u2013vel/+lswi) signals heat\u2011induced senescence, suggesting a likely yield decline.",
+      "peakNdvi": 0.913,
+      "peakLswi": 0.4192,
+      "velZscore": -7.806,
+      "lswiZscore": 0.881,
+      "dominantQuadrant": "III",
+      "spectralVelocity": "+0.241/16d",
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "current price +0.5%",
+        "stopLoss": "2% below entry",
+        "takeProfit": "4% above entry",
+        "riskReward": "2:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity Z-Score",
+          "status": "Fail",
+          "signal": "Velocity far below baseline, indicating reduced growth",
+          "weight": 0.3
+        },
+        {
+          "name": "LSWI Moisture Z-Score",
+          "status": "Pass",
+          "signal": "Moisture above baseline, mitigating some stress",
+          "weight": 0.25
+        },
+        {
+          "name": "Quadrant Classification",
+          "status": "Fail",
+          "signal": "Heat senescence dominates, likely reducing yields",
+          "weight": 0.15
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "Zero cloud cover, data quality high",
+          "weight": 0.1
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "Macro climate regime unknown, neutral assumption",
+          "weight": 0.2
+        }
+      ],
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
+      "ndviSource": "simulated",
+      "zscoreAvail": true
+    },
+    {
+      "commodity": "Corn",
+      "region": "Iowa US",
+      "sentiment": "Bearish",
+      "confidence": 0.55,
+      "rationale": "Velocity z\u2011score of \u20132.09 indicates growth lagging the 2000\u20112015 baseline, while the LSWI z\u2011score of +0.53 shows relatively moist conditions. The dominant quadrant IV (\u2013velocity, \u2013LSWI) signals a drought\u2011collapse pattern in late season, supporting a bearish outlook.",
+      "peakNdvi": 0.95,
+      "peakLswi": 0.3745,
+      "velZscore": -2.093,
+      "lswiZscore": 0.532,
+      "dominantQuadrant": "IV",
+      "spectralVelocity": "+0.2453/16d",
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "current futures price",
+        "stopLoss": "5% below entry",
+        "takeProfit": "10% above entry",
+        "riskReward": "2:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity Z-Score",
+          "status": "Caution",
+          "signal": "Significantly below baseline, indicating slower growth",
+          "weight": 0.3
+        },
+        {
+          "name": "LSWI Moisture Z-Score",
+          "status": "Pass",
+          "signal": "Above baseline, moisture not limiting",
           "weight": 0.25
         },
         {
@@ -557,163 +445,51 @@
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "No strong El Ni\u00f1o/La Ni\u00f1a signal, regime neutral",
+          "signal": "Neutral climate regime, no overriding bias",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     },
     {
       "commodity": "Corn",
-      "region": "Minnesota US",
+      "region": "Illinois US",
       "sentiment": "Bearish",
-      "confidence": 0.55,
-      "rationale": "Velocity z\u2011score of \u20131.82 indicates a strong decline in greenness, while the positive LSWI z\u2011score (+0.57) shows moisture is adequate. The dominant Quadrant III (\u2013vel/+lswi) signals heat\u2011induced senescence, suggesting a likely yield shortfall.",
-      "peakNdvi": 0.946,
-      "peakLswi": 0.3552,
-      "velZscore": -1.824,
-      "lswiZscore": 0.571,
-      "dominantQuadrant": "III",
-      "spectralVelocity": "0.24656/16d",
+      "confidence": 0.85,
+      "rationale": "Velocity z\u2011score of -2.34 indicates a strong decline in greenness, while the positive LSWI z\u2011score of 0.72 shows moisture is above baseline. The dominant IV quadrant (-vel/-lswi) confirms a drought\u2011collapse scenario, suggesting a bearish outlook for the season.",
+      "peakNdvi": 0.95,
+      "peakLswi": 0.3681,
+      "velZscore": -2.339,
+      "lswiZscore": 0.716,
+      "dominantQuadrant": "IV",
+      "spectralVelocity": "-0.0039/16d",
       "macroRegime": "neutral",
       "strategy": {
         "action": "SHORT",
         "entryZone": "near current price",
         "stopLoss": "+5%",
-        "takeProfit": "\u201310%",
-        "riskReward": "2:1"
+        "takeProfit": "-15%",
+        "riskReward": "3:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity Z-Score",
           "status": "Fail",
-          "signal": "Strong negative trend",
+          "signal": "Strong negative velocity z\u2011score indicates rapid decline in greenness",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
           "status": "Pass",
-          "signal": "Moisture adequate",
+          "signal": "Positive moisture z\u2011score suggests above\u2011baseline water content",
           "weight": 0.25
         },
         {
           "name": "Quadrant Classification",
           "status": "Fail",
-          "signal": "Heat senescence",
-          "weight": 0.15
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "0% cloud",
-          "weight": 0.1
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "Neutral climate",
-          "weight": 0.2
-        }
-      ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
-      "ndviSource": "simulated",
-      "zscoreAvail": true
-    },
-    {
-      "commodity": "Corn",
-      "region": "Nebraska US",
-      "sentiment": "Bearish",
-      "confidence": 0.55,
-      "rationale": "Velocity z\u2011score of -2.636 indicates growth lagging baseline, while the positive LSWI z\u2011score (+0.52) shows above\u2011normal moisture. Dominant quadrant III (heat senescence) confirms a heat\u2011stress signal, leading to a bearish outlook.",
-      "peakNdvi": 0.9257,
-      "peakLswi": 0.3533,
-      "velZscore": -2.636,
-      "lswiZscore": 0.52,
-      "dominantQuadrant": "III",
-      "spectralVelocity": "+0.003/16d",
-      "macroRegime": "Neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "basis or near current price",
-        "stopLoss": "+5% of entry",
-        "takeProfit": "-10% of entry",
-        "riskReward": "2:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity Z-Score",
-          "status": "Fail",
-          "signal": "Velocity z-score -2.636 indicates below\u2011baseline growth",
-          "weight": 0.3
-        },
-        {
-          "name": "LSWI Moisture Z-Score",
-          "status": "Pass",
-          "signal": "LSWI z-score +0.52 indicates above\u2011baseline moisture",
-          "weight": 0.25
-        },
-        {
-          "name": "Quadrant Classification",
-          "status": "Fail",
-          "signal": "Dominant quadrant III signals heat senescence",
-          "weight": 0.15
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "0.0% cloud cover ensures data quality",
-          "weight": 0.1
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Caution",
-          "signal": "Macro regime unspecified; assume neutral",
-          "weight": 0.2
-        }
-      ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
-      "ndviSource": "simulated",
-      "zscoreAvail": true
-    },
-    {
-      "commodity": "Corn",
-      "region": "Ohio US",
-      "sentiment": "Bearish",
-      "confidence": 0.65,
-      "rationale": "Velocity z-score of -3.095 indicates significant heat senescence, while LSWI z-score of 0.261 shows adequate moisture. The dominant quadrant III confirms heat-driven decline, suggesting a bearish outlook for corn futures in Ohio.",
-      "peakNdvi": 0.95,
-      "peakLswi": 0.3529,
-      "velZscore": -3.095,
-      "lswiZscore": 0.261,
-      "dominantQuadrant": "III",
-      "spectralVelocity": "+0.23352/16d",
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "near current price",
-        "stopLoss": "+2% of entry",
-        "takeProfit": "-5% of entry",
-        "riskReward": "2.5:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity Z-Score",
-          "status": "Fail",
-          "signal": "Strong negative velocity indicates heat senescence",
-          "weight": 0.3
-        },
-        {
-          "name": "LSWI Moisture Z-Score",
-          "status": "Pass",
-          "signal": "Moisture within normal range",
-          "weight": 0.25
-        },
-        {
-          "name": "Quadrant Classification",
-          "status": "Caution",
-          "signal": "Heat senescence dominates despite adequate moisture",
+          "signal": "IV quadrant signals drought collapse",
           "weight": 0.15
         },
         {
@@ -725,11 +501,235 @@
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "Neutral macro regime, no overriding climate stress",
+          "signal": "Neutral macro regime, no overriding climate bias",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
+      "ndviSource": "simulated",
+      "zscoreAvail": true
+    },
+    {
+      "commodity": "Corn",
+      "region": "Indiana US",
+      "sentiment": "Bearish",
+      "confidence": 0.65,
+      "rationale": "Velocity z\u2011score of \u20132.59 signals growth lagging the 2000\u20112015 baseline, while the dominant IV quadrant indicates a drought\u2011collapse pattern. The late\u2011season decline in NDVI and velocity further supports a bearish outlook.",
+      "peakNdvi": 0.9398,
+      "peakLswi": 0.3788,
+      "velZscore": -2.593,
+      "lswiZscore": 0.819,
+      "dominantQuadrant": "IV",
+      "spectralVelocity": "+0.26113/16d",
+      "macroRegime": "Neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "basis 5.5",
+        "stopLoss": "5.8",
+        "takeProfit": "5.0",
+        "riskReward": "1.5:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity Z-Score",
+          "status": "Caution",
+          "signal": "Below baseline growth, potential yield risk",
+          "weight": 0.3
+        },
+        {
+          "name": "LSWI Moisture Z-Score",
+          "status": "Pass",
+          "signal": "Above baseline moisture, mitigating factor",
+          "weight": 0.25
+        },
+        {
+          "name": "Quadrant Classification",
+          "status": "Fail",
+          "signal": "IV quadrant signals drought collapse",
+          "weight": 0.15
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "Zero cloud cover, data integrity confirmed",
+          "weight": 0.1
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "Neutral climate regime, no overriding bias",
+          "weight": 0.2
+        }
+      ],
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
+      "ndviSource": "simulated",
+      "zscoreAvail": true
+    },
+    {
+      "commodity": "Corn",
+      "region": "Minnesota US",
+      "sentiment": "Bearish",
+      "confidence": 0.32,
+      "rationale": "The season\u2019s velocity z\u2011score of \u20132.47 and dominant quadrant IV (drought collapse) signal a strong downward trend, while the near\u2011neutral LSWI z\u2011score indicates moisture is not a limiting factor. The negative velocity trend combined with a late\u2011season decline in NDVI supports a bearish outlook.",
+      "peakNdvi": 0.95,
+      "peakLswi": 0.348,
+      "velZscore": -2.466,
+      "lswiZscore": -0.089,
+      "dominantQuadrant": "IV",
+      "spectralVelocity": "+0.23782/16d",
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "current price",
+        "stopLoss": "+5%",
+        "takeProfit": "-10%",
+        "riskReward": "1.5:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity Z-Score",
+          "status": "Fail",
+          "signal": "Strong negative trend (\u20132.47)",
+          "weight": 0.3
+        },
+        {
+          "name": "LSWI Moisture Z-Score",
+          "status": "Pass",
+          "signal": "Near\u2011neutral moisture (-0.089)",
+          "weight": 0.25
+        },
+        {
+          "name": "Quadrant Classification",
+          "status": "Fail",
+          "signal": "Dominant IV indicates drought collapse",
+          "weight": 0.15
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "0% cloud cover",
+          "weight": 0.1
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "Neutral climate conditions",
+          "weight": 0.2
+        }
+      ],
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
+      "ndviSource": "simulated",
+      "zscoreAvail": true
+    },
+    {
+      "commodity": "Corn",
+      "region": "Nebraska US",
+      "sentiment": "Bearish",
+      "confidence": 0.78,
+      "rationale": "The season\u2019s velocity z\u2011score of \u20132.617 indicates a strong lag in greening relative to the 2000\u20112015 baseline, and the dominant Quadrant\u202fIV (\u2013vel/\u2013lswi) signals a drought\u2011collapse scenario. Combined with the modest positive LSWI z\u2011score, the overall picture points to a bearish outlook for the upcoming crop.",
+      "peakNdvi": 0.95,
+      "peakLswi": 0.3446,
+      "velZscore": -2.617,
+      "lswiZscore": 0.189,
+      "dominantQuadrant": "IV",
+      "spectralVelocity": "+0.002/16d",
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "near current price",
+        "stopLoss": "+5% of entry",
+        "takeProfit": "\u201310% of entry",
+        "riskReward": "2:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity Z-Score",
+          "status": "Fail",
+          "signal": "Strong negative velocity z\u2011score indicates delayed greening",
+          "weight": 0.3
+        },
+        {
+          "name": "LSWI Moisture Z-Score",
+          "status": "Pass",
+          "signal": "Slightly positive moisture z\u2011score, but not enough to offset velocity",
+          "weight": 0.25
+        },
+        {
+          "name": "Quadrant Classification",
+          "status": "Fail",
+          "signal": "Dominant Quadrant\u202fIV signals drought collapse",
+          "weight": 0.15
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "Zero cloud cover across all composites",
+          "weight": 0.1
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "No evidence of extreme El\u202fNi\u00f1o/La\u202fNi\u00f1a influence",
+          "weight": 0.2
+        }
+      ],
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
+      "ndviSource": "simulated",
+      "zscoreAvail": true
+    },
+    {
+      "commodity": "Corn",
+      "region": "Ohio US",
+      "sentiment": "Bearish",
+      "confidence": 0.62,
+      "rationale": "Velocity z-score of -2.54 signals a pronounced decline in greenness, while the dominant quadrant IV indicates a drought collapse scenario. Despite a positive moisture z-score, the overall spectral trend points to a bearish outlook for the season.",
+      "peakNdvi": 0.9288,
+      "peakLswi": 0.3627,
+      "velZscore": -2.541,
+      "lswiZscore": 0.854,
+      "dominantQuadrant": "IV",
+      "spectralVelocity": "+0.243/16d",
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "basis -0.5%",
+        "stopLoss": "+2%",
+        "takeProfit": "-4%",
+        "riskReward": "2:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity Z-Score",
+          "status": "Fail",
+          "signal": "Velocity z-score -2.541 indicates significant decline",
+          "weight": 0.3
+        },
+        {
+          "name": "LSWI Moisture Z-Score",
+          "status": "Pass",
+          "signal": "LSWI z-score 0.854 indicates above baseline moisture",
+          "weight": 0.25
+        },
+        {
+          "name": "Quadrant Classification",
+          "status": "Fail",
+          "signal": "Dominant quadrant IV signals drought collapse",
+          "weight": 0.15
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "0% cloud cover ensures data integrity",
+          "weight": 0.1
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "Macro regime neutral; no strong ENSO influence detected",
+          "weight": 0.2
+        }
+      ],
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     },
@@ -737,55 +737,55 @@
       "commodity": "Corn",
       "region": "Mato Grosso BR",
       "sentiment": "Bearish",
-      "confidence": 0.62,
-      "rationale": "Velocity z\u2011score of -2.40 indicates growth below the 2000\u20112015 baseline, while the positive LSWI z\u2011score and dominant Quadrant III (heat senescence) signal a stressed crop. The combination of slow growth and heat\u2011induced senescence points to a bearish outlook for the upcoming season.",
-      "peakNdvi": 0.95,
-      "peakLswi": 0.3537,
-      "velZscore": -2.403,
-      "lswiZscore": 0.317,
-      "dominantQuadrant": "III",
-      "spectralVelocity": "-0.0033/16d",
+      "confidence": 0.82,
+      "rationale": "The season\u2019s velocity z\u2011score of \u20132.48 indicates a strong decline in greenness, while the positive LSWI z\u2011score of +0.43 shows moisture is still adequate. However, the dominant quadrant IV (\u2013vel/\u2013lswi) signals a drought\u2011collapse pattern that outweighs the moisture signal, pointing to a bearish outlook.",
+      "peakNdvi": 0.9467,
+      "peakLswi": 0.3702,
+      "velZscore": -2.484,
+      "lswiZscore": 0.433,
+      "dominantQuadrant": "IV",
+      "spectralVelocity": "+0.245/16d",
       "macroRegime": "neutral",
       "strategy": {
         "action": "SHORT",
-        "entryZone": "near current futures price",
-        "stopLoss": "+2% of entry",
-        "takeProfit": "-4% of entry",
+        "entryZone": "current price",
+        "stopLoss": "5% below entry",
+        "takeProfit": "10% above entry",
         "riskReward": "2:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity Z-Score",
           "status": "Fail",
-          "signal": "Velocity below baseline, indicating slower growth",
+          "signal": "Strong negative velocity z\u2011score indicates declining greenness",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
           "status": "Pass",
-          "signal": "Moisture above baseline, moderate moisture conditions",
+          "signal": "Positive moisture z\u2011score suggests adequate water availability",
           "weight": 0.25
         },
         {
           "name": "Quadrant Classification",
           "status": "Fail",
-          "signal": "Quadrant III (heat senescence) signals negative growth",
+          "signal": "Dominant IV quadrant signals drought collapse",
           "weight": 0.15
         },
         {
           "name": "Cloud Cover QA",
           "status": "Pass",
-          "signal": "0% cloud cover, data quality high",
+          "signal": "Zero cloud cover ensures data integrity",
           "weight": 0.1
         },
         {
           "name": "Macro Regime",
           "status": "Caution",
-          "signal": "No clear macro regime identified",
+          "signal": "No clear ENSO signal; regime considered neutral",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     },
@@ -793,145 +793,33 @@
       "commodity": "Corn",
       "region": "Heilongjiang CN",
       "sentiment": "Bearish",
-      "confidence": 0.62,
-      "rationale": "The season\u2011long velocity z\u2011score of \u20133.113 indicates a strong decline relative to the 2000\u20112015 baseline, while the positive LSWI z\u2011score of 0.789 shows adequate moisture. The dominant quadrant III (heat senescence) confirms that the crop is experiencing temperature\u2011driven stress, supporting a bearish outlook.",
+      "confidence": 0.85,
+      "rationale": "The season\u2011long NDVI velocity z\u2011score of \u20132.94 indicates a strong lag in greening relative to the 2000\u20112015 baseline, and the dominant quadrant IV (\u2013velocity, \u2013LSWI) signals drought collapse. The late\u2011season decline in both NDVI and LSWI further supports a bearish outlook.",
       "peakNdvi": 0.95,
-      "peakLswi": 0.3641,
-      "velZscore": -3.113,
-      "lswiZscore": 0.789,
-      "dominantQuadrant": "III",
-      "spectralVelocity": "-0.02272/16d",
+      "peakLswi": 0.331,
+      "velZscore": -2.94,
+      "lswiZscore": 0.05,
+      "dominantQuadrant": "IV",
+      "spectralVelocity": "+0.0006/16d",
       "macroRegime": "neutral",
       "strategy": {
         "action": "SHORT",
-        "entryZone": "current market price",
-        "stopLoss": "+5% of entry",
-        "takeProfit": "-10% of entry",
+        "entryZone": "current price",
+        "stopLoss": "+5%",
+        "takeProfit": "+10%",
         "riskReward": "2:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity Z-Score",
           "status": "Fail",
-          "signal": "Significantly below baseline, indicating declining greenness",
+          "signal": "Velocity lagging baseline (\u20132.94)",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
           "status": "Pass",
-          "signal": "Above baseline, moisture not limiting",
-          "weight": 0.25
-        },
-        {
-          "name": "Quadrant Classification",
-          "status": "Fail",
-          "signal": "Quadrant III signals heat senescence",
-          "weight": 0.15
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "0% cloud cover, data quality high",
-          "weight": 0.1
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "Neutral climate regime, no overriding macro factor",
-          "weight": 0.2
-        }
-      ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
-      "ndviSource": "simulated",
-      "zscoreAvail": true
-    },
-    {
-      "commodity": "Wheat",
-      "region": "Kansas US",
-      "sentiment": "Bearish",
-      "confidence": 0.85,
-      "rationale": "The season\u2019s velocity z\u2011score of \u20131.74 and LSWI z\u2011score of \u20133.93 place the crop firmly in Quadrant\u202fIV, indicating a drought\u2011collapse scenario. Early\u2011season growth was strong, but the subsequent decline in moisture and growth velocity signals a likely yield shortfall.",
-      "peakNdvi": 0.8459,
-      "peakLswi": 0.1878,
-      "velZscore": -1.739,
-      "lswiZscore": -3.929,
-      "dominantQuadrant": "IV",
-      "spectralVelocity": "+0.208/16d",
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "basis \u22486.50",
-        "stopLoss": "5.50",
-        "takeProfit": "4.50",
-        "riskReward": "2:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity Z-Score",
-          "status": "Fail",
-          "signal": "Velocity z\u2011score \u20131.74 indicates below\u2011baseline growth rate",
-          "weight": 0.3
-        },
-        {
-          "name": "LSWI Moisture Z-Score",
-          "status": "Fail",
-          "signal": "LSWI z\u2011score \u20133.93 signals severe moisture deficit",
-          "weight": 0.25
-        },
-        {
-          "name": "Quadrant Classification",
-          "status": "Fail",
-          "signal": "Dominant Quadrant\u202fIV (drought collapse)",
-          "weight": 0.15
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "Zero cloud cover, data quality high",
-          "weight": 0.1
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Pass",
-          "signal": "No strong El\u202fNi\u00f1o/La\u202fNi\u00f1a influence detected",
-          "weight": 0.2
-        }
-      ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
-      "ndviSource": "simulated",
-      "zscoreAvail": true
-    },
-    {
-      "commodity": "Wheat",
-      "region": "Oklahoma US",
-      "sentiment": "Bearish",
-      "confidence": 0.85,
-      "rationale": "Seasonal velocity z-score of -2.07 and LSWI z-score of -3.82 place the region firmly in quadrant IV, indicating a drought collapse. The late\u2011season decline in NDVI velocity and moisture signal a bearish outlook for wheat futures.",
-      "peakNdvi": 0.8754,
-      "peakLswi": 0.1893,
-      "velZscore": -2.068,
-      "lswiZscore": -3.819,
-      "dominantQuadrant": "IV",
-      "spectralVelocity": "+0.223/16d",
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "current futures price",
-        "stopLoss": "2% above entry",
-        "takeProfit": "5% below entry",
-        "riskReward": "2.5:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity Z-Score",
-          "status": "Fail",
-          "signal": "Velocity z-score below -1.5 indicates declining greenness",
-          "weight": 0.3
-        },
-        {
-          "name": "LSWI Moisture Z-Score",
-          "status": "Fail",
-          "signal": "LSWI z-score below -1.5 indicates moisture deficit",
+          "signal": "Near\u2011neutral moisture (0.05)",
           "weight": 0.25
         },
         {
@@ -943,51 +831,51 @@
         {
           "name": "Cloud Cover QA",
           "status": "Pass",
-          "signal": "0% cloud cover ensures data quality",
+          "signal": "0% cloud cover, data quality high",
           "weight": 0.1
         },
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "No strong ENSO signal; regime neutral",
+          "signal": "Neutral climate regime, no overriding bias",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     },
     {
       "commodity": "Wheat",
-      "region": "Colorado US",
+      "region": "Kansas US",
       "sentiment": "Bearish",
-      "confidence": 0.32,
-      "rationale": "Seasonal velocity z\u2011score of \u20132.34 and LSWI z\u2011score of \u20133.72 place the crop in Quadrant\u202fIV (drought collapse), indicating a strong negative trend for the upcoming season.",
-      "peakNdvi": 0.843,
-      "peakLswi": 0.2177,
-      "velZscore": -2.338,
-      "lswiZscore": -3.717,
+      "confidence": 0.92,
+      "rationale": "Velocity z\u2011score of \u20132.49 and LSWI z\u2011score of \u20133.89 place the crop in Quadrant\u202fIV (drought collapse), indicating a strong negative trend for the 2026 season.",
+      "peakNdvi": 0.8213,
+      "peakLswi": 0.2018,
+      "velZscore": -2.489,
+      "lswiZscore": -3.887,
       "dominantQuadrant": "IV",
-      "spectralVelocity": "-0.021/16d",
-      "macroRegime": "neutral",
+      "spectralVelocity": "+0.21024/16d",
+      "macroRegime": "Neutral",
       "strategy": {
         "action": "SHORT",
-        "entryZone": "near current price",
-        "stopLoss": "+5%",
-        "takeProfit": "-10%",
-        "riskReward": "2:1"
+        "entryZone": "Current futures price",
+        "stopLoss": "+2%",
+        "takeProfit": "-5%",
+        "riskReward": "2.5:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity Z-Score",
           "status": "Fail",
-          "signal": "Strong negative velocity trend (\u20132.34)",
+          "signal": "Strong negative velocity trend",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
           "status": "Fail",
-          "signal": "Severe moisture deficit (\u20133.72)",
+          "signal": "Significant moisture deficit",
           "weight": 0.25
         },
         {
@@ -1005,219 +893,107 @@
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "No major ENSO signal, regime neutral",
+          "signal": "No clear regime bias, treated as neutral",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     },
     {
       "commodity": "Wheat",
-      "region": "Rostov RU",
+      "region": "Oklahoma US",
       "sentiment": "Bearish",
-      "confidence": 0.85,
-      "rationale": "Velocity z-score of -1.905 and LSWI z-score of -3.717 place the region in quadrant IV, indicating a drought collapse. The late-season decline in velocity and moisture confirms a bearish outlook.",
-      "peakNdvi": 0.8523,
-      "peakLswi": 0.2128,
-      "velZscore": -1.905,
-      "lswiZscore": -3.717,
+      "confidence": 0.88,
+      "rationale": "Velocity z\u2011score of -2.399 and LSWI z\u2011score of -3.851 place the crop in Quadrant IV, indicating drought collapse and a strong negative growth trend. The late\u2011season velocity drop to -0.2252 in July confirms continued stress, supporting a bearish outlook.",
+      "peakNdvi": 0.8442,
+      "peakLswi": 0.2096,
+      "velZscore": -2.399,
+      "lswiZscore": -3.851,
       "dominantQuadrant": "IV",
-      "spectralVelocity": "+0.20886/16d",
-      "macroRegime": "neutral",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "current price",
-        "stopLoss": "5% below entry",
-        "takeProfit": "10% above entry",
-        "riskReward": "2:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity Z-Score",
-          "status": "Caution",
-          "signal": "Below baseline but not extreme",
-          "weight": 0.3
-        },
-        {
-          "name": "LSWI Moisture Z-Score",
-          "status": "Fail",
-          "signal": "Severe moisture deficit",
-          "weight": 0.25
-        },
-        {
-          "name": "Quadrant Classification",
-          "status": "Fail",
-          "signal": "Drought collapse quadrant IV",
-          "weight": 0.15
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "0% cloud cover",
-          "weight": 0.1
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Caution",
-          "signal": "No macro data available",
-          "weight": 0.2
-        }
-      ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
-      "ndviSource": "simulated",
-      "zscoreAvail": true
-    },
-    {
-      "commodity": "Wheat",
-      "region": "Saskatchewan CA",
-      "sentiment": "Bearish",
-      "confidence": 0.32,
-      "rationale": "Velocity z\u2011score of \u20132.46 and LSWI z\u2011score of \u20133.99 place the crop in Quadrant\u202fIV (drought collapse), indicating a strong negative outlook for the 2026 season.",
-      "peakNdvi": 0.8493,
-      "peakLswi": 0.1885,
-      "velZscore": -2.459,
-      "lswiZscore": -3.995,
-      "dominantQuadrant": "IV",
-      "spectralVelocity": "+0.21207/16d",
-      "macroRegime": "El\u202fNino drought stress",
-      "strategy": {
-        "action": "SHORT",
-        "entryZone": "near current futures price",
-        "stopLoss": "+2% of entry",
-        "takeProfit": "\u20134% of entry",
-        "riskReward": "2:1"
-      },
-      "featureBlocks": [
-        {
-          "name": "NDVI Velocity Z-Score",
-          "status": "Fail",
-          "signal": "Strong negative velocity z\u2011score indicates below\u2011average greening",
-          "weight": 0.3
-        },
-        {
-          "name": "LSWI Moisture Z-Score",
-          "status": "Fail",
-          "signal": "Negative moisture z\u2011score signals dry conditions",
-          "weight": 0.25
-        },
-        {
-          "name": "Quadrant Classification",
-          "status": "Fail",
-          "signal": "Quadrant\u202fIV (drought collapse) dominates",
-          "weight": 0.15
-        },
-        {
-          "name": "Cloud Cover QA",
-          "status": "Pass",
-          "signal": "Zero cloud cover, data quality high",
-          "weight": 0.1
-        },
-        {
-          "name": "Macro Regime",
-          "status": "Caution",
-          "signal": "El\u202fNino\u2011associated drought stress may amplify risk",
-          "weight": 0.2
-        }
-      ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
-      "ndviSource": "simulated",
-      "zscoreAvail": true
-    },
-    {
-      "commodity": "Wheat",
-      "region": "Grand Est FR",
-      "sentiment": "Bearish",
-      "confidence": 0.85,
-      "rationale": "Velocity z\u2011score of -2.24 and LSWI z\u2011score of -4.33 indicate strong negative growth and moisture deficits, placing the region in quadrant IV (drought collapse). The late\u2011season decline in velocity and NDVI supports a bearish outlook.",
-      "peakNdvi": 0.8234,
-      "peakLswi": 0.1788,
-      "velZscore": -2.243,
-      "lswiZscore": -4.33,
-      "dominantQuadrant": "IV",
-      "spectralVelocity": "-0.14969/16d",
+      "spectralVelocity": "+0.2205/16d",
       "macroRegime": "El Nino drought stress",
       "strategy": {
         "action": "SHORT",
-        "entryZone": "~6000 USD/ton",
-        "stopLoss": "+5%",
-        "takeProfit": "-10%",
+        "entryZone": "Near current price",
+        "stopLoss": "5% above entry",
+        "takeProfit": "10% below entry",
         "riskReward": "2:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity Z-Score",
           "status": "Fail",
-          "signal": "Strong negative velocity z\u2011score",
+          "signal": "Strong negative velocity trend",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
           "status": "Fail",
-          "signal": "Very low moisture z\u2011score",
+          "signal": "Significant moisture deficit",
           "weight": 0.25
         },
         {
           "name": "Quadrant Classification",
           "status": "Fail",
-          "signal": "Quadrant IV (drought collapse)",
+          "signal": "Quadrant IV indicates drought collapse",
           "weight": 0.15
         },
         {
           "name": "Cloud Cover QA",
           "status": "Pass",
-          "signal": "0% cloud cover",
+          "signal": "0% cloud cover, data quality high",
           "weight": 0.1
         },
         {
           "name": "Macro Regime",
           "status": "Caution",
-          "signal": "El Nino associated drought stress",
+          "signal": "El Nino conditions may exacerbate drought",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     },
     {
-      "commodity": "Sugar",
-      "region": "Sao Paulo BR",
-      "sentiment": "Bullish",
+      "commodity": "Wheat",
+      "region": "Colorado US",
+      "sentiment": "Bearish",
       "confidence": 0.85,
-      "rationale": "The velocity z\u2011score of 8.24 and a dominant Quadrant\u202fII (+vel/\u2013lswi) signal strong greenup despite moisture stress, while the moderate positive LSWI z\u2011score (0.93) indicates adequate water. Combined with a peak NDVI of 0.876, the data support a bullish outlook for the 2026 season.",
-      "peakNdvi": 0.8759,
-      "peakLswi": 0.5277,
-      "velZscore": 8.244,
-      "lswiZscore": 0.929,
-      "dominantQuadrant": "II",
-      "spectralVelocity": "+0.21253/16d",
-      "macroRegime": "neutral",
+      "rationale": "Velocity z-score of -2.488 and LSWI z-score of -4.096 place the region in quadrant IV, indicating drought collapse and significant decline in vegetation vigor. Seasonal context shows early growth but rapid decline, supporting a bearish outlook.",
+      "peakNdvi": 0.8571,
+      "peakLswi": 0.1931,
+      "velZscore": -2.488,
+      "lswiZscore": -4.096,
+      "dominantQuadrant": "IV",
+      "spectralVelocity": "+0.240/16d",
+      "macroRegime": "El Nino drought stress",
       "strategy": {
-        "action": "LONG",
-        "entryZone": "100-105",
-        "stopLoss": "95",
-        "takeProfit": "115",
-        "riskReward": "2.4:1"
+        "action": "SHORT",
+        "entryZone": "near current price",
+        "stopLoss": "10% above entry",
+        "takeProfit": "20% below entry",
+        "riskReward": "2:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity Z-Score",
-          "status": "Pass",
-          "signal": "Strong positive velocity z-score indicates robust greenup",
+          "status": "Fail",
+          "signal": "Velocity z-score indicates significant decline relative to baseline",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
-          "status": "Pass",
-          "signal": "Moderate positive moisture anomaly suggests adequate water",
+          "status": "Fail",
+          "signal": "Moisture z-score indicates severe drought",
           "weight": 0.25
         },
         {
           "name": "Quadrant Classification",
-          "status": "Pass",
-          "signal": "Quadrant\u202fII supports bullish outlook",
+          "status": "Fail",
+          "signal": "Quadrant IV indicates drought collapse",
           "weight": 0.15
         },
         {
@@ -1229,51 +1005,107 @@
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "Neutral macro regime, no adverse climate bias",
+          "signal": "Macro regime aligns with observed drought signals",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     },
     {
-      "commodity": "Sugar",
-      "region": "Uttar Pradesh IN",
-      "sentiment": "Bullish",
-      "confidence": 0.85,
-      "rationale": "The velocity z\u2011score of 8.24 signals exceptionally rapid greening, while the LSWI z\u2011score of 1.21 confirms above\u2011baseline moisture. Despite the dominant quadrant II classification (stress greenup), the overall spectral trend remains strongly positive during the peak growing season.",
-      "peakNdvi": 0.8878,
-      "peakLswi": 0.4854,
-      "velZscore": 8.238,
-      "lswiZscore": 1.206,
-      "dominantQuadrant": "II",
-      "spectralVelocity": "+0.25672/16d",
+      "commodity": "Wheat",
+      "region": "Rostov RU",
+      "sentiment": "Bearish",
+      "confidence": 0.75,
+      "rationale": "Velocity z\u2011score of \u20131.69 and LSWI z\u2011score of \u20134.52 signal a marked slowdown in growth and severe moisture deficit. Dominant quadrant IV (\u2013vel/\u2013lswi) confirms a drought\u2011collapse scenario, and the peak NDVI in early May is followed by a sharp velocity decline, underscoring a deteriorating crop condition.",
+      "peakNdvi": 0.8723,
+      "peakLswi": 0.186,
+      "velZscore": -1.691,
+      "lswiZscore": -4.523,
+      "dominantQuadrant": "IV",
+      "spectralVelocity": "+0.042/16d",
       "macroRegime": "neutral",
       "strategy": {
-        "action": "LONG",
+        "action": "SHORT",
         "entryZone": "current price",
-        "stopLoss": "5% below entry",
-        "takeProfit": "15% above entry",
-        "riskReward": "3:1"
+        "stopLoss": "+5%",
+        "takeProfit": "-5%",
+        "riskReward": "1:2"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity Z-Score",
-          "status": "Pass",
-          "signal": "Velocity z-score 8.24 indicates rapid greening",
+          "status": "Caution",
+          "signal": "Velocity below baseline, indicating slower growth",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
-          "status": "Pass",
-          "signal": "LSWI z-score 1.21 indicates above\u2011baseline moisture",
+          "status": "Fail",
+          "signal": "Strong negative moisture anomaly",
           "weight": 0.25
         },
         {
           "name": "Quadrant Classification",
+          "status": "Fail",
+          "signal": "Quadrant IV suggests drought collapse",
+          "weight": 0.15
+        },
+        {
+          "name": "Cloud Cover QA",
           "status": "Pass",
-          "signal": "Quadrant II (+vel/-lswi) shows stress greenup but overall growth remains positive",
+          "signal": "No cloud interference",
+          "weight": 0.1
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "No strong macro signal",
+          "weight": 0.2
+        }
+      ],
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
+      "ndviSource": "simulated",
+      "zscoreAvail": true
+    },
+    {
+      "commodity": "Wheat",
+      "region": "Saskatchewan CA",
+      "sentiment": "Bearish",
+      "confidence": 0.65,
+      "rationale": "Velocity z\u2011score of \u20131.62 and LSWI z\u2011score of \u20133.68 place the crop in quadrant\u202fIV, indicating simultaneous drought collapse and reduced growth velocity. The early\u2011season peak NDVI is followed by a sharp decline, reinforcing a bearish outlook.",
+      "peakNdvi": 0.8471,
+      "peakLswi": 0.2007,
+      "velZscore": -1.619,
+      "lswiZscore": -3.678,
+      "dominantQuadrant": "IV",
+      "spectralVelocity": "+0.007/16d",
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "SHORT",
+        "entryZone": "near current futures price",
+        "stopLoss": "+2% of entry",
+        "takeProfit": "\u20135% of entry",
+        "riskReward": "2.5:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity Z-Score",
+          "status": "Fail",
+          "signal": "Strong negative velocity z\u2011score indicates reduced greening",
+          "weight": 0.3
+        },
+        {
+          "name": "LSWI Moisture Z-Score",
+          "status": "Fail",
+          "signal": "Very low moisture z\u2011score signals drought stress",
+          "weight": 0.25
+        },
+        {
+          "name": "Quadrant Classification",
+          "status": "Fail",
+          "signal": "Quadrant\u202fIV confirms drought collapse",
           "weight": 0.15
         },
         {
@@ -1285,51 +1117,51 @@
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "No clear macro regime influence detected",
+          "signal": "No strong ENSO signal; regime considered neutral",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     },
     {
-      "commodity": "Cotton",
-      "region": "Texas US",
+      "commodity": "Wheat",
+      "region": "Grand Est FR",
       "sentiment": "Bearish",
-      "confidence": 0.55,
-      "rationale": "The velocity z\u2011score of +4.82 indicates strong greenup, yet the LSWI z\u2011score of \u20133.33 signals significant moisture stress. Quadrant\u202fII (positive velocity, negative moisture) flags a stress\u2011greenup scenario that could constrain final yield, leaning toward a cautious bearish outlook.",
-      "peakNdvi": 0.7927,
-      "peakLswi": 0.1727,
-      "velZscore": 4.818,
-      "lswiZscore": -3.333,
-      "dominantQuadrant": "II",
-      "spectralVelocity": "+0.22151/16d",
-      "macroRegime": "neutral",
+      "confidence": 0.85,
+      "rationale": "The season\u2019s velocity z\u2011score of \u20132.718 and LSWI z\u2011score of \u20133.685 place the region firmly in quadrant\u202fIV (drought collapse), indicating a strong decline in greenness and moisture. Early growth was followed by a sharp drop in velocity and NDVI, signalling a bearish outlook for wheat futures.",
+      "peakNdvi": 0.8852,
+      "peakLswi": 0.2007,
+      "velZscore": -2.718,
+      "lswiZscore": -3.685,
+      "dominantQuadrant": "IV",
+      "spectralVelocity": "+0.22351/16d",
+      "macroRegime": "Neutral",
       "strategy": {
         "action": "SHORT",
-        "entryZone": "1.02\u00d7current price",
-        "stopLoss": "0.95\u00d7entry",
-        "takeProfit": "1.05\u00d7entry",
-        "riskReward": "1.5:1"
+        "entryZone": "Near current price",
+        "stopLoss": "+5% of entry",
+        "takeProfit": "-10% of entry",
+        "riskReward": "2:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity Z-Score",
-          "status": "Pass",
-          "signal": "Strong positive velocity indicates robust growth",
+          "status": "Fail",
+          "signal": "Strong negative velocity z\u2011score indicates declining greenness",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
           "status": "Fail",
-          "signal": "Negative moisture z\u2011score signals drought stress",
+          "signal": "Strong negative moisture z\u2011score signals drought",
           "weight": 0.25
         },
         {
           "name": "Quadrant Classification",
-          "status": "Caution",
-          "signal": "Quadrant\u202fII suggests stress\u2011greenup, mixed signals",
+          "status": "Fail",
+          "signal": "Quadrant\u202fIV confirms drought collapse",
           "weight": 0.15
         },
         {
@@ -1341,67 +1173,235 @@
         {
           "name": "Macro Regime",
           "status": "Pass",
-          "signal": "Neutral macro regime, no overriding climate bias",
+          "signal": "No clear macro anomaly; regime neutral",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
+      "ndviSource": "simulated",
+      "zscoreAvail": true
+    },
+    {
+      "commodity": "Sugar",
+      "region": "Sao Paulo BR",
+      "sentiment": "Bullish",
+      "confidence": 0.75,
+      "rationale": "The velocity z\u2011score of 8.13 indicates exceptionally strong greening, while the LSWI z\u2011score of 1.25 shows moderate moisture. Dominant quadrant II (+vel/-lswi) signals a stress\u2011greenup pattern that still supports a bullish outlook.",
+      "peakNdvi": 0.8668,
+      "peakLswi": 0.5189,
+      "velZscore": 8.134,
+      "lswiZscore": 1.246,
+      "dominantQuadrant": "II",
+      "spectralVelocity": "+0.22041/16d",
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "near current price",
+        "stopLoss": "5% below entry",
+        "takeProfit": "15% above entry",
+        "riskReward": "3:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity Z-Score",
+          "status": "Pass",
+          "signal": "Strong positive velocity",
+          "weight": 0.3
+        },
+        {
+          "name": "LSWI Moisture Z-Score",
+          "status": "Pass",
+          "signal": "Moderate moisture",
+          "weight": 0.25
+        },
+        {
+          "name": "Quadrant Classification",
+          "status": "Caution",
+          "signal": "Stress greenup pattern",
+          "weight": 0.15
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "0% cloud cover",
+          "weight": 0.1
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "Neutral climate conditions",
+          "weight": 0.2
+        }
+      ],
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
+      "ndviSource": "simulated",
+      "zscoreAvail": true
+    },
+    {
+      "commodity": "Sugar",
+      "region": "Uttar Pradesh IN",
+      "sentiment": "Bullish",
+      "confidence": 0.85,
+      "rationale": "The season velocity z\u2011score of 8.9 signals exceptionally strong greening momentum, while the LSWI z\u2011score of 1.3 indicates moisture above the 2000\u20112015 baseline. Dominant quadrant II (+vel/-lswi) reflects a stress\u2011greenup phase that is still driving rapid growth, especially during the peak July period. Together these factors point to a bullish outlook for sugar futures.",
+      "peakNdvi": 0.8894,
+      "peakLswi": 0.5025,
+      "velZscore": 8.916,
+      "lswiZscore": 1.259,
+      "dominantQuadrant": "II",
+      "spectralVelocity": "+0.21491/16d",
+      "macroRegime": "neutral",
+      "strategy": {
+        "action": "LONG",
+        "entryZone": "current price \u00b15%",
+        "stopLoss": "10% below entry",
+        "takeProfit": "20% above entry",
+        "riskReward": "2:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity Z-Score",
+          "status": "Pass",
+          "signal": "Velocity z\u2011score >8 indicates robust growth",
+          "weight": 0.3
+        },
+        {
+          "name": "LSWI Moisture Z-Score",
+          "status": "Pass",
+          "signal": "Moisture z\u2011score >1 signals favorable water conditions",
+          "weight": 0.25
+        },
+        {
+          "name": "Quadrant Classification",
+          "status": "Pass",
+          "signal": "Quadrant II confirms stress\u2011greenup but positive velocity",
+          "weight": 0.15
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "0% cloud cover ensures data integrity",
+          "weight": 0.1
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Pass",
+          "signal": "Neutral climate regime supports current bullish stance",
+          "weight": 0.2
+        }
+      ],
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
+      "ndviSource": "simulated",
+      "zscoreAvail": true
+    },
+    {
+      "commodity": "Cotton",
+      "region": "Texas US",
+      "sentiment": "Neutral",
+      "confidence": 0.62,
+      "rationale": "High velocity z\u2011score (+4.87) signals robust early growth, but the negative LSWI z\u2011score (\u20113.74) and Quadrant\u202fII classification (+vel/\u2011lswi) indicate moisture stress that could temper yields. The combination suggests a cautious neutral outlook.",
+      "peakNdvi": 0.7883,
+      "peakLswi": 0.1578,
+      "velZscore": 4.872,
+      "lswiZscore": -3.738,
+      "dominantQuadrant": "II",
+      "spectralVelocity": "+0.21774/16d",
+      "macroRegime": "Neutral",
+      "strategy": {
+        "action": "NEUTRAL",
+        "entryZone": "Current price \u00b15%",
+        "stopLoss": "\u201110%",
+        "takeProfit": "+15%",
+        "riskReward": "1.5:1"
+      },
+      "featureBlocks": [
+        {
+          "name": "NDVI Velocity Z-Score",
+          "status": "Pass",
+          "signal": "Strong positive velocity (+4.87) indicates vigorous growth",
+          "weight": 0.3
+        },
+        {
+          "name": "LSWI Moisture Z-Score",
+          "status": "Fail",
+          "signal": "Strong negative moisture (-3.74) signals potential water stress",
+          "weight": 0.25
+        },
+        {
+          "name": "Quadrant Classification",
+          "status": "Pass",
+          "signal": "Quadrant\u202fII (+vel/\u2011lswi) confirms growth under moisture stress",
+          "weight": 0.15
+        },
+        {
+          "name": "Cloud Cover QA",
+          "status": "Pass",
+          "signal": "Zero cloud cover ensures data integrity",
+          "weight": 0.1
+        },
+        {
+          "name": "Macro Regime",
+          "status": "Caution",
+          "signal": "No clear El\u202fNi\u00f1o/La\u202fNi\u00f1a signal; regime considered neutral",
+          "weight": 0.2
+        }
+      ],
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     },
     {
       "commodity": "Cotton",
       "region": "Xinjiang CN",
-      "sentiment": "Bearish",
-      "confidence": 0.55,
-      "rationale": "The season\u2019s velocity z\u2011score of +4.24 indicates above\u2011baseline growth, but the negative LSWI z\u2011score of \u20133.42 and Quadrant\u202fII classification (+vel/\u2013lswi) signal moisture stress during greenup, raising concerns for yield stability.",
-      "peakNdvi": 0.7959,
-      "peakLswi": 0.1747,
-      "velZscore": 4.243,
-      "lswiZscore": -3.417,
+      "sentiment": "Bullish",
+      "confidence": 0.65,
+      "rationale": "Seasonal velocity z\u2011score of +5.0 signals robust greenup, while the LSWI z\u2011score of \u20133.2 places the crop in quadrant\u202fII, indicating moisture stress that could temper yields. The high peak NDVI and early\u2011season growth support a bullish stance with caution for late\u2011season water deficits.",
+      "peakNdvi": 0.8016,
+      "peakLswi": 0.1621,
+      "velZscore": 5.001,
+      "lswiZscore": -3.198,
       "dominantQuadrant": "II",
-      "spectralVelocity": "+0.168/16d",
+      "spectralVelocity": "+0.19166/16d",
       "macroRegime": "neutral",
       "strategy": {
-        "action": "SHORT",
-        "entryZone": "basis",
-        "stopLoss": "+0.05",
-        "takeProfit": "-0.10",
-        "riskReward": "2.0:1"
+        "action": "LONG",
+        "entryZone": "near current futures price",
+        "stopLoss": "2% below entry",
+        "takeProfit": "5% above entry",
+        "riskReward": "2.5:1"
       },
       "featureBlocks": [
         {
           "name": "NDVI Velocity Z-Score",
           "status": "Pass",
-          "signal": "Strong positive velocity above baseline",
+          "signal": "Strong positive growth trend",
           "weight": 0.3
         },
         {
           "name": "LSWI Moisture Z-Score",
-          "status": "Fail",
-          "signal": "Significant moisture deficit relative to baseline",
+          "status": "Caution",
+          "signal": "Below\u2011baseline moisture, potential late\u2011season stress",
           "weight": 0.25
         },
         {
           "name": "Quadrant Classification",
           "status": "Pass",
-          "signal": "Stress greenup (Quadrant\u202fII) indicates potential yield risk",
+          "signal": "Consistent stress\u2011greenup pattern",
           "weight": 0.15
         },
         {
           "name": "Cloud Cover QA",
           "status": "Pass",
-          "signal": "Zero cloud cover, data quality high",
+          "signal": "Zero cloud cover, data integrity confirmed",
           "weight": 0.1
         },
         {
           "name": "Macro Regime",
-          "status": "Caution",
-          "signal": "Neutral macro regime, no clear El\u202fNi\u00f1o/La\u202fNi\u00f1a influence",
+          "status": "Pass",
+          "signal": "Neutral climate regime, no major El\u202fNi\u00f1o/La\u202fNi\u00f1a influence",
           "weight": 0.2
         }
       ],
-      "generatedAt": "2026-09-12T01:04:38.751166+00:00",
+      "generatedAt": "2026-09-12T09:57:16.979141+00:00",
       "ndviSource": "simulated",
       "zscoreAvail": true
     }
