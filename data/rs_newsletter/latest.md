@@ -1,72 +1,75 @@
 # QuantAgri Remote Sensing Intelligence Digest  
-## October 10, 2026  
+## October 17, 2026  
 *Earth observation news for agriculture, water, hazards, and environmental monitoring*
 
 ---
 
-**This week’s lead:**  
-ESA’s new AI‑powered Earth Virtual Expert and the first operational images from the IRIDE Eaglet II constellation together promise a leap forward in how quickly farmers and water managers can turn raw satellite data into actionable insights. By letting users ask natural‑language questions about satellite imagery and receive instant, science‑backed answers, the platform could democratise access to complex Earth‑observation data. These developments set the stage for a week of breakthroughs that span crop monitoring, water stewardship, and ag‑retail strategy.
+**Lead**  
+The most consequential headline of the week comes from NASA, which has confirmed that Earth is losing freshwater at a rate faster than previously estimated. This new assessment, based on satellite gravimetry, signals that the planet’s aquifers are depleting more quickly than models have predicted, a reality that could tighten water budgets for irrigation, municipal supply, and ecosystem services across the globe. Farmers, lenders, and water managers should take note: the window for sustainable groundwater use is narrowing, and the cost of water‑security investments may rise sooner than anticipated.
 
 ---
 
 ## 🛰 Remote Sensing  
-
-ESA’s new AI‑powered Earth Virtual Expert, launched this week, lets users ask natural‑language questions about satellite data and receive instant, science‑backed answers. The platform, built on trusted datasets, could let a farmer in Iowa instantly compare last‑season NDVI (a satellite index tracking how green and healthy crops look) with current values without needing a data scientist. Meanwhile, the first images from the IRIDE Eaglet II constellation show a crisp view of Gibraltar, demonstrating the new satellites’ higher‑resolution optical capabilities. In the same breath, Sentinel‑3C’s inaugural imagery confirms the satellite’s sensors are functioning, giving analysts fresh data on ocean colour, sea‑surface temperature, and land‑surface topography. A polarised radar snapshot of Typhoon Surigae from Sentinel‑1 reveals the storm’s wind‑driven sea surface roughness, offering a real‑time assessment of tropical cyclone intensity. A vivid view of Etosha National Park in Namibia, captured by Sentinel‑2, illustrates the continued value of high‑resolution optical imagery for monitoring large wildlife reserves and their surrounding agriculture. Together, these developments mean that both agricultural and disaster‑management stakeholders can access richer, more timely data from multiple ESA missions in a single, user‑friendly interface. Farmers can now detect crop stress earlier, while emergency responders can track storm evolution without waiting for proprietary satellite passes. The integration of AI with raw imagery also reduces the skill gap, allowing smaller operations to leverage advanced analytics. As the data ecosystem matures, we expect a shift from specialist‑led analysis to on‑the‑ground decision‑making powered by instant satellite insights. Those who adopt these tools early will gain a competitive edge in both yield optimisation and risk mitigation.
-
-## 🌾 Agriculture & Crop Monitoring  
-
-EU’s upgraded satellite system for early drought alerts now incorporates higher‑frequency optical and thermal bands, enabling agronomists to spot moisture deficits before visible symptoms appear. By feeding these alerts into precision‑ag platforms, growers can target irrigation more efficiently, potentially saving up to 20 % of water use in Mediterranean regions. However, the US spray‑drone market remains in flux as new FCC rules threaten to ban foreign‑made models, forcing operators to re‑evaluate their fleets and certification pathways. This regulatory uncertainty could delay the deployment of autonomous spraying solutions that promise lower labour costs and reduced pesticide drift. In a different vein, Edonia’s funding round to expand spirulina protein production signals a growing appetite for high‑protein, low‑water‑footprint crops that can be cultivated in marginal lands. The company’s AI agents for restaurants aim to streamline supply chains, reducing waste and ensuring traceability from farm to plate. Meanwhile, research showing higher nutrition in regenerative organic foods offers a new metric for marketing and certification, potentially commanding premium prices in health‑conscious markets. The GLP‑1 drug discussion suggests that future crop pricing might incorporate nutrient density, aligning agricultural output with emerging human‑health trends. Together, these stories paint a picture of an ag‑tech ecosystem where data, policy, and consumer preferences intersect to shape the next generation of crop production. Farmers who integrate early drought detection with adaptive irrigation, and who stay abreast of regulatory shifts in drone technology, will be better positioned to optimise yields and reduce input costs. Those who partner with protein‑scaling startups or adopt regenerative practices may also unlock new revenue streams in niche markets.
-
-## 🌊 Flood & Water Hazards  
-
-Nothing notable this week.
-
-## 💧 Freshwater & Groundwater  
-
-Scientists studying the aftermath of California wildfires have found that ash and sediment runoff can alter lake chemistry, potentially affecting fish habitats and drinking‑water quality. The study, which tracked changes in lake turbidity and nutrient loads after a major fire, underscores the need for post‑fire monitoring of water bodies in fire‑prone regions. In Kansas, the Prairie Festival celebrated land stewardship practices that protect soil, water, and communities, highlighting the role of cover crops and reduced tillage in maintaining groundwater recharge. The event also showcased how community engagement can drive adoption of water‑conserving technologies, a lesson that could be replicated in other Midwestern states. Meanwhile, a GRACE‑FO based groundwater model for Wadi El‑Assiuti in Egypt demonstrates how satellite gravimetry combined with machine‑learning can forecast aquifer depletion over decades. By detecting subtle shifts in Earth’s gravitational pull, GRACE satellites measure groundwater change, allowing managers to anticipate shortages before they become critical. These findings collectively suggest that integrating satellite‑derived water metrics with on‑the‑ground stewardship can create a feedback loop that protects both ecosystems and livelihoods. Water managers should consider incorporating post‑fire lake monitoring into their risk assessments, especially in regions with high wildfire frequency. Farmers and ranchers can use the Wadi model’s approach to evaluate long‑term groundwater sustainability in arid landscapes. Policymakers might leverage these insights to design incentives for practices that enhance groundwater recharge. Ultimately, the convergence of remote sensing and community initiatives offers a roadmap for resilient water systems in the face of climate change.
-
-## 🏜 Drought Watch  
-
-NASA’s GRACE‑FO soil‑moisture drought monitoring provides a continent‑wide view of groundwater and surface‑water depletion, offering a complementary perspective to traditional weather‑based indices. By measuring tiny shifts in Earth’s gravitational pull, the satellites detect changes in soil moisture across the United States, enabling early identification of drought hotspots. The data, updated every 10 days, can be integrated into farm‑level decision support tools to trigger irrigation schedules or adjust planting dates. Lenders and insurers can also use the drought maps to assess risk exposure for agricultural portfolios, potentially recalibrating premiums or loan terms. The system’s ability to capture sub‑regional variations means that even smallholder farms in the Midwest can benefit from tailored advisories. However, the spatial resolution, while improving, still lags behind the granularity of local weather stations, so ground truthing remains essential. Combining GRACE‑FO outputs with satellite optical indices like NDVI can enhance the accuracy of crop‑stress detection. Farmers should therefore consider subscribing to a multi‑source monitoring service that fuses gravimetric and optical data. Credit agencies might incorporate GRACE‑FO drought metrics into their risk models to better predict loan defaults during prolonged dry spells. In the long term, the continuous stream of soil‑moisture data could support adaptive water‑allocation policies at the state level. Those who act on this information early will likely see reduced water usage and higher resilience to climate variability.
-
-## 🔥 Wildfire & Forest Monitoring  
-
-Nothing notable this week.
-
-## 🌿 Invasive Species  
-
-Nothing notable this week.
-
-## 🧪 Pesticide & Herbicide  
-
-CropLife’s discussion on Farm Bill expiration highlights the uncertainty surrounding ag‑input subsidies and the potential shift toward a more market‑driven pricing model for herbicides and pesticides. The conversation underscores the need for retailers to diversify their product portfolios to remain competitive as government support wanes. Meanwhile, CAST’s honour of former USDA economist Joseph Glauber brings attention to the importance of rigorous economic analysis in shaping ag‑policy, reminding retailers that market signals will become even more critical. A podcast exploring modern weed‑management strategies offers practical insights into integrating biocontrol and precision‑application techniques, which can reduce chemical usage and lower costs. The episode also stresses the value of data‑driven decision making, a theme that echoes the broader shift toward digital ag‑inputs. Advice on timing ag‑retail sales suggests that starting conversations earlier in the season can strengthen customer relationships and improve inventory planning. By engaging customers before the peak demand period, retailers can better match supply with demand and reduce waste. A strategy for year‑round customer engagement further emphasizes the need to maintain continuous dialogue, turning pre‑pay conversations into long‑term loyalty. Together, these pieces paint a picture of a retail landscape that must adapt to policy changes, embrace technology, and focus on customer experience. Retailers who invest in digital platforms, data analytics, and proactive outreach will be better positioned to navigate the evolving ag‑input market. Input suppliers should also consider offering bundled solutions that combine herbicides with precision‑application tools to meet the growing demand for integrated pest management.
+ESA’s Copernicus program continues to deliver high‑resolution snapshots of the planet’s most remote and dynamic landscapes. A recent Sentinel‑3 image of West Antarctica shows the extent of ice‑sheet retreat, while a Sentinel‑2 view of Namibia’s Etosha National Park captures the shifting salinity of the country’s largest salt pan. Meanwhile, the first operational images from the IRIDE Eaglet II constellation include a clear view of Gibraltar, demonstrating the platform’s ability to monitor coastal and urban environments under cloud cover. Together, these images underscore the growing breadth of Copernicus data, offering practitioners a more granular view of land‑surface change that can inform everything from crop‑health monitoring to climate‑impact assessments.
 
 ---
 
-*QuantAgri Remote Sensing Intelligence Digest · October 10, 2026*  
-*Sources: Google News · NASA Earth Observatory · ESA Copernicus · USGS*  
-*FloodList · Circle of Blue · USDA APHIS · EPA · AgFunder · CropLife · and RSS feeds*  
+## 🌾 Agriculture & Crop Monitoring  
+Innovation is the theme of this week’s ag‑tech headlines. SenseUP is pushing RNAi pesticides from niche to mainstream, promising a more precise way to target pests without the collateral damage of conventional chemicals. Molagri is raising capital to develop “updatable” biopesticides that can evolve alongside resistance, a strategy that could keep farmers ahead of evolving pest pressures. In parallel, PerPlant has secured a deal with Valtra to embed its AI crop‑sensor directly into new tractors, allowing growers to collect real‑time crop‑health data at the point of application. These sensor deployments dovetail with AgriFood Signals’ report that India’s Scimplify has raised $25 million, while Deere and the USDA are funding seed‑research and food‑security initiatives, illustrating a global push toward precision and sustainability. The UK Agri‑Tech Centre’s decision to slash its workforce by 60 percent reflects a strategic pivot toward a leaner operating model, suggesting that firms are re‑allocating resources toward technology and data analytics rather than traditional staffing. For farmers and lenders, the takeaway is clear: the next generation of tools will be data‑driven, and those who can integrate sensor data into decision‑making will gain a competitive edge.
+
+---
+
+## 🌊 Flood & Water Hazards  
+Nothing notable this week.
+
+---
+
+## 💧 Freshwater & Groundwater  
+The convergence of satellite science and policy is sharpening the focus on groundwater depletion. NASA’s latest gravimetry study shows that the planet’s freshwater reserves are shrinking faster than earlier models suggested, a finding that dovetails with a research article linking the Colorado River drought to unprecedented groundwater loss in the Southwest. In Iowa, political leaders are pivoting toward aggressive measures to curb pollution and disease linked to agriculture, signaling a potential shift in regulatory pressure on water‑intensive farming practices. Meanwhile, Michigan lawmakers are close to passing a statewide septic‑code that would increase inspections and reduce the risk of human waste contaminating lakes, rivers, and groundwater. Together, these developments paint a picture of a water‑scarce world where policy, science, and industry must align to protect both human health and agricultural productivity. Water managers should consider integrating satellite‑derived groundwater metrics into their planning, while policymakers may need to revisit water‑use regulations in light of the new data.
+
+---
+
+## 🏜 Drought Watch  
+Nothing notable this week.
+
+---
+
+## 🔥 Wildfire & Forest Monitoring  
+Nothing notable this week.
+
+---
+
+## 🌿 Invasive Species  
+Nothing notable this week.
+
+---
+
+## 🧪 Pesticide & Herbicide  
+The crop‑protection landscape is shifting toward biologicals and precision tools. CropLife’s “Preparing Your Sales Team for the Biologicals Battlefield” stresses that scientific breakthroughs alone are insufficient; robust training, field proof, and distributor support are essential for adoption. Complementing this, a feature on “Four Building Blocks for Unlocking Precision Ag’s Full Value” outlines foundational variables that growers and retailers must address to realize the full potential of precision technologies. A recent podcast with PTx explores retrofit‑first expansion, targeted spraying, and the hurdles of scaling autonomous equipment, offering a glimpse into the operational realities of next‑generation spraying. Meanwhile, Chinese suppliers are moving closer to U.S. growers, prompting retailers to leverage agronomic expertise and local trust to differentiate themselves. Finally, Syngenta’s appointment of Jeff Cecil as North America crop‑protection president signals a leadership shift that could influence product strategy and support for growers. For practitioners, the lesson is that success will hinge on a blend of technology, training, and supply‑chain agility.
+
+---
+
+*QuantAgri Remote Sensing Intelligence Digest · October 17, 2026*  
+*Sources: Google News, NASA Earth Observatory, ESA Copernicus, USGS, FloodList, Circle of Blue, USDA APHIS, EPA, AgFunder, CropLife, and RSS feeds*  
 *[Past issues](https://github.com/rmkenv/quantagri/tree/main/data/rs_newsletter)*
 
 ---
 **Further Reading** *(articles referenced above without inline links)*
 
-- [EU upgrades satellite tech to detect early crop drought risks 08 October 2026 Free - Irish Farmers Journal](https://news.google.com/rss/articles/CBMitgFBVV95cUxPb3hRLUl5QmVIcmloOEg0cksxdFRod3d0Ymt2NHdKbkFRYzhrT0lvOHJDLTdhQWVMYl9oSEk2QXV1cmNTZ2U4NGlhZF9FSnB2QUZ0VWVmVHlIME50THV0UG53alNzNWlnLVhVMFdSMGVYUGdlNDNKaVprMENnMHFDM1V6M1NqdGhFM1hFLWdtWEZaSzlXOHd2R2UycGV6WVRKeVlBSWxYTEFCeUJBSk1QcXdOUXpuZw?oc=5) — *Google News: Crop Monitoring*
-- [Monitoring and forecasting groundwater storage dynamics in arid Wadi systems using GRACE/GRACE-FO satellite observations and XGBoost machine learning: Wadi El-Assiuti, Egypt (2003–2030) - Nature](https://news.google.com/rss/articles/CBMiX0FVX3lxTE1qbm4xSnlWVnhCS0dRT2VjaHRtRVE1d3JsNXBhTmNaY2RZdjVxZUMtcWxfZzRVbEFiYzdBSXNnY0NpM0dWZnlES05ISnZ0UU9qLWNvcm9QSHlSUVdVaHV3?oc=5) — *Google News: Water Scarcity*
-- [GRACE FO Soil Moisture Within Continental United States: Monitoring Drought - NASA SVS (.gov)](https://news.google.com/rss/articles/CBMiRkFVX3lxTE1oQjUtWlJEOXExdGFNVXhfaTF4M1dFU2NSV3R2MnczWGt3T3FQYm5nVTVRc05ZUTA3cTJEd21JMHpiNjAwVUE?oc=5) — *Google News: Drought Satellite*
+- [NASA confirms Earth is losing freshwater faster than thought - geekspin](https://news.google.com/rss/articles/CBMiiAFBVV95cUxOVlNzd1gyWUl5c0JnOU1jSEhualNFc3RER01wSmdSdFVoeGFYbmwzcmdxVnd3b1k2T2toZE5WXzExMmpmaVFvRGM3ZjVnYjV5emZqOHBfbHFfVkZYRDBMQ2N3SW10NXpjVlFFUmQzaUFkSjZBajNtSmNJVVpHMElKcUZSVzl3al9Z?oc=5) — *Google News: Groundwater Aquifer*
+- [RESEARCH ARTICLE: Colorado River drought drives unprecedented pattern of groundwater loss - Maven's Notebook](https://news.google.com/rss/articles/CBMixgFBVV95cUxPaW1UeGRiQlItYlRwa3A5UDdpaHRLbHJEckRLZUtaVjk0RVp5Ukh0S1NselBDaGFrNDN3QVhsSksxdUVmTjZsdHhTNHhfYlo1TDFIVFVhT09tTDE1bVBhckJaSnBKTjNDaWRPekFJM05tYWpBVm9KeklWdnVsZmN4cEd4MGI3MXNBM2EwM05XcWptN0V2cThaVU13akVYXzBuT0V0V2xtSkFKd2NsSkZhenllZWdCYm1qaTZRVTdNT09FZGN4bFE?oc=5) — *Google News: Water Scarcity*
+- [Earth from Space: West Antarctica](https://www.esa.int/ESA_Multimedia/Images/2026/10/Earth_from_Space_West_Antarctica) — *ESA Earth Observation*
 - [Gibraltar imaged by IRIDE Eaglet II](https://www.esa.int/ESA_Multimedia/Images/2026/10/Gibraltar_imaged_by_IRIDE_Eaglet_II) — *ESA Earth Observation*
-- [Sentinel-3C returns its first views of Earth](https://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-3/Sentinel-3C_returns_its_first_views_of_Earth) — *ESA Earth Observation*
-- [Introducing ESA’s Earth Virtual Expert](https://www.esa.int/Applications/Observing_the_Earth/FutureEO/Introducing_ESA_s_Earth_Virtual_Expert) — *ESA Earth Observation*
-- [Earth from Space: Typhoon Surigae](https://www.esa.int/ESA_Multimedia/Images/2026/10/Earth_from_Space_Typhoon_Surigae) — *ESA Earth Observation*
-- [Italy’s IRIDE completes Eaglet II constellation](https://www.esa.int/Applications/Observing_the_Earth/IRIDE/Italy_s_IRIDE_completes_Eaglet_II_constellation) — *ESA Earth Observation*
-- [US spray drone market “very much in flux” as firms attempt to navigate evolving landscape, says ASDC](https://agfundernews.com/us-spray-drone-market-very-much-in-flux-as-firms-attempt-to-navigate-evolving-landscape-says-asdc) — *AgFunder News*
-- [AgriFood Signals: Edonia raises funds to scale spirulina protein, AI agents for restaurants, PepsiCo does VR](https://agfundernews.com/agrifood-signals-edonia-raises-funds-to-scale-spirulina-protein-ai-agents-for-restaurants-pepsico-does-vr) — *AgFunder News*
-- [Could GLP-1 drugs finally put a price on crop nutrient density?](https://agfundernews.com/could-glp-1-drugs-finally-put-a-price-on-crop-nutrient-density) — *AgFunder News*
-- [Twiga’s demise underscores the need for new financing models in African agrifoodtech](https://agfundernews.com/twigas-demise-underscores-the-need-for-new-financing-models-in-african-agrifoodtech) — *AgFunder News*
-- [Myca raises $1.3m pre-seed to put AI agents in charge of agribusiness field operations](https://agfundernews.com/myca-raises-1-3m-pre-seed-to-put-ai-agents-in-charge-of-agribusiness-field-operations) — *AgFunder News*
-- [When a forest burns, what does it mean for lakes? Scientists are trying to find out](https://www.circleofblue.org/2026/great-lakes/when-a-forest-burns-what-does-it-mean-for-lakes-scientists-are-trying-to-find-out/) — *Circle of Blue*
-- [Kansas Prairie Festival Celebrates Agriculture That Protects Soil, Water, and Communities](https://www.circleofblue.org/2026/agriculture/kansas-prairie-festival-celebrates-agriculture-that-protects-soil-water-and-communities/) — *Circle of Blue*
-- [CropLife Retail Week: Farm Bill Expired: ARA CEO Breaks Down What’s Next for Ag Retail](https://www.croplife.com/management/croplife-retail-week-farm-bill-expired-ara-ceo-breaks-down-whats-next-for-ag-retail/?utm_source=rss&utm_medium=rss&utm_campaign=croplife-retail-week-farm-bill-expired-ara-ceo-breaks-down-whats-next-for-ag-retail) — *CropLife*
-- [CAST Names Former USDA Chief Economist Dr. Joseph Glauber 2026 Recipient of the CAST Lifetime Achievement Award](https://www.croplife.com/management/employees/cast-names-former-usda-chief-economist-dr-joseph-glauber-2026-recipient-of-the-cast-lifetime-achievement-award/?utm_source=rss&utm_medium=rss&utm_campaign=cast-names-former-usda-chief-economist-dr-joseph-glauber-2026-recipient-of-the-cast-lifetime-achievement-award) — *CropLife*
-- [Is Your Ag Retail Business Waiting Too Long to Start Selling Next Season?](https://www.croplife.com/management/is-your-ag-retail-business-waiting-too-long-to-start-selling-next-season/?utm_source=rss&utm_medium=rss&utm_campaign=is-your-ag-retail-business-waiting-too-long-to-start-selling-next-season) — *CropLife*
-- [From Seasonal Sales to Year-Round Customer Engagement in Ag Retail](https://www.croplife.com/management/from-seasonal-sales-to-year-round-customer-engagement-in-ag-retail/?utm_source=rss&utm_medium=rss&utm_campaign=from-seasonal-sales-to-year-round-customer-engagement-in-ag-retail) — *CropLife*
+- [Earth from Space: Namibia’s biggest salt pan](https://www.esa.int/ESA_Multimedia/Images/2026/10/Earth_from_Space_Namibia_s_biggest_salt_pan) — *ESA Earth Observation*
+- [🎥 SenseUP aims to take RNAi pesticides from niche to mainstream](https://agfundernews.com/%f0%9f%8e%a5-senseup-aims-to-take-rnai-pesticides-from-niche-to-mainstream) — *AgFunder News*
+- [UK Agri-Tech Centre to slash workforce by 60% in strategic pivot to new operating model](https://agfundernews.com/uk-agri-tech-centre-to-slash-workforce-by-60-in-strategic-pivot-to-new-operating-model) — *AgFunder News*
+- [AgriFood Signals: India’s Scimplify nets $25m, Deere funds food security, USDA funds seed research](https://agfundernews.com/agrifood-signals-indias-scimplify-nets-25m-deere-funds-food-security-usda-funds-seed-research) — *AgFunder News*
+- [Molagri raises $5.8m to build ‘updatable’ biopesticides](https://agfundernews.com/molagri-raises-5-8m-to-build-updatable-biopesticides) — *AgFunder News*
+- [PerPlant lands Valtra deal to put its AI crop sensor on tractors straight from the factory](https://agfundernews.com/perplant-lands-valtra-deal-to-put-its-ai-crop-sensor-on-tractors-straight-from-the-factory) — *AgFunder News*
+- [Iowa Campaigns Pivot on Farming Perils](https://www.circleofblue.org/2026/opinion/iowa-campaigns-pivot-on-farming-perils/) — *Circle of Blue*
+- [Michigan Draws Closer To State Septic Code](https://www.circleofblue.org/2026/supply/water-management/infrastructure/michigan-draws-closer-to-state-septic-code/) — *Circle of Blue*
+- [Preparing Your Sales Team for the Biologicals Battlefield](https://www.croplife.com/special-reports/biologicals/preparing-your-sales-team-for-the-biologicals-battlefield/?utm_source=rss&utm_medium=rss&utm_campaign=preparing-your-sales-team-for-the-biologicals-battlefield) — *CropLife*
+- [Four Building Blocks for Unlocking Precision Ag’s Full Value](https://www.croplife.com/smart-tech/four-building-blocks-for-unlocking-precision-ags-full-value/?utm_source=rss&utm_medium=rss&utm_campaign=four-building-blocks-for-unlocking-precision-ags-full-value) — *CropLife*
+- [Ag Tech Talk Podcast: PTx on Precision Ag Retrofits, Targeted Spraying, and Autonomy](https://www.croplife.com/smart-tech/ag-tech-talk-podcast-ptx-on-precision-ag-retrofits-targeted-spraying-and-autonomy/?utm_source=rss&utm_medium=rss&utm_campaign=ag-tech-talk-podcast-ptx-on-precision-ag-retrofits-targeted-spraying-and-autonomy) — *CropLife*
+- [When Chinese Suppliers Move Closer to the Grower: What It Means for U.S. Ag Retailers](https://www.croplife.com/management/when-chinese-suppliers-move-closer-to-the-grower-what-it-means-for-u-s-ag-retailers/?utm_source=rss&utm_medium=rss&utm_campaign=when-chinese-suppliers-move-closer-to-the-grower-what-it-means-for-u-s-ag-retailers) — *CropLife*
+- [Syngenta Names Jeff Cecil President, North America Crop Protection](https://www.croplife.com/crop-inputs/syngenta-names-jeff-cecil-president-north-america-crop-protection/?utm_source=rss&utm_medium=rss&utm_campaign=syngenta-names-jeff-cecil-president-north-america-crop-protection) — *CropLife*
