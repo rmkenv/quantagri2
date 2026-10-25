@@ -1,0 +1,238 @@
+{
+  "fetchedAt": "2026-10-25T10:35:59.699185+00:00",
+  "date": "2026-10-25",
+  "etfs": {
+    "CORN": {
+      "ticker": "CORN",
+      "name": "Teucrium Corn Fund",
+      "price": 17.68,
+      "weekChg": -1.83,
+      "high52w": 20.29,
+      "low52w": 16.47,
+      "pctOf52wH": 87.1,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": -0.56
+    },
+    "SOYB": {
+      "ticker": "SOYB",
+      "name": "Teucrium Soybean Fund",
+      "price": 26.79,
+      "weekChg": 0.04,
+      "high52w": 28.14,
+      "low52w": 21.71,
+      "pctOf52wH": 95.2,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 0.56
+    },
+    "WEAT": {
+      "ticker": "WEAT",
+      "name": "Teucrium Wheat Fund",
+      "price": 22.83,
+      "weekChg": -4.4,
+      "high52w": 28.0,
+      "low52w": 19.88,
+      "pctOf52wH": 81.5,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": -0.04
+    },
+    "CANE": {
+      "ticker": "CANE",
+      "name": "Teucrium Sugar Fund",
+      "price": 12.15,
+      "weekChg": -0.82,
+      "high52w": 12.47,
+      "low52w": 9.02,
+      "pctOf52wH": 97.4,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 0.75
+    },
+    "TAGS": {
+      "ticker": "TAGS",
+      "name": "Teucrium Agricultural Fund",
+      "price": 26.43,
+      "weekChg": -1.86,
+      "high52w": 28.77,
+      "low52w": 22.56,
+      "pctOf52wH": 91.9,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 0.0
+    },
+    "DBA": {
+      "ticker": "DBA",
+      "name": "Invesco DB Agriculture Fund",
+      "price": 27.87,
+      "weekChg": -1.17,
+      "high52w": 29.49,
+      "low52w": 24.7861,
+      "pctOf52wH": 94.5,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": -0.18
+    }
+  },
+  "futures": {
+    "ZS=F": {
+      "ticker": "ZS=F",
+      "name": "Soybeans (CBOT)",
+      "price": 1256.5,
+      "weekChg": 0.24,
+      "high52w": 1328.0,
+      "low52w": 1023.25,
+      "pctOf52wH": 94.6,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 0.28
+    },
+    "ZC=F": {
+      "ticker": "ZC=F",
+      "name": "Corn (CBOT)",
+      "price": 456.0,
+      "weekChg": -2.36,
+      "high52w": 543.0,
+      "low52w": 402.0,
+      "pctOf52wH": 84.0,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": -0.98
+    },
+    "ZW=F": {
+      "ticker": "ZW=F",
+      "name": "Wheat (CBOT)",
+      "price": 625.0,
+      "weekChg": -4.62,
+      "high52w": 767.0,
+      "low52w": 506.25,
+      "pctOf52wH": 81.5,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 0.04
+    },
+    "SB=F": {
+      "ticker": "SB=F",
+      "name": "Sugar #11 (ICE)",
+      "price": 20.24,
+      "weekChg": -1.6,
+      "high52w": 21.13,
+      "low52w": 13.31,
+      "pctOf52wH": 95.8,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 0.55
+    },
+    "CT=F": {
+      "ticker": "CT=F",
+      "name": "Cotton #2 (ICE)",
+      "price": 80.2,
+      "weekChg": 0.09,
+      "high52w": 91.7,
+      "low52w": 61.06,
+      "pctOf52wH": 87.5,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": -0.73
+    },
+    "ZL=F": {
+      "ticker": "ZL=F",
+      "name": "Soybean Oil (CBOT)",
+      "price": 66.83,
+      "weekChg": 0.21,
+      "high52w": 79.09,
+      "low52w": 47.9,
+      "pctOf52wH": 84.5,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 0.13
+    },
+    "ZM=F": {
+      "ticker": "ZM=F",
+      "name": "Soybean Meal (CBOT)",
+      "price": 346.1,
+      "weekChg": -2.45,
+      "high52w": 376.1,
+      "low52w": 286.4,
+      "pctOf52wH": 92.0,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": -0.35
+    },
+    "KE=F": {
+      "ticker": "KE=F",
+      "name": "KC HRW Wheat (CBOT)",
+      "price": 664.5,
+      "weekChg": -5.0,
+      "high52w": 827.75,
+      "low52w": 498.75,
+      "pctOf52wH": 80.3,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": -0.19
+    }
+  },
+  "commodityPrices": {
+    "Soybeans": {
+      "ticker": "ZS=F",
+      "name": "Soybeans (CBOT)",
+      "price": 1256.5,
+      "weekChg": 0.24,
+      "high52w": 1328.0,
+      "low52w": 1023.25,
+      "pctOf52wH": 94.6,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 0.28
+    },
+    "Corn": {
+      "ticker": "ZC=F",
+      "name": "Corn (CBOT)",
+      "price": 456.0,
+      "weekChg": -2.36,
+      "high52w": 543.0,
+      "low52w": 402.0,
+      "pctOf52wH": 84.0,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": -0.98
+    },
+    "Wheat": {
+      "ticker": "ZW=F",
+      "name": "Wheat (CBOT)",
+      "price": 625.0,
+      "weekChg": -4.62,
+      "high52w": 767.0,
+      "low52w": 506.25,
+      "pctOf52wH": 81.5,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 0.04
+    },
+    "Sugar": {
+      "ticker": "SB=F",
+      "name": "Sugar #11 (ICE)",
+      "price": 20.24,
+      "weekChg": -1.6,
+      "high52w": 21.13,
+      "low52w": 13.31,
+      "pctOf52wH": 95.8,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 0.55
+    },
+    "Cotton": {
+      "ticker": "CT=F",
+      "name": "Cotton #2 (ICE)",
+      "price": 80.2,
+      "weekChg": 0.09,
+      "high52w": 91.7,
+      "low52w": 61.06,
+      "pctOf52wH": 87.5,
+      "lastDate": "2026-10-23",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": -0.73
+    }
+  }
+}
