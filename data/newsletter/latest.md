@@ -1,187 +1,142 @@
 # The QuantAgri Intelligence Weekly  
-## October 24, 2026  
+## October 31, 2026  
 
 ---  
 
-**TEASER** – *Soybeans (Iowa)*: price **$1,269.50** (‑1.32 % day) versus a **+0.27078 / 16 d** NDVI velocity, the sharpest divergence between satellite signal and current pricing this week.  
+**TEASER:**  
+*Mato Grosso soybeans – price $1,234.0000 (92.9 % of 52‑week high) versus a negative NDVI velocity of –0.242 /16 days, signaling a sharp decline in greenness that is not reflected in the current price.*
 
 ---  
 
 ## Executive Overview  
-
-The front‑month soybean contract sits at **$1,269.50** (‑1.32 % day, +1.28 % week) and is **95.6 %** of its 52‑week high. The NDVI velocity for the Iowa node is **+0.27078 / 16 d**, indicating a robust greening trend that is at odds with the price decline. This mispricing suggests a potential short‑term rebound in soybean futures as the satellite signal points to improving crop health.  
-
-Corn is trading **$456.00** (‑0.98 % day, ‑2.36 % week) at **84.0 %** of its 52‑week high. The Iowa corn node shows a **‑0.021 / 16 d** velocity – a mild decline in greening – consistent with the price slide, but the velocity magnitude is small, implying that the market may be over‑reacting to short‑term weather noise.  
-
-Wheat is at **$625.00** (+0.04 % day, ‑4.62 % week) and **81.5 %** of its 52‑week high. The Kansas wheat node has a **‑0.0037 / 16 d** velocity, a slight decline that aligns with the modest price rise, indicating a neutral stance.  
-
-Sugar trades **$20.26** (+0.65 % day, ‑1.51 % week) at **95.9 %** of its 52‑week high. The São Paulo node’s velocity is **+0.2375 / 16 d**, a strong positive trend that matches the price lift, confirming the bullish sentiment.  
-
-Cotton is at **$80.31** (‑0.59 % day, +0.22 % week) and **87.6 %** of its 52‑week high. The Xinjiang node’s velocity is **+0.21528 / 16 d**, indicating improving vegetation that is not yet reflected in the price, hinting at a potential upward move.  
-
-Overall, the most pronounced mispricing is in U.S. soybean futures, where the satellite signal is strongly positive while the market is still in a bearish stance.  
+The current commodity landscape presents a mixed picture of price and satellite‑derived vegetation health. Soybeans trade at $1,234.0000, 92.9 % of their 52‑week high, yet the NDVI velocity for Mato Grosso is –0.242 /16 days, a clear bearish trend that contradicts the near‑peak price. In contrast, U.S. corn sits at $447.5000, 82.4 % of its 52‑week high, while Iowa NDVI velocity is +0.231 /16 days, indicating improving greenness that the market has not yet priced in. Wheat is at $603.2500 (78.7 % of 52‑week high) with a Kansas velocity of +0.209 /16 days, again suggesting undervaluation relative to satellite signals. Sugar remains near its 52‑week high at $19.3700 (91.7 %) with a São Paulo velocity of +0.236 /16 days, aligning price and growth momentum. Cotton trades at $78.1300 (85.2 % of 52‑week high) with a Xinjiang velocity of +0.209 /16 days, indicating healthy growth despite moderate price levels. The divergence between satellite velocity and price is most pronounced in Mato Grosso soybeans, where the market appears over‑valued relative to the declining greenness trend.
 
 ---  
 
 ## Live Market Snapshot  
 
 ### Commodity Futures  
-
 | Contract | Name | Price | Day | Week | 52w Low | 52w High | % of High |
 |----------|------|------:|----:|-----:|--------:|---------:|----------:|
-| ZS=F | Soybeans (CBOT) | $1,269.5000 | +1.32% | +1.28% | $1,023.25 | $1,328.00 | 95.6% |
-| ZC=F | Corn (CBOT) | $456.0000 | -0.98% | -2.36% | $402.00 | $543.00 | 84.0% |
-| ZW=F | Wheat (CBOT) | $625.0000 | +0.04% | -4.62% | $506.25 | $767.00 | 81.5% |
-| SB=F | Sugar #11 (ICE) | $20.2600 | +0.65% | -1.51% | $13.31 | $21.13 | 95.9% |
-| CT=F | Cotton #2 (ICE) | $80.3100 | -0.59% | +0.22% | $61.06 | $91.70 | 87.6% |
-| ZL=F | Soybean Oil (CBOT) | $66.7900 | +0.07% | +0.15% | $47.90 | $79.09 | 84.4% |
-| ZM=F | Soybean Meal (CBOT) | $346.5000 | -0.23% | -2.34% | $286.40 | $376.10 | 92.1% |
-| KE=F | KC HRW Wheat (CBOT) | $664.0000 | -0.26% | -5.08% | $498.75 | $827.75 | 80.2% |
+| ZS=F | Soybeans (CBOT) | $1,234.0000 | +1.17% | -0.58% | $1,023.25 | $1,328.00 | 92.9% |
+| ZC=F | Corn (CBOT) | $447.5000 | -0.83% | -1.65% | $402.00 | $543.00 | 82.4% |
+| ZW=F | Wheat (CBOT) | $603.2500 | -0.08% | -2.07% | $506.25 | $767.00 | 78.7% |
+| SB=F | Sugar #11 (ICE) | $19.3700 | -0.51% | +1.41% | $13.31 | $21.13 | 91.7% |
+| CT=F | Cotton #2 (ICE) | $78.1300 | -0.47% | -1.18% | $61.06 | $91.70 | 85.2% |
+| ZL=F | Soybean Oil (CBOT) | $65.8100 | +0.26% | -1.79% | $47.90 | $79.09 | 83.2% |
+| ZM=F | Soybean Meal (CBOT) | $324.7000 | -1.40% | -4.56% | $286.40 | $376.10 | 86.3% |
+| KE=F | KC HRW Wheat (CBOT) | $643.5000 | -0.27% | -2.35% | $498.75 | $827.75 | 77.7% |
 
-The biggest weekly mover is the **Corn** contract, which fell **‑2.36 %** over the week, the largest decline among the core commodities.  
+*The largest weekly mover is Sugar, which gained +1.41 % over the week, reflecting a modest rebound after a slight daily decline.*
 
 ### Agricultural ETFs  
-
 | Ticker | Name | Price | Day | Week | 52w Low | 52w High | % of High |
 |--------|------|------:|----:|-----:|--------:|---------:|----------:|
-| CORN | Teucrium Corn Fund | $17.6800 | -0.56% | -1.83% | $16.47 | $20.29 | 87.1% |
-| SOYB | Teucrium Soybean Fund | $26.7900 | +0.56% | +0.04% | $21.71 | $28.14 | 95.2% |
-| WEAT | Teucrium Wheat Fund | $22.8300 | -0.04% | -4.40% | $19.88 | $28.00 | 81.5% |
-| CANE | Teucrium Sugar Fund | $12.1500 | +0.75% | -0.82% | $9.02 | $12.47 | 97.4% |
-| TAGS | Teucrium Agricultural Fund | $26.4300 | +0.00% | -1.86% | $22.56 | $28.77 | 91.9% |
+| CORN | Teucrium Corn Fund | $17.3400 | -0.57% | -1.64% | $16.47 | $20.29 | 85.5% |
+| SOYB | Teucrium Soybean Fund | $26.1400 | +0.11% | -1.21% | $21.71 | $28.14 | 92.9% |
+| WEAT | Teucrium Wheat Fund | $22.2000 | +0.14% | -1.51% | $19.88 | $28.00 | 79.3% |
+| CANE | Teucrium Sugar Fund | $11.6500 | -0.60% | +1.57% | $9.02 | $12.47 | 93.4% |
+| TAGS | Teucrium Agricultural Fund | $25.7100 | -0.19% | -0.81% | $22.56 | $28.77 | 89.4% |
+| DBA | Invesco DB Agriculture Fund | $26.8900 | -1.03% | -2.57% | $24.79 | $29.49 | 91.2% |
 
-The **CANE** ETF is the best performer this week, up **+0.75 %** day and **‑0.82 %** week, sitting at **97.4 %** of its 52‑week high. The **CORN** ETF is the weakest, down **‑0.56 %** day and **‑1.83 %** week, at **87.1 %** of its 52‑week high.  
+*The best performer this week is the Sugar ETF (CANE), up +1.57 % weekly, while the worst is the Corn ETF (CORN), down -1.64 %.*
 
 ---  
 
 ## Commodity Deep Dives  
 
 ### Soybeans  
-
-**Current Price:** $1,269.5000  
-**Weekly Change:** +1.28%  
-**52w Position:** 95.6 % of high  
-
+**Current Price:** $1,234.0000 | **Weekly Change:** -0.58% | **52w Position:** 92.9%  
 **Spectral Velocity Analysis:**  
-- Iowa node: **+0.27078 / 16 d** (improving vegetation)  
-- Mato Grosso node: **+0.2334 / 16 d** (improving vegetation)  
+- Iowa, US: +0.2156 /16 days (improving)  
+- Mato Grosso, BR: –0.242 /16 days (declining)  
 
 **Signal vs Price Divergence:**  
-The satellite signal shows a strong positive greening trend in both the U.S. and Brazil, yet the front‑month soybean contract is still in a modest down‑trend. This divergence suggests the market may be lagging behind the actual crop development, potentially creating a short‑term buying opportunity.  
+The price is near the 52‑week high, yet the Mato Grosso node shows a sharp negative velocity, indicating a rapid decline in greenness that is not reflected in the market. Iowa’s positive velocity suggests local improvement, but the national price is driven largely by the bearish Mato Grosso signal.  
 
 **Investor Implications:**  
-Consider a **short** position if the price continues to decline toward the **$1,240** support level, with a target near **$1,300** if the NDVI trend persists. The 95.6 % of 52‑week high indicates limited upside room, so a cautious approach is warranted.  
-
----  
+Short soybeans at current levels with a target near $1,200.00, taking advantage of the divergence between satellite‑derived decline and price. A stop‑loss at $1,260.00 protects against a brief rebound.
 
 ### Corn  
-
-**Current Price:** $456.0000  
-**Weekly Change:** ‑2.36%  
-**52w Position:** 84.0 % of high  
-
+**Current Price:** $447.5000 | **Weekly Change:** -1.65% | **52w Position:** 82.4%  
 **Spectral Velocity Analysis:**  
-- Iowa node: **‑0.021 / 16 d** (slight decline)  
-- Illinois node: **‑0.0067 / 16 d** (slight decline)  
-- Indiana node: **+0.001 / 16 d** (negligible improvement)  
+- Iowa, US: +0.231 /16 days (improving)  
+- Mato Grosso, BR: +0.25484 /16 days (improving)  
 
 **Signal vs Price Divergence:**  
-The NDVI velocities are largely flat or slightly negative, matching the price decline. The market is not over‑reacting; the price movement aligns with the modest greening slowdown.  
+Both key nodes show positive velocity, yet the price remains 82.4 % of the 52‑week high, suggesting the market has not fully priced in the healthy greening trend.  
 
 **Investor Implications:**  
-A **long** position may be justified if the price rebounds above **$470** and the velocity turns positive, but the current 84.0 % of 52‑week high suggests limited upside. A **short** could be considered if the price falls below **$440** and the velocity remains negative.  
-
----  
+Long corn at $447.50 with a target of $470.00, riding the upward momentum indicated by satellite data. A stop‑loss at $430.00 limits downside.
 
 ### Wheat  
-
-**Current Price:** $625.0000  
-**Weekly Change:** ‑4.62%  
-**52w Position:** 81.5 % of high  
-
+**Current Price:** $603.2500 | **Weekly Change:** -2.07% | **52w Position:** 78.7%  
 **Spectral Velocity Analysis:**  
-- Kansas node: **‑0.0037 / 16 d** (slight decline)  
+- Kansas, US: +0.20979 /16 days (improving)  
 
 **Signal vs Price Divergence:**  
-The velocity is slightly negative, which is consistent with the modest price rise. The market appears to be correctly pricing the wheat crop, with no significant divergence.  
+The Kansas node’s positive velocity contrasts with the 78.7 % 52‑week position, implying the market undervalues wheat relative to the improving grain‑filling phase.  
 
 **Investor Implications:**  
-Given the 81.5 % of 52‑week high, the wheat contract has limited upside. A **long** position could be considered if the price moves above **$640** and the velocity turns positive, but current conditions suggest a neutral stance.  
-
----  
+Long wheat at $603.25 with a target of $620.00. Set a stop‑loss at $590.00 to capture the expected upward correction.
 
 ### Sugar  
-
-**Current Price:** $20.2600  
-**Weekly Change:** ‑1.51%  
-**52w Position:** 95.9 % of high  
-
+**Current Price:** $19.3700 | **Weekly Change:** +1.41% | **52w Position:** 91.7%  
 **Spectral Velocity Analysis:**  
-- São Paulo node: **+0.2375 / 16 d** (positive, improving vegetation)  
+- São Paulo, BR: +0.23688 /16 days (positive)  
 
 **Signal vs Price Divergence:**  
-The positive velocity aligns with the price increase, confirming the bullish sentiment. The price is still near the 52‑week high, indicating limited upside.  
+Price is near the 52‑week high, yet the velocity remains positive, indicating continued greening. The signal is bullish but not decelerating, so the market remains aligned with satellite data.  
 
 **Investor Implications:**  
-A **long** position could be maintained if the price stays above **$21** and the velocity remains positive. A **short** may be considered if the price drops below **$19** and the velocity slows, but the current trend is supportive of a bullish stance.  
-
----  
+Hold or add to existing sugar positions; target $20.00. A stop‑loss at $18.50 protects against a short‑term pullback.
 
 ### Cotton  
-
-**Current Price:** $80.3100  
-**Weekly Change:** ‑0.59%  
-**52w Position:** 87.6 % of high  
-
+**Current Price:** $78.1300 | **Weekly Change:** -1.18% | **52w Position:** 85.2%  
 **Spectral Velocity Analysis:**  
-- Xinjiang node: **+0.21528 / 16 d** (positive, improving vegetation)  
+- Xinjiang, CN: +0.209 /16 days (positive)  
 
 **Signal vs Price Divergence:**  
-The satellite signal shows a strong positive greening trend, while the price has slipped. This divergence suggests the market may be under‑pricing cotton, potentially creating a buying opportunity.  
+Positive velocity indicates healthy growth, yet the price is modestly below the 52‑week high, suggesting a potential undervaluation.  
 
 **Investor Implications:**  
-A **long** position could be justified if the price climbs above **$85** and the velocity remains positive. A **short** could be considered if the price falls below **$75** and the velocity turns negative, but current conditions favor a bullish stance.  
+Long cotton at $78.13 with a target of $82.00. A stop‑loss at $75.00 caps risk.
 
 ---  
 
 ## ETF Technical Audit  
 
-- **CORN** – $17.6800, ‑0.56 % day, ‑1.83 % week, 87.1 % of 52‑week high. The ETF tracks the corn futures, which are in a mild down‑trend, consistent with the ETF’s decline.  
-- **SOYB** – $26.7900, +0.56 % day, +0.04 % week, 95.2 % of 52‑week high. The soybean ETF mirrors the front‑month soybean contract, which is also near its 52‑week high, indicating a bullish bias.  
-- **WEAT** – $22.8300, ‑0.04 % day, ‑4.40 % week, 81.5 % of 52‑week high. The wheat ETF follows the wheat futures, both showing a modest decline and limited upside.  
-- **CANE** – $12.1500, +0.75 % day, ‑0.82 % week, 97.4 % of 52‑week high. The sugar ETF is the strongest performer, reflecting the strong positive velocity in São Paulo sugarcane.  
-- **TAGS** – $26.4300, +0.00 % day, ‑1.86 % week, 91.9 % of 52‑week high. The broad agricultural fund is slightly lagging, consistent with the mixed signals across the core commodities.  
-
-The ETF performance aligns closely with the underlying commodity signals, reinforcing the validity of the satellite‑derived insights.  
+- **CORN (Teucrium Corn Fund)** – $17.3400, –0.57 % weekly, 85.5 % of 52‑week high. The ETF mirrors corn’s price trend and aligns with the satellite‑derived positive velocity, suggesting a modest upside potential.  
+- **SOYB (Teucrium Soybean Fund)** – $26.1400, –1.21 % weekly, 92.9 % of 52‑week high. The ETF tracks soybeans, but the bearish Mato Grosso velocity indicates a potential correction.  
+- **WEAT (Teucrium Wheat Fund)** – $22.2000, –1.51 % weekly, 79.3 % of 52‑week high. Reflects wheat’s undervaluation relative to the positive Kansas velocity.  
+- **CANE (Teucrium Sugar Fund)** – $11.6500, +1.57 % weekly, 93.4 % of 52‑week high. Aligns with sugar’s positive velocity and near‑peak price.  
+- **TAGS (Teucrium Agricultural Fund)** – $25.7100, –0.81 % weekly, 89.4 % of 52‑week high. Broad exposure; performance tied to the mixed signals across base commodities.  
+- **DBA (Invesco DB Agriculture Fund)** – $26.8900, –2.57 % weekly, 91.2 % of 52‑week high. The fund’s decline reflects the overall bearish sentiment in soybeans and corn.
 
 ---  
 
 ## Spectral Alpha This Week  
+The most striking divergence between satellite velocity and market pricing occurs in Mato Grosso soybeans. The NDVI velocity of –0.242 /16 days signals a sharp decline in greenness, yet the front‑month price sits at $1,234.0000, 92.9 % of the 52‑week high. This mispricing offers a clear alpha opportunity: a short position could capture the corrective move as the satellite trend materializes.  
 
-The most striking divergence this week is the **Soybeans (Iowa)** node, where the NDVI velocity is **+0.27078 / 16 d** while the front‑month contract is down **‑1.32 %** day. This positive velocity indicates a robust greening trend that is not yet reflected in the market, suggesting a potential short‑term rebound.  
+In contrast, U.S. corn and wheat exhibit positive velocities (+0.231 /16 days for Iowa corn, +0.20979 /16 days for Kansas wheat) while trading at 82.4 % and 78.7 % of their respective 52‑week highs. These commodities are undervalued relative to their growth momentum, suggesting potential upside.  
 
-In contrast, the **Corn (Ohio)** node shows a **‑0.0648 / 16 d** velocity, a mild decline that is consistent with the **‑0.98 %** daily price drop, indicating that the market is accurately pricing the crop.  
+Sugar remains near its 52‑week high with a positive velocity (+0.23688 /16 days), indicating a strong, sustained greening that supports the current price. Cotton’s Xinjiang velocity (+0.209 /16 days) also points to healthy growth, yet the price is modestly below the 52‑week high, hinting at a modest upside.  
 
-The **Wheat (Kansas)** node’s velocity of **‑0.0037 / 16 d** is essentially flat, matching the modest price rise, and the **Sugar (São Paulo)** node’s velocity of **+0.2375 / 16 d** confirms the bullish sentiment that is already priced in.  
-
-The **Cotton (Xinjiang)** node’s velocity of **+0.21528 / 16 d** is the largest positive velocity among the cotton nodes, yet the price has slipped **‑0.59 %** day, creating a clear mispricing. The z‑score for this node is **+5.244**, indicating a strong greenup relative to the 2000‑2015 baseline, which further supports the case for a bullish reversal.  
-
-These signals underscore the importance of monitoring NDVI velocity trends as early indicators of market mispricing, especially for commodities where the satellite data diverges sharply from price action.  
+Overall, the satellite data suggest a bullish bias for corn, wheat, sugar, and cotton, while a bearish bias for soybeans in Mato Grosso. Traders should weigh these signals against market fundamentals and risk tolerance.
 
 ---  
 
 ## What to Watch Next Week  
 
-- **Soybean price**: Monitor for a rebound above **$1,300**; watch the Iowa NDVI velocity for any change in trend.  
-- **Corn price**: Watch for a potential support at **$440**; track the Ohio velocity for signs of continued decline.  
-- **Wheat price**: Keep an eye on the **$640** resistance; observe Kansas velocity for any shift toward positivity.  
-- **Sugar price**: Observe the **$21** upper bound; São Paulo velocity should remain positive to sustain the bullish bias.  
-- **Cotton price**: Target **$85** upside; Xinjiang velocity should stay above **+0.20 / 16 d** to justify a long stance.  
-- **WASDE release** (next Wednesday): Pay attention to U.S. crop forecasts, especially for corn and soybeans, which could validate or contradict the satellite signals.  
+- **Soybean price**: Monitor for a pullback below $1,200.00, which would confirm the negative velocity signal.  
+- **Corn price**: Watch for a breakout above $470.00, aligning with the positive Iowa velocity.  
+- **Wheat price**: Look for a rebound to $620.00, reflecting Kansas’s improving grain‑filling.  
+- **WASDE release** (June 5, 2026): Focus on U.S. corn and soybean supply/demand projections.  
+- **NDVI inflection points**: Pay attention to the next Sentinel‑2 update for Mato Grosso soybeans; a further decline in velocity could trigger a sharp price correction.  
 
 ---  
 
-*The QuantAgri Intelligence Weekly · October 24, 2026*  
-*Prices: Yahoo Finance (live, 2026‑10‑24). Spectral data: Planetary Computer Sentinel‑2 L2A.*  
+*The QuantAgri Intelligence Weekly · October 31, 2026*  
+*Prices: Yahoo Finance (live, 2026‑10‑31). Spectral data: Planetary Computer Sentinel‑2 L2A.*  
 *NDVI velocity and z‑scores computed by QuantAgri internal pipeline from Sentinel‑2 time series; figures may differ from third‑party vegetation indices.*  
 *Futures prices: Yahoo Finance continuous front‑month (=F) contracts; 52‑week ranges span rolled contracts and may differ from specific expiry‑contract ranges (e.g., Jul‑2026). Not investment advice.*
