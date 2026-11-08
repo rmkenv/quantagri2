@@ -1,6 +1,6 @@
 {
-  "fetchedAt": "2026-11-07T12:19:01.920022+00:00",
-  "date": "2026-11-07",
+  "fetchedAt": "2026-11-08T12:38:43.809605+00:00",
+  "date": "2026-11-08",
   "etfs": {
     "CORN": {
       "ticker": "CORN",
@@ -76,6 +76,18 @@
     }
   },
   "futures": {
+    "ZS=F": {
+      "ticker": "ZS=F",
+      "name": "Soybeans (CBOT)",
+      "price": 1193.75,
+      "weekChg": -0.91,
+      "high52w": 1328.0,
+      "low52w": 1023.25,
+      "pctOf52wH": 89.9,
+      "lastDate": "2026-11-06",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 1.08
+    },
     "ZC=F": {
       "ticker": "ZC=F",
       "name": "Corn (CBOT)",
@@ -162,6 +174,18 @@
     }
   },
   "commodityPrices": {
+    "Soybeans": {
+      "ticker": "ZS=F",
+      "name": "Soybeans (CBOT)",
+      "price": 1193.75,
+      "weekChg": -0.91,
+      "high52w": 1328.0,
+      "low52w": 1023.25,
+      "pctOf52wH": 89.9,
+      "lastDate": "2026-11-06",
+      "contractNote": "Continuous front-month (=F); 52w range spans rolled contracts",
+      "dayChg": 1.08
+    },
     "Corn": {
       "ticker": "ZC=F",
       "name": "Corn (CBOT)",
